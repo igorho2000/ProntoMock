@@ -1,0 +1,179 @@
+@keyframes background {
+    0% {background-color: rgb(230, 230, 230);}
+    10% {background-color: rgb(230, 230, 230);}
+    25% {background-color: rgb(230, 230, 230);}
+    35% {background-color: white;}
+    50% {background-color: white;}
+    60% {background-color: rgb(201, 241, 255);}
+    75% {background-color: rgb(201, 241, 255);}
+    85% {background-color: rgb(105, 216, 255);}
+    100% {background-color: rgb(105, 216, 255);}
+}
+
+@keyframes scene1 {
+    0% {opacity: 0;}
+    10% {opacity: 1;}
+    30% {opacity: 1;}
+    35% {opacity: 0;}
+}
+.scene1 {
+    animation: scene1 6s;
+}
+
+@keyframes scene2 {
+    0% {opacity: 0;}
+    30% {opacity: 0;}
+    35% {opacity: 1;}
+    55% {opacity: 1;}
+    60% {opacity: 0;}
+}
+.scene2 {
+    animation: scene2 6s;
+}
+
+@keyframes scene3 {
+    0% {opacity: 0;}
+    55% {opacity: 0;}
+    60% {opacity: 1;}
+    80% {opacity: 1;}
+    85% {opacity: 0;}
+}
+.scene3 {
+    animation: scene3 6s;
+}
+
+@keyframes scene4 {
+    0% {opacity: 0;}
+    80% {opacity: 0;}
+    90% {opacity: 1;}
+    100% {opacity: 1;}
+}
+.scene4 {
+    animation: scene4 6s;
+}
+
+.Home-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: rgb(105, 216, 255);
+    animation: background 6s;
+}
+.Home-scene {
+    width: 102vw;
+    max-height: 60vh;
+    position: fixed;
+    bottom: -1%;
+    left: -1vw;
+}
+.Home-logo {
+    height: 8rem;
+    margin-right: 20px;
+}
+
+.Home-title {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.Home-adj {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 6rem;
+}
+.Home-v {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    font-size: 3.2rem;
+}
+.Home-infocont {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    position: fixed;
+    top: calc(20vh - 2rem);
+    align-items: center;
+    height: 8rem;
+}
+.Home-button {
+    padding: 0.5rem 1.5rem;
+    border: white solid 2px;
+    border-radius: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+    align-self: center;
+    margin-left: 10vw;
+    transition: border-color, background-color 0.3s;
+
+}
+.Home-button:hover {
+    border-color: transparent;
+    background-color: rgb(33, 63, 71);
+}
+
+.Home-disappear {
+    opacity: 0;
+}
+
+@keyframes ipadmove {
+    0% {left: 2vw}
+    100% {left: -98vw}
+}
+
+@media (max-width: 960px) {
+    .Home-scene {
+        width: 200vw;
+        left: -98vw;
+        animation: ipadmove 6s;
+    }
+    .Home-title {
+        flex-direction: column;
+    }
+    .Home-button {
+        margin-left: 0;
+        align-self: baseline;
+        margin-top: 20px;
+    }
+    .Home-logo {
+        height: 12rem;
+        margin-right: 50px;
+    }
+    .Home-infocont {
+        top: 25vh;
+    }
+}
+
+@keyframes iphonemove {
+    0% {left: 2vw}
+    100% {left: -240vw}
+}
+
+@media (max-width: 480px) {
+    .Home-scene {
+        width: 350vw;
+        left: -240vw;
+        animation: iphonemove 6s;
+    }
+    .Home-infocont {
+        flex-direction: column;
+        align-items: center;
+        top: 20vh;
+    }
+    .Home-logo {
+        margin: 0 0 25px;
+        height: 8rem;
+    }
+    .Home-adj {
+        font-size: 5rem;
+    }
+    .Home-v {
+        font-size: 2.7rem;
+    }
+    .Home-button{
+        font-size: 1.5rem;
+        align-self: center;
+        margin-top: 36px;
+    }
+}
