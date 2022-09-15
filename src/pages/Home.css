@@ -13,8 +13,8 @@
 @keyframes scene1 {
     0% {opacity: 0;}
     10% {opacity: 1;}
-    30% {opacity: 1;}
-    35% {opacity: 0;}
+    25% {opacity: 1;}
+    30% {opacity: 0;}
 }
 .scene1 {
     animation: scene1 6s;
@@ -24,8 +24,8 @@
     0% {opacity: 0;}
     30% {opacity: 0;}
     35% {opacity: 1;}
-    55% {opacity: 1;}
-    60% {opacity: 0;}
+    50% {opacity: 1;}
+    55% {opacity: 0;}
 }
 .scene2 {
     animation: scene2 6s;
@@ -35,8 +35,8 @@
     0% {opacity: 0;}
     55% {opacity: 0;}
     60% {opacity: 1;}
-    80% {opacity: 1;}
-    85% {opacity: 0;}
+    75% {opacity: 1;}
+    80% {opacity: 0;}
 }
 .scene3 {
     animation: scene3 6s;
@@ -50,6 +50,48 @@
 }
 .scene4 {
     animation: scene4 6s;
+}
+
+@keyframes scene1img {
+    0% {opacity: 0;}
+    10% {opacity: 1;}
+    30% {opacity: 1;}
+    35% {opacity: 0;}
+}
+.scene1img {
+    animation: scene1img 6s;
+}
+
+@keyframes scene2img {
+    0% {opacity: 0;}
+    30% {opacity: 0;}
+    35% {opacity: 1;}
+    55% {opacity: 1;}
+    60% {opacity: 0;}
+}
+.scene2img {
+    animation: scene2img 6s;
+}
+
+@keyframes scene3img {
+    0% {opacity: 0;}
+    55% {opacity: 0;}
+    60% {opacity: 1;}
+    80% {opacity: 1;}
+    85% {opacity: 0;}
+}
+.scene3img {
+    animation: scene3img 6s;
+}
+
+@keyframes scene4img {
+    0% {opacity: 0;}
+    80% {opacity: 0;}
+    85% {opacity: 1;}
+    100% {opacity: 1;}
+}
+.scene4img {
+    animation: scene4img 6s;
 }
 
 .Home-container {
@@ -106,7 +148,7 @@
     align-self: center;
     margin-left: 10vw;
     transition: border-color, background-color 0.3s;
-
+    text-decoration: none;
 }
 .Home-button:hover {
     border-color: transparent;
@@ -126,7 +168,18 @@
     .Home-scene {
         width: 200vw;
         left: -98vw;
-        animation: ipadmove 6s;
+    }
+    .scene1img {
+        animation: scene1img 6s, ipadmove 6s;
+    }
+    .scene2img {
+        animation: scene2img 6s, ipadmove 6s;
+    }
+    .scene3img {
+        animation: scene3img 6s, ipadmove 6s;
+    }
+    .scene4img {
+        animation: scene4img 6s, ipadmove 6s;
     }
     .Home-title {
         flex-direction: column;
@@ -154,7 +207,18 @@
     .Home-scene {
         width: 350vw;
         left: -240vw;
-        animation: iphonemove 6s;
+    }
+    .scene1img {
+        animation: scene1img 6s, iphonemove 6s;
+    }
+    .scene2img {
+        animation: scene2img 6s, iphonemove 6s;
+    }
+    .scene3img {
+        animation: scene3img 6s, iphonemove 6s;
+    }
+    .scene4img {
+        animation: scene4img 6s, iphonemove 6s;
     }
     .Home-infocont {
         flex-direction: column;
