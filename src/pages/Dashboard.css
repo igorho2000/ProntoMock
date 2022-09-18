@@ -1,5 +1,5 @@
 .dashboard-header-top {
-    width: 100vw;
+    width: 100%;
     height: 70px;
     background-color: rgb(178,178,178);
     display: flex;
@@ -7,6 +7,9 @@
     justify-content: space-between;
     overflow-x: hidden;
     align-items: center;
+    top: 0;
+    position: fixed;
+    z-index: 10;
 }
 .dashboard-logo-cont {
     display: flex;
@@ -42,18 +45,150 @@
 }
 .dashboard-account-icon {
     display: flex;
-    width: 50px;
-    height: 50px;
-    background-color: skyblue;
+    width: 46.5px;
+    height: 46.5px;
+    background-color: rgb(70, 140, 168);
     align-items: center;
     justify-content: center;
+    font-weight: 700;
     font-size: 22px;
     color: white;
     text-shadow: 1px 2px black;
+    border: rgb(82, 82, 82) 3.5px solid;
+    border-radius: 5px;
+}
+.dashboard-header-bottom {
+    margin-top: 70px;
+}
+.dashboard-project-cont {
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+    padding-top: 10px;
+}
+.dashboard-project-title {
+    display: flex;
+    align-items: center;
+}
+.dashboard-project-project {
+    font-weight: 700;
+    font-size: 25px;
+}
+.dashboard-project-name {
+    font-weight: 400;
+    font-size: 25px;
+    margin-left: 6px;
+}
+.dashboard-project-expand {
+    position: relative;
+    margin: 0 12px 0 6px;
+    transition: top 0.3s;
+}
+.dashboard-project-title:hover {
+    cursor: pointer;
+}
+.dashboard-project-title:hover > .dashboard-project-expand {
+    top: 3px;
+}
+
+.dashboard-project-icon {
+    margin-right: 8px;
+    height: 30px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.dashboard-project-icon:hover {
+    transform: rotate(25deg);
+}
+
+.dashboard-body {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0 , 1fr));
+    column-gap: 30px;
+    padding: 0 15px;
+    max-width: 100vw;
+    margin-bottom: 30px;
+}
+.dashboard-draft {
+    width: 1fr;
+    border: black solid 1px;
+    border-radius: 30px;
+    padding: 15px 20px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    background-color: rgb(238, 238, 238);
+}
+.dashboard-draft-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.dashboard-draft-name {
+    font-size: 20px;
+}
+.dashboard-draft-type {
+    font-size: 16px;
+    font-weight: 400;
+}
+.dashboard-draft-date {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.dashboard-draft-img {
+    margin-top: 1rem;
+    max-width: 100%;
+    border-radius: 15px;
+    max-height: 25vh;
+}
+.dashboard-draft-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.dashboard-draft-more {
+    align-self: baseline;
+}
+.dashboard-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    border: transparent solid 2px;
+    border-radius: 2rem;
+    padding: 8px 15px;
+    background-color:  rgb(134, 134, 134);
+    align-items: center;
+    box-shadow: 4px 4px transparent;
+    transition: background-color, box-shadow 0.3s;
+    cursor: pointer;
+}
+.dashboard-button:hover {
+    background-color: rgb(99, 99, 99);
+    box-shadow: 2px 4px rgb(178, 178, 178);
+}
+.dashboard-button-text {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-right: 8px
 }
 
 @media (max-width: 960px) {
-
+    .dashboard-body {
+        grid-template-columns: repeat(2, minmax(0 , 1fr));
+    }
+    .dashboard-draft-img {
+        max-width: 100%;
+        width: auto;
+        height: 25vh;
+    }
+    .dashboard-button {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -64,5 +199,12 @@
     .dashboard-mock {
         font-weight: 700;
         font-size: 22px;
+    }
+    .dashboard-body {
+        grid-template-columns: minmax(0 , 1fr);
+    }
+    .dashboard-draft-img {
+        width: auto;
+        height: 25vh;
     }
 }

@@ -1,0 +1,62 @@
+/* ProjectDrop */
+.projectdrop {
+    position: absolute;
+    background-color: rgb(103, 103, 103);
+    opacity: 1;
+    margin-left: 25px;
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+    flex-direction: column;
+    display: flex;
+    transition: opacity 1s;
+}
+.projectdrop-line {
+    background-color: lightgray;
+    border: lightgray 1=0.5px solid;
+    width: calc(100% - 15px);
+    align-self: center;    
+    margin: 6px 0;
+}
+.projectdrop-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 5px;
+    border-radius: 7px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+.projectdrop-list:hover {
+    background-color: rgb(162, 162, 162);
+}
+.projectdrop-list img {
+    height: 1.7rem;
+    margin-right: 0.3rem
+}
+.projectdrop h3 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    margin-right: 15px;
+}
+
+/* DraftDrop */
+
+.draftdrop {
+    width: 200px;
+    height: 300px;
+    background-color: rgb(202, 168, 123);
+    position: absolute;
+    margin-top: 36px;
+    border-radius: 5px;
+}
+
+@media (max-width: 960px) {
+
+}
+
+@media (max-width: 480px) {
+    
+}
