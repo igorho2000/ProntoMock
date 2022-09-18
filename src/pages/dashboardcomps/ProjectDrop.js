@@ -27,7 +27,8 @@ export default function ProjectDrop() {
             dispatch(switchProject(index));
             dispatch(resetPopups());
         }}>
-            <img src="../../dashboard/project.svg" />
+            <img className="projectdrop-box" src="../../dashboard/project.svg" />
+            <img className="projectdrop-lid" src="../../dashboard/project-lid.svg" />
             <h3>{item.name}</h3>
         </div>
     ))
@@ -42,7 +43,8 @@ export default function ProjectDrop() {
             onClick={() => {
                 dispatch(resetPopups());
             }}>
-                <img style={{height: "1.9rem"}} src="../../dashboard/newproject.svg" />
+                <img style={{height: "1.9rem", marginRight: "0.3rem"}} src="../../dashboard/newproject.svg" />
+                <img className="projectdrop-plus" src="../../dashboard/newproject-plus.svg" />
                 <h3 style={{fontWeight: "700", color: "#f4d7d7ff"}}>New Project</h3>
             </div>
         </div>

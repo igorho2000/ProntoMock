@@ -42,6 +42,7 @@
 
 .dashboard-account-cont {
     display: flex;
+    cursor: pointer;
 }
 .dashboard-account-icon {
     display: flex;
@@ -56,6 +57,13 @@
     text-shadow: 1px 2px black;
     border: rgb(82, 82, 82) 3.5px solid;
     border-radius: 5px;
+}
+.dashboard-account-expand {
+    margin: 0 0.7rem 0 0.5rem;
+    transition: transform 0.2s;
+}
+.dashboard-account-cont:hover > .dashboard-account-expand {
+    transform: translateY(4px);
 }
 .dashboard-header-bottom {
     margin-top: 70px;
@@ -151,6 +159,7 @@
 }
 .dashboard-draft-more {
     align-self: baseline;
+    cursor: pointer;
 }
 .dashboard-button {
     position: fixed;
