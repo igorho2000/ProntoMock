@@ -44,22 +44,22 @@ const initialState = {
             name: 'One Premium',
             drafts: [
                 {
-                    name: 'Project Promotion Poster',
+                    name: '1',
                     type: 'A3 Horizontal',
                     date: '8/6/2022',
                 },
                 {
-                    name: 'Flyer Design',
+                    name: '2',
                     type: 'B4 Portrait',
                     date: '9/8/2022',
                 },
                 {
-                    name: 'Project Promotion Poster',
+                    name: '3',
                     type: 'A3 Horizontal',
                     date: '8/6/2022',
                 },
                 {
-                    name: 'Flyer Design',
+                    name: '4',
                     type: 'B4 Portrait',
                     date: '9/8/2022',
                 }
@@ -110,8 +110,12 @@ export const projectSlice = createSlice({
         },
         renameProjectDraft: (state, action) => {
             // Payload is an Array where 0=index 1=starred? 2=newName
-            const target = action.payload[1] ? state.currentProject[0].starredDrafts : state.currentProject[0].drafts;
-            target[action.payload[0]].name = action.payload[2];
+            if (action.payload[1] === true ) {
+                state.currentProject[0].starredDrafts[action.payload[0]].name = action.payload[2];
+            } else {
+                state.currentProject[0].drafts[action.payload[0]].name = action.payload[2];
+            }
+            
         },
     },
 });

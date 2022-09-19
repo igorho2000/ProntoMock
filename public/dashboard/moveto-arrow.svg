@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   enable-background="new 0 0 24 24"
+   height="36px"
+   viewBox="0 0 24 24"
+   width="36px"
+   fill="#FFFFFF"
+   version="1.1"
+   id="svg147"
+   sodipodi:docname="moveto-arrow.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs151" />
+  <sodipodi:namedview
+     id="namedview149"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="23.055556"
+     inkscape:cx="14.33494"
+     inkscape:cy="18.021687"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg147" />
+  <g
+     id="g141">
+    <rect
+       fill="none"
+       height="24"
+       width="24"
+       id="rect139" />
+  </g>
+  <g
+     id="g145"
+     style="fill:#ffffff"
+     transform="matrix(0.70361446,0,0,0.71807229,0.98313252,3.6072289)">
+    <path
+       d="M 12.16,12 H 8 v 2 h 4.16 L 10.57,15.59 11.99,17 16,13.01 11.99,9 10.58,10.41 Z"
+       id="path143"
+       style="fill:#ffffff"
+       sodipodi:nodetypes="cccccccccc" />
+  </g>
+</svg>

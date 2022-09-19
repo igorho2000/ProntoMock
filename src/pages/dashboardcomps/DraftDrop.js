@@ -12,6 +12,7 @@ import {
     selectEveryProject, selectCurrentProject,
 } from '../../features/projectSlice';
 
+
 import { useOutsideClick } from "../../Functions";
 
 export default function DraftDrop(props) {
@@ -19,11 +20,12 @@ export default function DraftDrop(props) {
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
     const currentProject = useSelector(selectCurrentProject);
+    const everyPopup = useSelector(selectEveryPopup);
 
     return (
         <div className="projectdrop draftdrop" ref={wrapperRef}>
             
-            {props.star ?
+            {props.star === true ?
             <div className="projectdrop-list" onClick={() => {
             dispatch(resetPopups());
             dispatch(unstarProjectDraft(props.index));
@@ -40,12 +42,32 @@ export default function DraftDrop(props) {
                 <h3>Star</h3>
             </div>
             }
+            {props.star === true ?
             <div className="projectdrop-list" onClick={() => {
-            dispatch(resetPopups());
-            }}>
+                dispatch(resetPopups());
+                dispatch(showPopup(['StarredDraftRename', props.index]));
+                }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/rename.svg" />
                 <img className="draftdrop-iconmove draftdrop-rename" src="../../dashboard/rename-pencil.svg" />
                 <h3>Rename</h3>
+            </div> 
+            :
+            <div className="projectdrop-list" onClick={() => {
+                dispatch(resetPopups());
+                dispatch(showPopup(['DraftRename', props.index]));
+                }}>
+                <img className="draftdrop-iconbase" src="../../dashboard/rename.svg" />
+                <img className="draftdrop-iconmove draftdrop-rename" src="../../dashboard/rename-pencil.svg" />
+                <h3>Rename</h3>
+            </div>
+            }
+            <div className="projectdrop-list" onClick={() => {
+            dispatch(resetPopups());
+            dispatch(showPopup(['StarredDraftMove', props.index]));
+            }}>
+                <img className="draftdrop-iconbase" src="../../dashboard/moveto.svg" />
+                <img className="draftdrop-iconmove draftdrop-moveto" src="../../dashboard/moveto-arrow.svg" />
+                <h3>Move To...</h3>
             </div>
             <div className="projectdrop-list" onClick={() => {
             dispatch(resetPopups());
@@ -63,6 +85,7 @@ export default function DraftDrop(props) {
                 <img className="draftdrop-iconmove draftdrop-delete" src="../../dashboard/delete-lid.svg" />
                 <h3>Delete</h3>
             </div>
+            
         </div>
     )
 }

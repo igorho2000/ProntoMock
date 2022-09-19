@@ -14,6 +14,9 @@ import {
     selectEveryProject, selectCurrentProject,
 } from '../../features/projectSlice';
 
+import DraftRename from "./DraftRename";
+import DraftMove from './DraftMove';
+
 export default function DraftInfo(props) {
     
     const dispatch = useDispatch();
@@ -45,6 +48,13 @@ export default function DraftInfo(props) {
                 </div>
             </div>
             <img className="dashboard-draft-img" src="../dashboard/ex1.png" />
+            {
+                props.star ?
+                everyPopup.StarredDraftRename[props.index] && <DraftRename index={props.index} star={props.star} name={props.name} />
+                :
+                everyPopup.DraftRename[props.index] && <DraftRename index={props.index} star={props.star} name={props.name} /> 
+            }
+            {everyPopup.DraftMove[props.index] && <DraftMove index={props.index} star={props.star} />}
         </div>
     )
 }

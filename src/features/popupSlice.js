@@ -7,6 +7,10 @@ const initialState = {
         ProjectDrop: [],
         DraftDrop: [],
         StarDraftDrop: [],
+        DraftMove: [],
+        DraftRename: [],
+        StarredDraftRename: [],
+        NewDraft: [],
     },
 }
 
@@ -19,8 +23,12 @@ export const popupSlice = createSlice({
             var stardraftpopup = Array(state.everyPopup.StarDraftDrop.length).fill(false);
             state.everyPopup.AccountDrop = [false];
             state.everyPopup.ProjectDrop = [false];
-            state.everyPopup.DraftDrop = draftpopup;
-            state.everyPopup.StarDraftDrop = stardraftpopup;
+            state.everyPopup.DraftDrop = [false];
+            state.everyPopup.StarDraftDrop = [false];
+            state.everyPopup.DraftMove = [false];
+            state.everyPopup.DraftRename = [false];
+            state.everyPopup.StarredDraftRename = [false];
+            state.everyPopup.NewDraft = [false];
         },
         showPopup: (state, action) => {
             var popupType = action.payload[0];

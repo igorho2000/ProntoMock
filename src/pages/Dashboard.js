@@ -14,10 +14,9 @@ import {
 } from '../features/popupSlice';
 
 import AccountDrop from './dashboardcomps/AccountDrop';
-import DraftDrop from './dashboardcomps/DraftDrop';
 import ProjectDrop from "./dashboardcomps/ProjectDrop";
-import ProjectShare from "./dashboardcomps/ProjectShare";
-import DraftInfo from "./dashboardcomps/DraftInfo";  
+import DraftInfo from "./dashboardcomps/DraftInfo";
+import NewDraft from "./dashboardcomps/NewDraft";  
 
 export default function Dashboard() {
     const dispatch = useDispatch();
@@ -26,14 +25,11 @@ export default function Dashboard() {
     const currentProject = useSelector(selectCurrentProject);
 
     const outputProjectDraft = currentProject[0].drafts.map((item, index) => (
-        <DraftInfo name={item.name} type={item.type} date={item.date} key={`draft${index}`} index={index} star={false}/>
+        <DraftInfo name={item.name} type={item.type} date={item.date} key={`draft${index}`} index={index} star={false} />
     ))
     const outputStarredProjectDraft = currentProject[0].starredDrafts.map((item, index) => (
         <DraftInfo name={item.name} type={item.type} date={item.date} key={`stardraft${index}`} index={index} star={true} />
     ))
-
-    console.log(everyPopup['ProjectDrop'][0]);
-    console.log(everyPopup['DraftDrop']);
 
     return (
         <div>
@@ -70,10 +66,12 @@ export default function Dashboard() {
                 {outputStarredProjectDraft}
                 {outputProjectDraft}
             </div>
-            <a className="dashboard-button">
+            <a className="dashboard-button" onClick={() => dispatch((showPopup(['NewDraft', 0])))}>
                 <p className="dashboard-button-text">New Design</p>
                 <img src="../dashboard/create.svg" />
             </a>
+            
+            {everyPopup['NewDraft'][0] && <NewDraft />}
         </div>
     )
 }
