@@ -18,9 +18,10 @@ export default function DraftInfo(props) {
     
     const dispatch = useDispatch();
     const everyPopup = useSelector(selectEveryPopup);
+    const currentProject = useSelector(selectCurrentProject);
 
     return (
-        <div className="dashboard-draft">
+        <div className="dashboard-draft" style={{backgroundColor: props.star && "#edc732"}}>
             <div className="dashboard-draft-cont">
                 <div className="dashboard-draft-title">
                     <h4 className="dashboard-draft-name">{props.name}</h4>
@@ -28,11 +29,19 @@ export default function DraftInfo(props) {
                     <h6 className="dashboard-draft-date">{`Last Updated: ${props.date}`}</h6>
                 </div>
                 <div className='dashboard-draft-settings'>
+                    {props.star ?
+                    <img className="dashboard-draft-more" src="../dashboard/more.svg" 
+                    onClick={() => 
+                        dispatch(showPopup(['StarDraftDrop', props.index]))
+                    }/>:
                     <img className="dashboard-draft-more" src="../dashboard/more.svg" 
                     onClick={() => 
                         dispatch(showPopup(['DraftDrop', props.index]))
                     }/>
-                    {everyPopup.DraftDrop[props.index] && <DraftDrop index={props.index} />}
+                    }
+                    {props.star ?
+                    everyPopup.StarDraftDrop[props.index] && <DraftDrop index={props.index} star={props.star} /> :
+                    everyPopup.DraftDrop[props.index] && <DraftDrop index={props.index} star={props.star} />}
                 </div>
             </div>
             <img className="dashboard-draft-img" src="../dashboard/ex1.png" />

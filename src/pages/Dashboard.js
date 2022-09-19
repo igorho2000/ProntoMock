@@ -26,11 +26,14 @@ export default function Dashboard() {
     const currentProject = useSelector(selectCurrentProject);
 
     const outputProjectDraft = currentProject[0].drafts.map((item, index) => (
-        <DraftInfo name={item.name} type={item.type} date={item.date} key={`draft${index}`} index={index} />
+        <DraftInfo name={item.name} type={item.type} date={item.date} key={`draft${index}`} index={index} star={false}/>
+    ))
+    const outputStarredProjectDraft = currentProject[0].starredDrafts.map((item, index) => (
+        <DraftInfo name={item.name} type={item.type} date={item.date} key={`stardraft${index}`} index={index} star={true} />
     ))
 
     console.log(everyPopup['ProjectDrop'][0]);
-    console.log(everyPopup['DraftDrop'][0]);
+    console.log(everyPopup['DraftDrop']);
 
     return (
         <div>
@@ -43,11 +46,13 @@ export default function Dashboard() {
                             <h2 className="dashboard-mock">MOCK</h2>
                         </div>
                     </Link>
-                    <div className="dashboard-account-cont">
+                    <div className="dashboard-account-cont" onClick={() => dispatch(showPopup(['AccountDrop', 0]))}>
                         <div className="dashboard-account-icon">WW</div>
                         <img className="dashboard-account-expand" src="../dashboard/expand.svg" />
                     </div>
+                    
                 </div>
+                {everyPopup['AccountDrop'][0] && <AccountDrop />}
                 <div className="dashboard-header-bottom">
                     <div className="dashboard-project-cont">
                         <div className="dashboard-project-title" onClick={() => dispatch(showPopup(['ProjectDrop', 0]))}>
@@ -62,6 +67,7 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className="dashboard-body">
+                {outputStarredProjectDraft}
                 {outputProjectDraft}
             </div>
             <a className="dashboard-button">

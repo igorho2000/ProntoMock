@@ -10,7 +10,6 @@
     color: white;
     flex-direction: column;
     display: flex;
-    transition: opacity 1s;
 }
 .projectdrop-line {
     background-color: lightgray;
@@ -62,12 +61,63 @@
 /* DraftDrop */
 
 .draftdrop {
-    width: 200px;
-    height: 300px;
-    background-color: rgb(202, 168, 123);
-    position: absolute;
     margin-top: 36px;
-    border-radius: 5px;
+}
+.draftdrop h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.2rem 0;
+}
+.draftdrop-iconbase {
+    height: 1.4rem;
+    margin-right: 0.4rem
+}
+.draftdrop-iconmove {
+    height: 1.4rem;
+    position: absolute;
+}
+.draftdrop-star,
+.draftdrop-rename,
+.draftdrop-duplicate,
+.draftdrop-delete {
+    transition: transform 0.2s;
+}
+.projectdrop-list:hover > .draftdrop-star {
+    transform: rotate(15deg);
+}
+.projectdrop-list:hover > .draftdrop-rename {
+    transform: translateX(0.3rem);
+}
+.projectdrop-list:hover > .draftdrop-duplicate {
+    transform: translate3d(-0.1rem, -0.1rem, 0);
+}
+.projectdrop-list:hover > .draftdrop-delete {
+    transform: translateY(-0.15rem);
+}
+
+/* AccountDrop */
+.accountdrop {
+    right: 0.5rem;
+    margin: 0;
+    margin-top: -0.3rem;
+    z-index: 11;
+}
+.accountdrop h3 {
+    font-size: 1.2rem;
+}
+.accountdrop-settings,
+.accountdrop-logout {
+    transition: transform 0.2s;
+}
+.accountdrop-settings {
+    height: 0.6rem;
+    margin-left: 0.7rem;
+    margin-top: 0.4rem;
+}
+.projectdrop-list:hover > .accountdrop-settings {
+    transform: rotate(360deg);
+}
+.projectdrop-list:hover > .accountdrop-logout {
+    transform: translateX(0.3rem);
 }
 
 @media (max-width: 960px) {
