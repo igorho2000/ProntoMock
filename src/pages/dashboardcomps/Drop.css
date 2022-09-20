@@ -165,7 +165,8 @@
     border-bottom: #3688a3 solid 3.5px;
 }
 .draftrename-cancel,
-.draftrename-submit {
+.draftrename-submit,
+.draftrename-delete {
     font-size: 1rem;
     font-weight: 400;
     border-radius: 1rem;
@@ -176,7 +177,8 @@
     transition: box-shadow 0.2s;
 }
 .draftrename-cancel:hover,
-.draftrename-submit:hover {
+.draftrename-submit:hover,
+.draftrename-delete:hover {
     box-shadow: 2px 3.5px gray;
 }
 .draftrename-cancel {
@@ -185,6 +187,10 @@
 .draftrename-submit {
     background-color: #004e68;
     color: white
+}
+.draftrename-delete {
+    color: white;
+    background-color: maroon;
 }
 .draftrename-buttoncont {
     display: flex;
@@ -198,11 +204,64 @@
     }
 }
 
-@media (max-width: 480px) {
-    
+/* DraftMove */
+.draftmove {
+    height: 135px;
+}
+.draftmove-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.draftmove-input > label {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+select {
+    cursor: pointer;
+}
+.draftmove-input option {
+    outline: none;
+    cursor: pointer;
+}
+/* ProjectSettings */
+.projectsettings {
+    height: 250px;
+    top: 30vh;
+    width: 300px;
+    left: calc(50vw - 150px);
+}
+.projectsettings-cont {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.projectsettings-form {
+    display: flex;
+    margin-bottom: 15px;
+}
+.projectsettings-form > .draftrename-input {
+    margin-right: 10px;
+}
+.projectsettings-section {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-/* DraftMove */
+/* NewProject */
+.newproject {
+    height: 135px;
+}
+.newproject-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.newproject-form > .draftrename-input{
+    margin-bottom: 15px;
+}
 
 @media (max-width: 960px) {
 

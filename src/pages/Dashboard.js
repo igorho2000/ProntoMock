@@ -16,7 +16,9 @@ import {
 import AccountDrop from './dashboardcomps/AccountDrop';
 import ProjectDrop from "./dashboardcomps/ProjectDrop";
 import DraftInfo from "./dashboardcomps/DraftInfo";
-import NewDraft from "./dashboardcomps/NewDraft";  
+import NewDraft from "./dashboardcomps/NewDraft";
+import ProjectSettings from "./dashboardcomps/ProjectSettings"; 
+import NewProject from "./dashboardcomps/NewProject";
 
 export default function Dashboard() {
     const dispatch = useDispatch();
@@ -56,7 +58,8 @@ export default function Dashboard() {
                             <h3 className="dashboard-project-name">{currentProject[0].name}</h3>
                             <img className="dashboard-project-expand"  src="../dashboard/expandblack.svg" />  
                         </div>
-                        <img className="dashboard-project-icon" src="../dashboard/settings.svg" />
+                        <img className="dashboard-project-icon" src="../dashboard/settings.svg" 
+                        onClick={() => dispatch(showPopup(['ProjectSettings', 0]))}/>
                         
                     </div>
                     {everyPopup['ProjectDrop'][0] && <ProjectDrop />}
@@ -72,6 +75,9 @@ export default function Dashboard() {
             </a>
             
             {everyPopup['NewDraft'][0] && <NewDraft />}
+            {everyPopup['ProjectSettings'][0] && <ProjectSettings />}
+            {everyPopup['NewProject'][0] && <NewProject />}
+            
         </div>
     )
 }

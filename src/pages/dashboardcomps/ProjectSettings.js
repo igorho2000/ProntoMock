@@ -8,13 +8,13 @@ import {
     selectEveryPopup,
 } from '../../features/popupSlice';
 import {
-    switchProject,
+    switchProject, renameProject, deleteProject,
     selectEveryProject, selectCurrentProject,
 } from '../../features/projectSlice';
 
 import { useOutsideClick } from "../../Functions";
 
-export default function NewDraft() {
+export default function ProjectSettings(props) {
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
@@ -29,17 +29,19 @@ export default function NewDraft() {
 
     function handleRenameSubmit(event) {
         event.preventDefault();
+        dispatch(renameProject(nameValue));
 
     }
 
     function handleDeletion() {
+        dispatch(deleteProject());
         dispatch(switchProject(0));
         dispatch(resetPopups());
     }
 
     return (
         <div className="draftrename projectsettings" ref={wrapperRef} >
-            <h4 className="draftrename-title">New Draft</h4>
+            <h4 className="draftrename-title">Project Settings</h4>
             <div className="projectsettings-cont">
                 <h5 className="projectsettings-section">Rename Project</h5>
                 <form className="projectsettings-form" onSubmit={handleRenameSubmit}>

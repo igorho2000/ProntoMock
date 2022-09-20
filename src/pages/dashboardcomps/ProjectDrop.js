@@ -42,6 +42,7 @@ export default function ProjectDrop() {
             style={{paddingLeft: "2px"}}
             onClick={() => {
                 dispatch(resetPopups());
+                dispatch(showPopup(['NewProject', 0]))
             }}>
                 <img style={{height: "1.9rem", marginRight: "0.3rem"}} src="../../dashboard/newproject.svg" />
                 <img className="projectdrop-plus" src="../../dashboard/newproject-plus.svg" />

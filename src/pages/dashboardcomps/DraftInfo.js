@@ -54,7 +54,12 @@ export default function DraftInfo(props) {
                 :
                 everyPopup.DraftRename[props.index] && <DraftRename index={props.index} star={props.star} name={props.name} /> 
             }
-            {everyPopup.DraftMove[props.index] && <DraftMove index={props.index} star={props.star} />}
+            {
+                props.star ?
+                everyPopup.StarredDraftMove[props.index] && <DraftMove index={props.index} star={props.star} name={props.name} />
+                :
+                everyPopup.DraftMove[props.index] && <DraftMove index={props.index} star={props.star} name={props.name} />
+            }
         </div>
     )
 }

@@ -81,6 +81,22 @@ export const projectSlice = createSlice({
             state.currentProject = toCurrent;
             state.everyProject = toList.concat(state.everyProject);
         },
+        renameProject: (state, action) => {
+            // Payload is the new name
+            state.currentProject[0].name = action.payload;
+        },
+        deleteProject: (state) => {
+            state.currentProject.splice(0, 1);
+        },
+        newProject: (state, action) => {
+            // Payload is the new project name
+            state.everyProject.unshift({
+                name: action.payload,
+                drafts: [],
+                starredDrafts: [],
+                team: []
+            })
+        },
         starProjectDraft: (state, action) => {
             // Payload is the index number
             var toStarred = state.currentProject[0].drafts.splice(action.payload, 1);
@@ -117,11 +133,18 @@ export const projectSlice = createSlice({
             }
             
         },
+        moveProjectDraft: (state, action) => {
+            // Payload is an Array where 0=index 1=starred? 2=indexOfNewProject
+            const star = action.payload[1] ? 'starredDrafts' : 'drafts';
+            var toMove = state.currentProject[0][star].splice(action.payload[0], 1);
+            state.everyProject[action.payload[2]][star].unshift(toMove[0]);
+        }
     },
 });
 
-export const {switchProject, starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft, 
-              renameProjectDraft} = projectSlice.actions;
+export const {switchProject, renameProject, deleteProject, newProject,
+              starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft, 
+              renameProjectDraft, moveProjectDraft} = projectSlice.actions;
 
 export const selectEveryProject = (state) => state.project.everyProject;
 export const selectCurrentProject = (state) => state.project.currentProject;
