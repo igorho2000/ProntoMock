@@ -140,19 +140,19 @@
 }
 .Home-button {
     padding: 0.5rem 1.5rem;
-    border: white solid 2px;
     border-radius: 2rem;
     font-size: 1.8rem;
     font-weight: 600;
     color: white;
     align-self: center;
     margin-left: 10vw;
-    transition: border-color, background-color 0.3s;
+    transition: box-shadow 0.3s;
     text-decoration: none;
+    background-color: #004e68;
+    box-shadow: 2px 3.5px transparent;
 }
 .Home-button:hover {
-    border-color: transparent;
-    background-color: rgb(33, 63, 71);
+    box-shadow: 2px 5px gray;
 }
 
 .Home-disappear {

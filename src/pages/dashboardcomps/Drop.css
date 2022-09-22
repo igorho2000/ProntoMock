@@ -102,8 +102,9 @@
 .accountdrop {
     right: 0.5rem;
     margin: 0;
-    margin-top: -0.3rem;
     z-index: 11;
+    top: 66px;
+    position: fixed;
 }
 .accountdrop h3 {
     font-size: 1.2rem;
@@ -263,13 +264,46 @@ select {
     margin-bottom: 15px;
 }
 
-@media (max-width: 960px) {
 
+
+/* NewDraft */
+.newdraft {
+    top: 30vh;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.newdraft-form {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    padding: 10px;
+}
+.newdraft-input {
+    width: 245px;
+    margin-bottom: 15px;
+}
+.newdraft-drop {
+    width: 260px;
+    margin-bottom: 8px;
+}
+.newdraft-radio {
+    margin-bottom: 15px;
+    margin-right: 2px;
+}
+.newdraft-radiotext {
+    margin-right: 12px;
+}
+
+@media (max-width: 960px) {
+    .newdraft {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
-    
+    .newdraft {
+        display: none;
+    }
 }
-
-/* NewDraft */
-

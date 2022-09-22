@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { act } from 'react-dom/test-utils';
 
 const initialState = {
     everyProject: [
@@ -138,13 +137,23 @@ export const projectSlice = createSlice({
             const star = action.payload[1] ? 'starredDrafts' : 'drafts';
             var toMove = state.currentProject[0][star].splice(action.payload[0], 1);
             state.everyProject[action.payload[2]][star].unshift(toMove[0]);
+        },
+        newProjectDraft: (state, action) => {
+            // Payload is an Object containing name, size, orientation
+            let today = new Date().toLocaleDateString()
+            
+            state.currentProject[0].drafts.unshift({
+                name: action.payload.name,
+                type: action.payload.size + ' ' + action.payload.orientation,
+                date: today,
+            })
         }
     },
 });
 
 export const {switchProject, renameProject, deleteProject, newProject,
               starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft, 
-              renameProjectDraft, moveProjectDraft} = projectSlice.actions;
+              renameProjectDraft, moveProjectDraft, newProjectDraft} = projectSlice.actions;
 
 export const selectEveryProject = (state) => state.project.everyProject;
 export const selectCurrentProject = (state) => state.project.currentProject;

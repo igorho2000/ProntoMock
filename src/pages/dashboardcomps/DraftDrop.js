@@ -1,15 +1,12 @@
 import React from "react";
 import './Drop.css';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
     resetPopups, showPopup,
-    selectEveryPopup,
 } from '../../features/popupSlice';
 import {
-    switchProject, starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft,
-    selectEveryProject, selectCurrentProject,
+    starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft,
 } from '../../features/projectSlice';
 
 
@@ -19,8 +16,6 @@ export default function DraftDrop(props) {
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
-    const currentProject = useSelector(selectCurrentProject);
-    const everyPopup = useSelector(selectEveryPopup);
 
     return (
         <div className="projectdrop draftdrop" ref={wrapperRef}>
@@ -30,7 +25,7 @@ export default function DraftDrop(props) {
             dispatch(resetPopups());
             dispatch(unstarProjectDraft(props.index));
             }}>
-                <img className="draftdrop-iconbase draftdrop-star" src="../../dashboard/unstar.svg" />
+                <img className="draftdrop-iconbase draftdrop-star" src="../../dashboard/unstar.svg" alt="unstar draft icon" />
                 <h3>Unstar</h3>
             </div> 
             :
@@ -38,7 +33,7 @@ export default function DraftDrop(props) {
             dispatch(resetPopups());
             dispatch(starProjectDraft(props.index));
             }}>
-                <img className="draftdrop-iconbase draftdrop-star" src="../../dashboard/star.svg" />
+                <img className="draftdrop-iconbase draftdrop-star" src="../../dashboard/star.svg" alt="star draft icon"/>
                 <h3>Star</h3>
             </div>
             }
@@ -49,8 +44,8 @@ export default function DraftDrop(props) {
                 dispatch(resetPopups());
                 dispatch(showPopup(['StarredDraftRename', props.index]));
                 }}>
-                <img className="draftdrop-iconbase" src="../../dashboard/rename.svg" />
-                <img className="draftdrop-iconmove draftdrop-rename" src="../../dashboard/rename-pencil.svg" />
+                <img className="draftdrop-iconbase" src="../../dashboard/rename.svg" alt="rename draft icon bottom portion"/>
+                <img className="draftdrop-iconmove draftdrop-rename" src="../../dashboard/rename-pencil.svg" alt="rename draft icon upper portion"/>
                 <h3>Rename</h3>
             </div> 
             :
@@ -58,8 +53,8 @@ export default function DraftDrop(props) {
                 dispatch(resetPopups());
                 dispatch(showPopup(['DraftRename', props.index]));
                 }}>
-                <img className="draftdrop-iconbase" src="../../dashboard/rename.svg" />
-                <img className="draftdrop-iconmove draftdrop-rename" src="../../dashboard/rename-pencil.svg" />
+                <img className="draftdrop-iconbase" src="../../dashboard/rename.svg" alt="rename draft icon bottom portion" />
+                <img className="draftdrop-iconmove draftdrop-rename" src="../../dashboard/rename-pencil.svg" alt="rename draft icon upper portion" />
                 <h3>Rename</h3>
             </div>
             }
@@ -71,8 +66,8 @@ export default function DraftDrop(props) {
             dispatch(resetPopups());
             dispatch(showPopup(['StarredDraftMove', props.index]));
             }}>
-                <img className="draftdrop-iconbase" src="../../dashboard/moveto.svg" />
-                <img className="draftdrop-iconmove draftdrop-moveto" src="../../dashboard/moveto-arrow.svg" />
+                <img className="draftdrop-iconbase" src="../../dashboard/moveto.svg" alt="move to other project icon upper portion" />
+                <img className="draftdrop-iconmove draftdrop-moveto" src="../../dashboard/moveto-arrow.svg" alt="move to other project icon bottom portion" />
                 <h3>Move To...</h3>
             </div>
             :
@@ -80,8 +75,8 @@ export default function DraftDrop(props) {
             dispatch(resetPopups());
             dispatch(showPopup(['DraftMove', props.index]));
             }}>
-                <img className="draftdrop-iconbase" src="../../dashboard/moveto.svg" />
-                <img className="draftdrop-iconmove draftdrop-moveto" src="../../dashboard/moveto-arrow.svg" />
+                <img className="draftdrop-iconbase" src="../../dashboard/moveto.svg" alt="move to other project icon upper portion" />
+                <img className="draftdrop-iconmove draftdrop-moveto" src="../../dashboard/moveto-arrow.svg" alt="move to other project icon bottom portion" />
                 <h3>Move To...</h3>
             </div>
             }
@@ -91,8 +86,8 @@ export default function DraftDrop(props) {
             dispatch(resetPopups());
             dispatch(duplicateProjectDraft([props.index, props.star]))
             }}>
-                <img className="draftdrop-iconbase" src="../../dashboard/duplicate.svg" />
-                <img className="draftdrop-iconmove draftdrop-duplicate" src="../../dashboard/duplicate-duplicate.svg" />
+                <img className="draftdrop-iconbase" src="../../dashboard/duplicate.svg" alt="duplicate draft icon bottom portion" />
+                <img className="draftdrop-iconmove draftdrop-duplicate" src="../../dashboard/duplicate-duplicate.svg" alt="duplicate draft icon upper portion" />
                 <h3>Duplicate</h3>
             </div>
 
@@ -101,8 +96,8 @@ export default function DraftDrop(props) {
             dispatch(resetPopups());
             dispatch(deleteProjectDraft([props.index, props.star]))
             }}>
-                <img className="draftdrop-iconbase" src="../../dashboard/delete.svg" />
-                <img className="draftdrop-iconmove draftdrop-delete" src="../../dashboard/delete-lid.svg" />
+                <img className="draftdrop-iconbase" src="../../dashboard/delete.svg" alt="delete draft icon bottom portion" />
+                <img className="draftdrop-iconmove draftdrop-delete" src="../../dashboard/delete-lid.svg" alt="delete draft icon upper portion" />
                 <h3 style={{color: "#de8787", fontWeight: "700"}}>Delete</h3>
             </div>
             

@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { act } from 'react-dom/test-utils';
 
 const initialState = {
     everyPopup: {
+        // Transition
+        Transition: false,
+        // Dashboard Popups
         AccountDrop: [],
         ProjectDrop: [],
         DraftDrop: [],
@@ -14,6 +16,8 @@ const initialState = {
         NewDraft: [],
         ProjectSettings: [],
         NewProject: [],
+        // Editor Popups
+        DraftSettings: [],
     },
 }
 
@@ -22,8 +26,7 @@ export const popupSlice = createSlice({
     initialState,
     reducers: {
         resetPopups: (state) => {
-            var draftpopup = Array(state.everyPopup.DraftDrop.length).fill(false);
-            var stardraftpopup = Array(state.everyPopup.StarDraftDrop.length).fill(false);
+            state.everyPopup.Transition = false;
             state.everyPopup.AccountDrop = [false];
             state.everyPopup.ProjectDrop = [false];
             state.everyPopup.DraftDrop = [false];
@@ -35,16 +38,20 @@ export const popupSlice = createSlice({
             state.everyPopup.NewDraft = [false];
             state.everyPopup.ProjectSettings = [false];
             state.everyPopup.NewProject = [false];
+            state.everyPopup.DraftSettings = [false];
         },
         showPopup: (state, action) => {
             var popupType = action.payload[0];
             var popupIndex = action.payload[1];
             state.everyPopup[popupType][popupIndex] = true;
         },
+        transition: (state) => {
+            state.everyPopup.Transition = true;
+        },
     },
 });
 
-export const {resetPopups, showPopup,} = popupSlice.actions;
+export const {resetPopups, showPopup, transition} = popupSlice.actions;
 
 export const selectEveryPopup = (state) => state.popup.everyPopup;
 

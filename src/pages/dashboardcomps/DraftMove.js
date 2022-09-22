@@ -1,15 +1,13 @@
 import React from "react";
 import './Drop.css';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    resetPopups, showPopup,
-    selectEveryPopup,
+    resetPopups,
 } from '../../features/popupSlice';
 import {
     switchProject, moveProjectDraft,
-    selectEveryProject, selectCurrentProject,
+    selectEveryProject,
 } from '../../features/projectSlice';
 
 import { useOutsideClick } from "../../Functions";

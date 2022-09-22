@@ -1,18 +1,13 @@
 import React from 'react';
 import '../Dashboard.css';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
 import DraftDrop from './DraftDrop';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    resetPopups, showPopup,
+    showPopup,
     selectEveryPopup,
 } from '../../features/popupSlice';
-import {
-    switchProject,
-    selectEveryProject, selectCurrentProject,
-} from '../../features/projectSlice';
 
 import DraftRename from "./DraftRename";
 import DraftMove from './DraftMove';
@@ -21,7 +16,6 @@ export default function DraftInfo(props) {
     
     const dispatch = useDispatch();
     const everyPopup = useSelector(selectEveryPopup);
-    const currentProject = useSelector(selectCurrentProject);
 
     return (
         <div className="dashboard-draft" style={{backgroundColor: props.star && "#edc732"}}>
@@ -33,11 +27,11 @@ export default function DraftInfo(props) {
                 </div>
                 <div className='dashboard-draft-settings'>
                     {props.star ?
-                    <img className="dashboard-draft-more" src="../dashboard/more.svg" 
+                    <img className="dashboard-draft-more" src="../dashboard/more.svg" alt="more options icon"
                     onClick={() => 
                         dispatch(showPopup(['StarDraftDrop', props.index]))
                     }/>:
-                    <img className="dashboard-draft-more" src="../dashboard/more.svg" 
+                    <img className="dashboard-draft-more" src="../dashboard/more.svg" alt="more options icon"
                     onClick={() => 
                         dispatch(showPopup(['DraftDrop', props.index]))
                     }/>
@@ -47,7 +41,7 @@ export default function DraftInfo(props) {
                     everyPopup.DraftDrop[props.index] && <DraftDrop index={props.index} star={props.star} />}
                 </div>
             </div>
-            <img className="dashboard-draft-img" src="../dashboard/ex1.png" />
+            <img className="dashboard-draft-img" src="../dashboard/ex1.png" alt="draft demo" />
             {
                 props.star ?
                 everyPopup.StarredDraftRename[props.index] && <DraftRename index={props.index} star={props.star} name={props.name} />

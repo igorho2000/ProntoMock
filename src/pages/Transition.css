@@ -1,0 +1,100 @@
+.transition {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(184, 184, 184);
+    position: fixed;
+    top: 0;
+    z-index: 2147483647;
+    animation: fade 3s ease-in-out;
+}
+.transition-cont {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 85vh;
+    align-items: center;
+}
+.transition-cont > img {
+    position: absolute;
+}
+.transition-square {
+    width: 130px;
+}
+.transition-left {
+    height: 152.55px;
+    transform: translateX(-38.14px);
+    animation: left 0.5s ease-in-out;
+}
+.transition-bottom {
+    width: 152.55px;
+    transform: translateY(38.14px);
+    animation: bottom 1s ease-in-out;
+}
+.transition-right {
+    height: 152.55px;
+    transform: translateX(38.14px);
+    animation: right 1.5s ease-in-out;
+}
+.transition-top {
+    width: 152.55px;
+    transform: translateY(-38.14px);
+    animation: top 2s ease-in-out;
+}
+
+.transition-pm {
+    width: 110px;
+    animation: pm 2.5s ease-in-out;
+}
+.transition-cont > div {
+    top: 300px;
+    width: 120px;
+    height: 0px;
+    border-radius: 7px;
+    position: absolute;
+    transform: translateY(100px);
+}
+.transition-line {
+    background-color: gray;
+    border: 7px gray solid;
+}
+.transition-progress {
+    background-color: rgb(84, 84, 84);
+    border: 7px rgb(84, 84, 84) solid;
+    animation: progress 3s ease-in-out;
+}
+
+@keyframes progress {
+    0% {width: 0px; transform: translate3d(-60px, 100px, 0)}
+    100% {width: 120px; transform: translate3d(0px, 100px, 0)}
+}
+
+@keyframes left {
+    0% {opacity: 0; transform: translateX(-48.14px);}
+    100% {opacity: 1; transform: translateX(-38.14px);}
+}
+@keyframes right {
+    0% {opacity: 0; transform: translateX(48.14px);}
+    66.67% {opacity: 0; transform: translateX(48.14px);}
+    100% {opacity: 1; transform: translateX(38.14px);}
+}
+@keyframes bottom {
+    0% {opacity: 0; transform: translateY(48.14px);}
+    50% {opacity: 0; transform: translateY(48.14px);}
+    100% {opacity: 1; transform: translateY(38.14px);}
+}
+@keyframes top {
+    0% {opacity: 0; transform: translateY(-48.14px);}
+    75% {opacity: 0; transform: translateY(-48.14px);}
+    100% {opacity: 1; transform: translateY(-38.14px);}
+}
+@keyframes pm {
+    0% {opacity: 0; }
+    80% {opacity: 0; }
+    95% {opacity: 1; }
+    100% {opacity: 1; }
+}
+@keyframes fade {
+    0% {opacity: 1; }
+    90% {opacity: 1; }
+    100% {opacity: 0; }
+}
