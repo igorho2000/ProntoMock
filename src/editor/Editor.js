@@ -1,5 +1,5 @@
 import React from 'react';
-import './draft.css';
+import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -27,7 +27,7 @@ export default function Editor() {
     return (
         <div>
             <Header />
-            <div className="draft-header-bottom">
+            <div className="editor-header-bottom">
                 <h3>Editing:</h3>
                 <h3>{currentDraft.draftSettings.name}</h3>
                 <h4>{`(Project ${currentProject[0].name})`}</h4>

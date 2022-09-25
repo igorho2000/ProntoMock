@@ -1,0 +1,239 @@
+.editor-header-bottom {
+    display: flex;
+    margin-top: 80px;
+    margin-left: 25px;
+    align-items: center;
+}
+.editor-header-bottom > h3 {
+    font-size: 25px;
+}
+.editor-header-bottom > h3:nth-child(2) {
+    font-weight: 400;
+    margin-left: 5px;
+}
+.editor-header-bottom > h4 {
+    margin-left: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 5.5px;
+}
+
+/* Elements Panel */
+.elements {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 25px;
+    background-color: white;
+    padding: 0.7rem 0.3rem;
+    border-radius: 2rem;
+    top: calc((100vh - 305px) / 2);
+    border: rgb(192, 192, 192) solid 0.5px;
+}
+.elements-function {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background-color 0.1s;
+}
+.elements-function:hover {
+    background-color: rgb(198, 198, 198);
+}
+.elements-icon {
+    height: 2.2rem;
+}
+.elements-description {
+    position: absolute;
+    left: 60px;
+    background-color: rgb(87, 87, 87);
+    color: white;
+    border-radius: 4px;
+    padding: 0 3px 2px;
+    font-size: 0.8rem;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+.elements-function:hover > .elements-description {
+    display: block;
+    opacity: 1;
+}
+
+
+
+/* Canvas */
+.canvas {
+    width: calc(100vw - 290px);
+    height: calc(100vh - 180px);
+    top: 70px;
+    left: 0px;
+    background-color: rgb(228, 228, 228);
+    position: fixed;
+    overflow-x: visible;
+    overflow-y: scroll;
+    z-index: -10000000;
+    padding: 60px 0px 50px;
+}
+.draft-cont {
+    display: flex;
+    justify-content: center;
+    min-width: 700px;
+}
+.canvas-buffer {
+    min-width: 100px;
+    height: 1px;
+    background-color: rgb(228, 228, 228);
+}
+.draft {
+    min-width: 500px;
+    min-height: 1000px;
+    background-color: white;
+}
+.margin {
+    position: absolute;
+    min-width: 400px;
+    min-height: 900px;
+    margin-top: 50px;
+    border: rgb(158, 205, 216) 1.5px solid;
+}
+
+/* Control Panel */
+.control {
+    width: 280px;
+    min-height: calc(100vh - 60px);
+    background-color: white;
+    position: fixed;
+    right: 0;
+    top: 70px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-left: rgb(232, 232, 232) solid 0.5px;
+    padding: 10px 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.control-title {
+    position: sticky;
+    margin-bottom: 16px;
+}
+.control-group {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.control-divider {
+    margin-bottom: 10px;
+    border-color: rgb(227, 227, 227);
+    border-width: 0.5px;
+    outline: none;
+}
+.control-form,
+.control-form-long,
+.control-form-check,
+.control-form-color {
+    font-size: 0.9rem;
+    color: rgb(142, 142, 142);
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+.control-form-long,
+.control-form-color {
+    grid-column: 1 / span 2;
+}
+.control-form-check {
+    grid-column: 1 / span 2;
+    margin: 0;
+}
+.control-form-long label,
+.control-form label,
+.control-form-color label {
+    width: 3.5rem;
+}
+.control-form-check input,
+.control-form input,
+.control-form-long input,
+.control-form-color input,
+.control-form-long select {
+    font-size: 0.9rem;
+    width: 4rem;
+    margin-left: 5px;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0 0 0 4px;
+}
+.control-form-color div {
+    height: 0.9rem;
+    width: 0.9rem;
+    background-color: #00ff00;
+    border: gray 1px solid;
+    border-radius: 2px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.control-form-long input {
+    width: 2.5rem;
+}
+.control-form-check input {
+    width: 15.2px;
+    margin: 1px 3px 0 0;
+}
+.control-form-long select {
+    width: 6rem;
+    padding: 0;
+}
+.control-form-check label {
+    font-size: 0.8rem;
+    font-style: italic;
+}
+.control-form-input:hover input,
+.control-form-long input:hover,
+.control-form-long select:hover,
+.control-form-color input:hover,
+.control-form input:hover {
+    border: 1px solid rgb(186, 186, 186);
+}
+
+.control-form input:focus,
+.control-form-long input:focus,
+.control-form-long select:focus,
+.control-form-color input:focus {
+    border: 1px solid rgb(0, 154, 188);
+}
+.control-group-title {
+    font-weight: 600;
+}
+
+@media (max-width: 960px) {
+    .elements,
+    .control {
+        display: none;
+    }
+    .canvas {
+        width: calc(100vw - 100px);
+    }
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: rgba(0, 0, 0 ,0);
+  }
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0 ,0);
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0 ,0);
+}
