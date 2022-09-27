@@ -1,8 +1,12 @@
 .editor-header-bottom {
     display: flex;
     margin-top: 80px;
-    margin-left: 25px;
+    margin-left: 15px;
     align-items: center;
+    background-color: rgb(228, 228, 228);
+    padding: 0 10px 4px;
+    border-radius: 2rem;
+    width: fit-content;
 }
 .editor-header-bottom > h3 {
     font-size: 25px;
@@ -102,45 +106,75 @@
 /* Control Panel */
 .control {
     width: 280px;
-    min-height: calc(100vh - 60px);
+    height: calc(100vh - 80px);
     background-color: white;
     position: fixed;
     right: 0;
     top: 70px;
-    overflow-y: scroll;
+    overflow-y: visible;
     overflow-x: hidden;
     border-left: rgb(232, 232, 232) solid 0.5px;
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 0 10px;
     display: flex;
     flex-direction: column;
 }
 .control-title {
-    position: sticky;
     margin-bottom: 16px;
 }
 .control-group {
     display: grid;
     grid-template-columns: auto auto;
 }
+.control-group button {
+    font-size: 0.9rem;
+    font-weight: 400;
+    border-radius: 1rem;
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    box-shadow: 2px 3.5px transparent;
+    transition: box-shadow 0.2s;
+    background-color: #004e68;
+    color: white;
+    margin-top: 8px;
+}
+.control-group button:hover {
+    box-shadow: 2px 3.5px gray;
+}
 .control-divider {
     margin-bottom: 10px;
     border-color: rgb(227, 227, 227);
     border-width: 0.5px;
+    width: 270px;
     outline: none;
 }
 .control-form,
 .control-form-long,
 .control-form-check,
-.control-form-color {
+.control-form-color,
+.control-form-slider,
+.control-form-color-pick {
     font-size: 0.9rem;
     color: rgb(142, 142, 142);
     margin-top: 5px;
     display: flex;
     align-items: center;
 }
+.control-form-color-pick {
+    margin-top: 8px;
+}
 .control-form-long,
-.control-form-color {
+.control-form-color,
+.control-form-slider-cont,
+.control-form-color-pick {
     grid-column: 1 / span 2;
+}
+.control-form-slider-cont {
+    background-color: rgb(233, 233, 233);
+    width: 240px;
+    border-radius: 5px;
+    padding: 3px 10px 5px;
+    margin-top: 5px;
 }
 .control-form-check {
     grid-column: 1 / span 2;
@@ -148,14 +182,17 @@
 }
 .control-form-long label,
 .control-form label,
-.control-form-color label {
+.control-form-color label,
+.control-form-slider label {
     width: 3.5rem;
 }
 .control-form-check input,
 .control-form input,
+.control-form select,
 .control-form-long input,
 .control-form-color input,
-.control-form-long select {
+.control-form-long select,
+.control-form-slider-input {
     font-size: 0.9rem;
     width: 4rem;
     margin-left: 5px;
@@ -164,17 +201,26 @@
     border-radius: 4px;
     padding: 0 0 0 4px;
 }
-.control-form-color div {
+.control-form-color div,
+.control-form-color-pick div {
     height: 0.9rem;
     width: 0.9rem;
-    background-color: #00ff00;
+    background: linear-gradient(#00ff00, #00ff00), url(transparent.svg);
     border: gray 1px solid;
     border-radius: 2px;
-    margin-left: 5px;
+    margin: 0 5px;
     cursor: pointer;
+}
+.control-form-color-pick div {
+    margin: 0 4px 0 0;
+    background: none;
 }
 .control-form-long input {
     width: 2.5rem;
+}
+.control-form-slider-input {
+    width: 2rem;
+    background-color: rgb(233, 233, 233);
 }
 .control-form-check input {
     width: 15.2px;
@@ -188,23 +234,61 @@
     font-size: 0.8rem;
     font-style: italic;
 }
+.con
 .control-form-input:hover input,
+.control-form select:hover,
 .control-form-long input:hover,
 .control-form-long select:hover,
 .control-form-color input:hover,
-.control-form input:hover {
+.control-form input:hover,
+.control-form-slider-input:hover {
     border: 1px solid rgb(186, 186, 186);
 }
 
 .control-form input:focus,
+.control-form select:focus,
 .control-form-long input:focus,
 .control-form-long select:focus,
-.control-form-color input:focus {
+.control-form-color input:focus,
+.control-form-slider-input:focus {
     border: 1px solid rgb(0, 154, 188);
 }
 .control-group-title {
     font-weight: 600;
 }
+.control-form-long img {
+    padding: 2px;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.control-form img {
+    padding: 2px;
+    border-radius: 3px;
+}
+.control-form-long img:hover,
+.control-form img:hover {
+    cursor: pointer;
+    background-color: rgb(207, 207, 207);
+
+}
+.control-form-slider-slider {
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    width: 140px;
+}
+.control-form-slider-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%; 
+    background: #7e7e7e;
+    border: rgb(218, 218, 218) solid 2px;
+    cursor: pointer;
+  }
 
 @media (max-width: 960px) {
     .elements,
@@ -212,7 +296,7 @@
         display: none;
     }
     .canvas {
-        width: calc(100vw - 100px);
+        width: 100vw;
     }
 }
 
@@ -236,4 +320,15 @@
 }
 ::-webkit-scrollbar-corner {
     background: rgba(0, 0, 0 ,0);
+}
+
+/* Up Down Button */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

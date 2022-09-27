@@ -30,7 +30,6 @@ export default function Editor() {
             <div className="editor-header-bottom">
                 <h3>Editing:</h3>
                 <h3>{currentDraft.draftSettings.name}</h3>
-                <h4>{`(Project ${currentProject[0].name})`}</h4>
             </div>
             <Elements />
             <Canvas />
