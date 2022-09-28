@@ -10,7 +10,13 @@ import {
 export default function ControlColorpicker(props) {
 
     const draftSettings = useSelector(selectDraft);
-    const colorSettings = draftSettings[props.type];
+    var colorSettings = '';
+
+    if (props.type === 'selectedObject') {
+        colorSettings = draftSettings[props.type][0];
+    } else if (props.type == 'canvasSettings') {
+        colorSettings = draftSettings[props.type];
+    }
 
     const dispatch = useDispatch();
 
@@ -31,19 +37,19 @@ export default function ControlColorpicker(props) {
 
 
     const [inputValue, setInputValue] = React.useState({
-        red: colorSettings.fillColor[0],
-        green: colorSettings.fillColor[1],
-        blue: colorSettings.fillColor[2],
-        opacity: colorSettings.fillColor[3],
+        red: colorSettings[props.target][0],
+        green: colorSettings[props.target][1],
+        blue: colorSettings[props.target][2],
+        opacity: colorSettings[props.target][3],
     })
 
     React.useEffect(() =>
         {
             setInputValue({
-                red: colorSettings.fillColor[0],
-                green: colorSettings.fillColor[1],
-                blue: colorSettings.fillColor[2],
-                opacity: colorSettings.fillColor[3],
+                red: colorSettings[props.target][0],
+                green: colorSettings[props.target][1],
+                blue: colorSettings[props.target][2],
+                opacity: colorSettings[props.target][3],
             })
         }, [colorSettings]
     )
@@ -74,7 +80,7 @@ export default function ControlColorpicker(props) {
             {...state,
             [event.target.id]: input}
         ))
-        const output = [...colorSettings.fillColor]
+        const output = [...colorSettings[props.target]]
         output[event.target.ariaLabel] = toStore;
         if (props.type === 'canvasSettings') {
             dispatch(ChangeCanvasProperties([props.target, output]));

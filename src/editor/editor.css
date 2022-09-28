@@ -257,10 +257,11 @@
     font-weight: 600;
 }
 .control-form-long img {
-    padding: 2px;
+    padding: 1px;
     border-radius: 3px;
     margin-top: 5px;
     margin-right: 5px;
+    border: transparent 1px solid;
 }
 .control-form img {
     padding: 2px;

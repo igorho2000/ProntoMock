@@ -20,29 +20,25 @@ const initialState = {
     selectedObject: [
         {
             type: 'text',
-            width: 0,
-            height: 0,
-            x: 0,
-            y: 0,
-            rotate: 0,
+            width: 1,
+            height: 2,
+            x: 3,
+            y: 4,
+            rotate: 5,
             radius: [0,0,0,0],
             differentRadius: false,
             zIndex: 1,
-            bold: false,
+            bold: true,
             underline: false,
             italic: false,
-            textHorizontalAlign: 'left',
-            textVerticalAlign: 'top',
+            size: 26,
+            textAlign: 'left',
             font: 'Sans Serif',
             textColor: [0,0,0,1],
             fillColor: [0,0,0,1],
-            borderStyle: ['none', 'none', 'none', 'none'],
-            borderWidth: [0,0,0,0],
-            borderColorTop: [0,0,0,1],
-            borderColorRight: [0,0,0,1],
-            borderColorBottom: [0,0,0,1],
-            borderColorLeft: [0,0,0,1],
-            differentBorder: false
+            borderStyle: 'none',
+            borderWidth: 0,
+            borderColor: [0,0,0,1],
         },
     ],
     savedVersions: {
@@ -62,13 +58,14 @@ export const draftSlice = createSlice({
         ChangeCanvasProperties: (state, action) => {
             // payload is an array where 0=property name and 1=new value
             state.canvasSettings[action.payload[0]] = action.payload[1];
-            console.log(action.payload)
+            
         },
         ChangeSelectedProperties: (state, action) => {
             // payload is an array where 0=property name and 1=new value
-            state.selectedObject = state.selectedObject.map((item) => {
+            state.selectedObject.map((item) => {
                 item[action.payload[0]] = action.payload[1];
             })
+            console.log(action.payload)
         }
     },
 });
