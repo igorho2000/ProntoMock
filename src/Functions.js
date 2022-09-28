@@ -25,3 +25,12 @@ export function useOutsideClick(ref) {
       };
     }, [ref]);
   }
+
+
+export function RGBtoHEX(array) {
+  var red = array[0].toString(16).length == 1 ? '0' + array[0].toString(16) : array[0].toString(16);
+  var green = array[1].toString(16).length == 1 ? '0' + array[1].toString(16) : array[1].toString(16);
+  var blue = array[2].toString(16).length == 1 ? '0' + array[2].toString(16) : array[2].toString(16);
+  var hex = '#' + red + green + blue;
+  return hex
+}

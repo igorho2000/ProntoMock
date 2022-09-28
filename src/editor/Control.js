@@ -48,7 +48,7 @@ export default function Control() {
                     </form>
                     <form className='control-form' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                         <label>Rotate</label>
-                        <input type="text" value="5 °" />
+                        <input type="text" value="5" />
                     </form>
                     <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                         <label>Radius</label>

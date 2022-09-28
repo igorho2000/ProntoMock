@@ -8,6 +8,7 @@ import {
 } from '../../features/draftSlice';
 
 import ControlColorpicker from './ControlColorpicker';
+import { RGBtoHEX } from '../../Functions';
 
 export default function ControlDocument() {
 
@@ -23,16 +24,15 @@ export default function ControlDocument() {
         height: canvasSettings.height,
         margin: canvasSettings.margin,
         differentMargin: canvasSettings.differentMargin,
-        fillColor: canvasSettings.fillColor
+        fillColor: RGBtoHEX(canvasSettings.fillColor),
     })
 
-    // handleBlur();
-    // handleChange();
-    // handleCheckChange();
-    // handleCheckInputChange();
-    // handleKeyUp();
-    // handleSelectChange();
-    // handleSubmit();
+    React.useEffect(() => {
+        setInputValue((state) => ({
+            ...state,
+            fillColor: RGBtoHEX(canvasSettings.fillColor)
+        }))
+    }, [canvasSettings])
 
     function handleChange(event) {
         setInputValue((state) => (
@@ -85,6 +85,39 @@ export default function ControlDocument() {
         }
         dispatch(ChangeCanvasProperties([event.target.id, inputValue[event.target.id]]));
     }
+    function handleHEXBlur(event) {
+        
+        if (event.target.value[0] !== '#' && event.target.value.length !== 6) {
+            setInputValue((state) => (
+                {...state,
+                [event.target.id]: RGBtoHEX(canvasSettings.fillColor)}
+            ))
+            return
+        }
+        if (event.target.value[0] === '#' && event.target.value.length !== 7) {
+            setInputValue((state) => (
+                {...state,
+                [event.target.id]: RGBtoHEX(canvasSettings.fillColor)}
+            ))
+            return
+        }
+        var toConvert = event.target.value;
+        if (toConvert[0] === '#') {
+            toConvert = toConvert.substring(1);
+        }
+        if (/^[a-fA-F0-9]+$/.test(toConvert) === false) {
+            return
+        }
+        const red = parseInt(toConvert.substring(0,2), 16);
+        const green = parseInt(toConvert.substring(2,4), 16);
+        const blue = parseInt(toConvert.substring(4,6), 16);
+
+        var output = [...canvasSettings[event.target.id]];
+        output[0] = red;
+        output[1] = green;
+        output[2] = blue;
+        dispatch(ChangeCanvasProperties([event.target.id, output]))
+    }
     function handleSubmit(event) {
         event.preventDefault();
     }
@@ -116,6 +149,16 @@ export default function ControlDocument() {
                     <option>Custom</option>
                 </select>
             </form>
+            { inputValue.size === 'Custom' &&
+            <form className='control-form' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
+                <label>Width</label>
+                <input type="number" value={inputValue.width} id="width" onChange={handleChange} />
+            </form>}
+            { inputValue.size === 'Custom' &&
+            <form className='control-form' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
+                <label>Height</label>
+                <input type="number" value={inputValue.height} id="height" onChange={handleCheckChange} />
+            </form>}
             <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Unit</label>
                 <select value={inputValue.unit} id="unit" onChange={handleSelectChange}>
@@ -126,15 +169,7 @@ export default function ControlDocument() {
                     <option>px</option>
                 </select>
             </form>
-            <form className='control-form' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
-                <label>Width</label>
-                <input type="number" value={inputValue.width} id="width" onChange={handleChange} />
-            </form>
             
-            <form className='control-form' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
-                <label>Height</label>
-                <input type="number" value={inputValue.height} id="height" onChange={handleCheckChange} />
-            </form>
             {
                 inputValue.differentMargin ?
                 <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
@@ -156,15 +191,15 @@ export default function ControlDocument() {
                 <input type="checkbox" aria-label='margin' id="differentMargin" checked={inputValue.differentMargin} onChange={handleCheckChange} />
                 <label for="differentMargin">Different margin on each side</label>
             </div>
-            <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
+            <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>
                 <label>Fill</label>
-                <input type="text" value="#00FF00" />
+                <input id="fillColor" type="text" value={inputValue.fillColor} onChange={handleChange} />
                 <div onClick={toggleColorPop} style={{background: `linear-gradient(to right, 
                     rgba(${canvasSettings.fillColor[0]}, ${canvasSettings.fillColor[1]}, ${canvasSettings.fillColor[2]}, ${canvasSettings.fillColor[3]}), 
                     rgba(${canvasSettings.fillColor[0]}, ${canvasSettings.fillColor[1]}, ${canvasSettings.fillColor[2]}, ${canvasSettings.fillColor[3]})), 
                     url(../../properties/transparent.svg)`}}></div>
             </form>
-            {colorPop && <ControlColorpicker toggle={toggleColorPop} target='fillColor' />}
+            {colorPop && <ControlColorpicker target='fillColor' type='canvasSettings' />}
             
         </div>
         
