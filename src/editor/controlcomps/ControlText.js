@@ -49,7 +49,7 @@ export default function ControlText() {
     }
 
     function handleBlur(event) {
-        if (event.target.value === '') {
+        if (event.target.value === '' || +event.target.value <= 0 ) {
             setInputValue((state) => (
                 {...state,
                 [event.target.id]: canvasSettings[event.target.id]}

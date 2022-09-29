@@ -3,12 +3,13 @@ import '../editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
-    ChangeCanvasProperties,
+    ChangeCanvasProperties, SetDraftSize,
     selectDraft,
 } from '../../features/draftSlice';
 
 import ControlColorpicker from './ControlColorpicker';
 import { RGBtoHEX } from '../../Functions';
+import { paperSizes } from '../../features/paperSizes';
 
 export default function ControlDocument() {
 
@@ -48,6 +49,24 @@ export default function ControlDocument() {
         ))
         dispatch(ChangeCanvasProperties([event.target.id, inputValue[event.target.id]]))
     }
+    function handleSizeSelectChange(event) {
+        if (event.target.value === 'Custom') {
+            setInputValue((state) => (
+                {...state,
+                size: event.target.value,
+                }
+            ))
+            return
+        }
+        setInputValue((state) => (
+            {...state,
+            size: event.target.value,
+            width: paperSizes[event.target.value][0],
+            height: paperSizes[event.target.value][1],
+            }
+        ))
+        dispatch(SetDraftSize(event.target.value))
+    }
     function handleCheckInputChange(event) {
         if (event.target.ariaLabel === '4') {
             setInputValue((state) => (
@@ -73,13 +92,30 @@ export default function ControlDocument() {
         }
         ))
         dispatch(ChangeCanvasProperties([event.target.id, inputValue[event.target.id]]));
-        dispatch(ChangeCanvasProperties(['margin', inputValue.margin]));
+        dispatch(ChangeCanvasProperties(['margin', [inputValue.margin[0],inputValue.margin[0],inputValue.margin[0],inputValue.margin[0]]]));
     }
     function handleBlur(event) {
-        if (event.target.value === '') {
+        if (event.target.value === '' || +event.target.value <= 0 ) {
             setInputValue((state) => (
                 {...state,
                 [event.target.id]: canvasSettings[event.target.id]}
+            ))
+            return
+        }
+        dispatch(ChangeCanvasProperties([event.target.id, inputValue[event.target.id]]));
+    }
+    function handleMarginBlur(event) {
+        if (event.target.value === '' || +event.target.value < 0 ) {
+            setInputValue((state) => (
+                {...state,
+                margin: canvasSettings['margin']}
+            ))
+            return
+        }
+        if ((+inputValue.margin[0] + +inputValue.margin[2] >= +inputValue.height) || (+inputValue.margin[1] + +inputValue.margin[3] >= +inputValue.width)) {
+            setInputValue((state) => (
+                {...state,
+                margin: canvasSettings['margin']}
             ))
             return
         }
@@ -135,6 +171,10 @@ export default function ControlDocument() {
         ))
     }
 
+    const outputPaperSizes = Object.keys(paperSizes).map((item) => (
+        <option key={`papersize-${item}`}>{item}</option>
+    ))
+
     return (
         <div className='control-title'>
         <div>
@@ -143,10 +183,8 @@ export default function ControlDocument() {
         <div className='control-group'>
             <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Size</label>
-                <select value={inputValue.size} id="size" onChange={handleSelectChange}>
-                    <option>A4</option>
-                    <option>A3</option>
-                    <option>Custom</option>
+                <select value={inputValue.size} id="size" onChange={handleSizeSelectChange} style={{width: '8rem'}}>
+                    {outputPaperSizes}
                 </select>
             </form>
             { inputValue.size === 'Custom' &&
@@ -157,16 +195,12 @@ export default function ControlDocument() {
             { inputValue.size === 'Custom' &&
             <form className='control-form' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
                 <label>Height</label>
-                <input type="number" value={inputValue.height} id="height" onChange={handleCheckChange} />
+                <input type="number" value={inputValue.height} id="height" onChange={handleChange} />
             </form>}
             <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Unit</label>
                 <select value={inputValue.unit} id="unit" onChange={handleSelectChange}>
-                    <option>in</option>
                     <option>mm</option>
-                    <option>cm</option>
-                    <option>pt</option>
-                    <option>px</option>
                 </select>
             </form>
             
@@ -174,14 +208,14 @@ export default function ControlDocument() {
                 inputValue.differentMargin ?
                 <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                     <label>Margin</label>
-                    <input type="number" id="margin" aria-label={0} onChange={handleCheckInputChange} onBlur={handleBlur} value={inputValue.margin[0]} style={{borderRight: "none", borderBottom: "none", borderLeft: "none", borderWidth: '2px'}} />
-                    <input type="number" id="margin" aria-label={1} onChange={handleCheckInputChange} onBlur={handleBlur} value={inputValue.margin[1]} style={{borderLeft: "none", borderBottom: "none", borderTop: "none", borderWidth: '2px'}} />
-                    <input type="number" id="margin" aria-label={2} onChange={handleCheckInputChange} onBlur={handleBlur} value={inputValue.margin[2]} style={{borderLeft: "none", borderTop: "none", borderRight: "none", borderWidth: '2px'}} />
-                    <input type="number" id="margin" aria-label={3} onChange={handleCheckInputChange} onBlur={handleBlur} value={inputValue.margin[3]} style={{borderRight: "none", borderTop: "none", borderBottom: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={0} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[0]} style={{borderRight: "none", borderBottom: "none", borderLeft: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={1} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[1]} style={{borderLeft: "none", borderBottom: "none", borderTop: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={2} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[2]} style={{borderLeft: "none", borderTop: "none", borderRight: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={3} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[3]} style={{borderRight: "none", borderTop: "none", borderBottom: "none", borderWidth: '2px'}} />
             
                 </form>
                 :
-                <form className='control-form' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
+                <form className='control-form' onSubmit={handleSubmit} onBlur={handleMarginBlur} onKeyUp={handleKeyUp}>
                     <label>Margin</label>
                     <input type="number" id="margin" aria-label={4} onChange={handleCheckInputChange} value={inputValue.margin[0]} />
                 </form>

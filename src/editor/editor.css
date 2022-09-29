@@ -69,7 +69,7 @@
 
 /* Canvas */
 .canvas {
-    width: calc(100vw - 290px);
+    max-width: calc(100vw - 290px);
     height: calc(100vh - 180px);
     top: 70px;
     left: 0px;
@@ -78,29 +78,23 @@
     overflow-x: visible;
     overflow-y: scroll;
     z-index: -10000000;
-    padding: 60px 0px 50px;
+    padding: 60px 0 50px;
 }
 .draft-cont {
     display: flex;
     justify-content: center;
-    min-width: 700px;
+    min-width: calc(100vw - 300px);
+    width: fit-content;
 }
 .canvas-buffer {
     min-width: 100px;
     height: 1px;
     background-color: rgb(228, 228, 228);
 }
-.draft {
-    min-width: 500px;
-    min-height: 1000px;
-    background-color: white;
-}
 .margin {
     position: absolute;
-    min-width: 400px;
-    min-height: 900px;
-    margin-top: 50px;
-    border: rgb(158, 205, 216) 1.5px solid;
+    border: rgb(158, 205, 216) 0.3mm solid;
+    outline: white 0.3mm solid;
 }
 
 /* Control Panel */
