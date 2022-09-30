@@ -49,7 +49,7 @@ const initialState = {
         minZIndex: 10000000,
         maxZIndex: 10000000,
         objectNum: 0,
-        selected: 'Square',
+        selected: 'Text',
     }
 }
 
@@ -95,6 +95,7 @@ export const draftSlice = createSlice({
             state.statistics.selected = 'Selected';
         },
         DeselectObject: (state) => {
+            state.everyObject = state.everyObject.concat(state.selectedObject);
             state.selectedObject = [];
             state.statistics.selected = 'none';
         }
