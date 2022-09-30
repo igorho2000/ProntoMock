@@ -2,8 +2,11 @@ import React from 'react';
 import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { selectDraft } from '../features/draftSlice';
+
 export default function Elements() {
     const dispatch = useDispatch();
+    const draftInfo = useSelector(selectDraft);
 
     return (
         <div>
@@ -42,7 +45,7 @@ export default function Elements() {
                     <img className='elements-icon elements-control-icon' src="../properties/zoom_in.svg" />
                     <div className='elements-description'>Zoom In</div>
                 </div>
-                <p>70%</p>
+                <p>{`${draftInfo.statistics.zoom * 100}%`}</p>
                 <div className='elements-function'>
                     <img className='elements-icon elements-control-icon' src="../properties/zoom_out.svg" />
                     <div className='elements-description'>Zoom Out</div>

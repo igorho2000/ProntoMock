@@ -149,10 +149,16 @@ export default function ControlText() {
                 </form>
                 <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                     <label>Font</label>
-                    <select id='font' value={inputValue.font} onChange={handleSelectChange} >
-                        <option>Sans Serif</option>
+                    <select id='font' value={inputValue.font} onChange={handleSelectChange} style={{width: '10rem'}}>
                         <option>Ariel</option>
-                        <option>Serif</option>
+                        <option>Verdana</option>
+                        <option>Tahoma</option>
+                        <option>Trebuchet MS</option>
+                        <option>Times New Roman</option>
+                        <option>Georgia</option>
+                        <option>Garamond</option>
+                        <option>Courier New</option>
+                        <option>Brush Script MT</option>
                     </select>
                 </form>
                 <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>

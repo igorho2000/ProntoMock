@@ -50,6 +50,7 @@ const initialState = {
         maxZIndex: 10000000,
         objectNum: 0,
         selected: 'Text',
+        zoom: 1,
     }
 }
 
