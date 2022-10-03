@@ -41,7 +41,7 @@ export default function ControlBorder() {
             {...state,
             [event.target.id]: event.target.value}
         ))
-        dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]))
+        dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
     }
 
     function handleBlur(event) {
@@ -125,7 +125,7 @@ export default function ControlBorder() {
                     <input id="borderWidth" type="number" value={inputValue.borderWidth} onChange={handleChange} />
                 </form>
                 <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>
-                    <label>text</label>
+                    <label>Color</label>
                     <input id="borderColor" type="text" value={inputValue.borderColor} onChange={handleChange} />
                     <div onClick={toggleColorPop} style={{background: `linear-gradient(to right, 
                         rgba(${canvasSettings.borderColor[0]}, ${canvasSettings.borderColor[1]}, ${canvasSettings.borderColor[2]}, ${canvasSettings.borderColor[3]}), 

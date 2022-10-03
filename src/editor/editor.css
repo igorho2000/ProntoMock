@@ -74,7 +74,8 @@
     left: 30px
 }
 .elements-control-icon {
-    height: 24px
+    height: 24px;
+    width: 24px;
 }
 .elements-control > p {
     margin: 5px 0;
@@ -103,6 +104,10 @@
     min-width: calc(100vw - 300px);
     width: fit-content;
 }
+.draft {
+    position: relative;
+    z-index: 1;
+}
 .canvas-buffer {
     min-width: 100px;
     height: 1px;
@@ -110,9 +115,16 @@
 }
 .margin {
     position: absolute;
+    z-index: -1000000;
     border: rgb(158, 205, 216) 0.3mm solid;
     outline: white 0.3mm solid;
 }
+
+textarea:focus {
+    outline: none;
+}
+
+
 
 /* Control Panel */
 .control {
@@ -198,6 +210,7 @@
 .control-form-slider label {
     width: 3.5rem;
 }
+.elements-control input,
 .control-form-check input,
 .control-form input,
 .control-form select,
@@ -238,6 +251,12 @@
     width: 15.2px;
     margin: 1px 3px 0 0;
 }
+.elements-control input {
+    width: 1.5rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
 .control-form-long select {
     width: 6rem;
     padding: 0;
@@ -246,7 +265,7 @@
     font-size: 0.8rem;
     font-style: italic;
 }
-.con
+.elements-control input:hover,
 .control-form-input:hover input,
 .control-form select:hover,
 .control-form-long input:hover,
@@ -256,7 +275,7 @@
 .control-form-slider-input:hover {
     border: 1px solid rgb(186, 186, 186);
 }
-
+.elements-control input:focus,
 .control-form input:focus,
 .control-form select:focus,
 .control-form-long input:focus,

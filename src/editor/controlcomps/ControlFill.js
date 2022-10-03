@@ -92,7 +92,7 @@ export default function ControlFill() {
             </div>
             <div className='control-group'>
                 <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>
-                    <label>text</label>
+                    <label>Color</label>
                     <input id="fillColor" type="text" value={inputValue.fillColor} onChange={handleChange} />
                     <div onClick={toggleColorPop} style={{background: `linear-gradient(to right, 
                         rgba(${canvasSettings.fillColor[0]}, ${canvasSettings.fillColor[1]}, ${canvasSettings.fillColor[2]}, ${canvasSettings.fillColor[3]}), 

@@ -45,7 +45,7 @@ export default function ControlText() {
             {...state,
             [event.target.id]: event.target.value}
         ))
-        dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]))
+        dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
     }
 
     function handleBlur(event) {
@@ -162,7 +162,7 @@ export default function ControlText() {
                     </select>
                 </form>
                 <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>
-                    <label>text</label>
+                    <label>Color</label>
                     <input id="textColor" type="text" value={inputValue.textColor} onChange={handleChange} />
                     <div onClick={toggleColorPop} style={{background: `linear-gradient(to right, 
                         rgba(${canvasSettings.textColor[0]}, ${canvasSettings.textColor[1]}, ${canvasSettings.textColor[2]}, ${canvasSettings.textColor[3]}), 
