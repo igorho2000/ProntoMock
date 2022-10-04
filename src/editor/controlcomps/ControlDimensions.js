@@ -55,8 +55,8 @@ export default function ControlDimensions(props) {
             [event.target.ariaLabel]: [state[event.target.ariaLabel][0], state[event.target.ariaLabel][0], state[event.target.ariaLabel][0], state[event.target.ariaLabel][0]]
         }
         ))
-        dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
-        dispatch(ChangeSelectedProperties([event.target.ariaLabel, inputValue[event.target.ariaLabel]]));
+        dispatch(ChangeSelectedProperties([event.target.id, event.target.checked]));
+        dispatch(ChangeSelectedProperties([event.target.ariaLabel, [inputValue[event.target.ariaLabel][0], inputValue[event.target.ariaLabel][0],inputValue[event.target.ariaLabel][0],inputValue[event.target.ariaLabel][0]]]));
     }
 
     function handleBlur(event) {

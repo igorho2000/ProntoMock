@@ -39,12 +39,16 @@ export function useOutsideClick(ref) {
           if (event.target.className === 'selectedText') {
             return
           }
+          if (event.target.className === 'elements-control' || event.target.offsetParent.className === 'elements elements-control') {
+            return
+          }
           if (event.target.className === 'control' || event.target.offsetParent.className === 'control') {
             return
           }
           if (event.shiftKey === true) {
             return
           }
+          console.log(event);
           dispatch(DeselectObject());
         }
       }

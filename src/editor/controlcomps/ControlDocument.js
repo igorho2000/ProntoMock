@@ -91,7 +91,7 @@ export default function ControlDocument() {
             [event.target.ariaLabel]: [state[event.target.ariaLabel][0], state[event.target.ariaLabel][0], state[event.target.ariaLabel][0], state[event.target.ariaLabel][0]]
         }
         ))
-        dispatch(ChangeCanvasProperties([event.target.id, inputValue[event.target.id]]));
+        dispatch(ChangeCanvasProperties([event.target.id, event.target.checked]));
         dispatch(ChangeCanvasProperties(['margin', [inputValue.margin[0],inputValue.margin[0],inputValue.margin[0],inputValue.margin[0]]]));
     }
     function handleBlur(event) {
