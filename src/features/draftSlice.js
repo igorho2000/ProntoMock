@@ -45,13 +45,48 @@ const initialState = {
             bold: true,
             underline: true,
             italic: true,
-            size: 26,
+            size: 14,
             textAlign: 'left',
             font: 'Sans Serif',
             textColor: [0,0,0,1],
             fillColor: [255,255,255,1],
             borderStyle: 'none',
             borderWidth: 0,
+            borderColor: [0,0,0,1],
+        },
+        {
+            type: 'Text',
+            value: `Hi, it's Dorothy`,
+            width: 20,
+            height: 20,
+            x: 10,
+            y: 70,
+            rotate: 0,
+            radius: [5,5,5,5],
+            differentRadius: false,
+            zIndex: 2,
+            bold: true,
+            underline: true,
+            italic: true,
+            size: 12,
+            textAlign: 'left',
+            font: 'Ariel',
+            textColor: [0,0,0,1],
+            fillColor: [255,255,255,1],
+            borderStyle: 'none',
+            borderWidth: 0,
+            borderColor: [0,0,0,1],
+        },
+        {
+            type: 'Line',
+            height: 0,
+            width: 50,
+            x: 1,
+            y: 60,
+            rotate: 0,
+            zIndex: 30,
+            borderStyle: 'solid',
+            borderWidth: 1,
             borderColor: [0,0,0,1],
         },
         {
@@ -67,44 +102,11 @@ const initialState = {
             borderWidth: 0,
             borderColor: [0,0,0,1],
         }
+        
     ],
     selectedObject: [
         
-        {
-            type: 'Text',
-            value: `Hi, it's Dorothy`,
-            width: 20,
-            height: 20,
-            x: 10,
-            y: 70,
-            rotate: 0,
-            radius: [0,0,0,0],
-            differentRadius: false,
-            zIndex: 2,
-            bold: true,
-            underline: true,
-            italic: true,
-            size: 26,
-            textAlign: 'left',
-            font: 'Ariel',
-            textColor: [0,0,0,1],
-            fillColor: [255,255,255,1],
-            borderStyle: 'solid',
-            borderWidth: 0,
-            borderColor: [0,0,0,1],
-        },
-        {
-            type: 'Line',
-            height: 0,
-            width: 50,
-            x: 1,
-            y: 60,
-            rotate: 0,
-            zIndex: 30,
-            borderStyle: 'solid',
-            borderWidth: 1,
-            borderColor: [0,0,0,1],
-        }
+        
     ],
     savedVersions: {
 
@@ -113,7 +115,7 @@ const initialState = {
         minZIndex: 10000000,
         maxZIndex: 10000000,
         objectNum: 0,
-        selected: 'Selected',
+        selected: 'none',
         zoom: 1,
     }
 }
@@ -132,7 +134,10 @@ export const draftSlice = createSlice({
             state.selectedObject.map((item) => {
                 item[action.payload[0]] = action.payload[1];
             })
-            console.log(action.payload)
+        },
+        ChangeSelectedText: (state, action) => {
+            // payload is an array where 0=index number and 1=new value
+            state.selectedObject[action.payload[0]].value = action.payload[1];
         },
         SetDraftSize: (state, action) => {
             // payload is a string of the paper size
@@ -151,29 +156,55 @@ export const draftSlice = createSlice({
         SelectObject: (state, action) => {
             // payload is the index of the element selected
             var toSelected = state.everyObject.splice(action.payload, 1)
+            state.selectedObject = state.selectedObject.concat(toSelected);
 
             if (state.statistics.selected === 'none') {
-                state.statistics.selected = toSelected.type;
+                state.statistics.selected = toSelected[0].type;
                 return
             } 
-            if (state.statistics.selected === toSelected.type) {
+            if (state.statistics.selected === toSelected[0].type) {
                 if (state.statistics.selected[-1] === 's') {
                     return
                 }
                 state.statistics.selected += 's'
+                return
             }
             state.statistics.selected = 'Selected';
         },
         DeselectObject: (state) => {
             state.everyObject = state.everyObject.concat(state.selectedObject);
-            state.selectedObject = [];
+            state.selectedObject.splice(0, state.selectedObject.length);
             state.statistics.selected = 'none';
+        },
+        DeselectParticularObject: (state, action) => {
+            // payload is the index number of the item to deselect
+            var toEvery = state.selectedObject.splice(action.payload, 1);
+            state.everyObject = state.everyObject.concat(toEvery);
+
+            if (state.selectedObject.length === 0) {
+                state.statistics.selected = 'none';
+                return
+            }
+            if (state.selectedObject.length === 1) {
+                state.statistics.selected = state.selectedObject[0].type;
+                return
+            }
+            const selected = state.selectedObject[0].type;
+            for (var i = 0; i < state.selectedObject.length; i++) {
+                if (state.selectedObject[i].type !== selected) {
+                    state.statistics.selected = 'Selected';
+                    break
+                }
+                if (i === state.selectedObject.length - 1) {
+                    state.statistics.selected = selected + 's';
+                }
+            }
         }
     },
 });
 
-export const {ChangeCanvasProperties, ChangeSelectedProperties, SetDraftSize, ZoomInOutDraft,
-SelectObject, DeselectObject} = draftSlice.actions;
+export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeSelectedText, SetDraftSize, ZoomInOutDraft,
+SelectObject, DeselectObject, DeselectParticularObject} = draftSlice.actions;
 
 export const selectDraft = (state) => state.draft;
 

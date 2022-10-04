@@ -41,11 +41,18 @@ export default function ControlBorder() {
             {...state,
             [event.target.id]: event.target.value}
         ))
+        if (event.target.value === 'none') {
+            dispatch(ChangeSelectedProperties(['borderWidth', 0]))
+            setInputValue((state) => (
+                {...state,
+                borderWidth: 0}
+            ))
+        }
         dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
     }
 
     function handleBlur(event) {
-        if (event.target.value === '' || +event.target.value <= 0 ) {
+        if (event.target.value === '' || +event.target.value < 0 ) {
             setInputValue((state) => (
                 {...state,
                 [event.target.id]: canvasSettings[event.target.id]}
@@ -120,10 +127,15 @@ export default function ControlBorder() {
                         <option>dotted</option>
                     </select>
                 </form>
+                {
+                    inputValue.borderStyle !== 'none' &&
                 <form className='control-form' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleBlur}>
                     <label>Width</label>
                     <input id="borderWidth" type="number" value={inputValue.borderWidth} onChange={handleChange} />
                 </form>
+                }
+                {
+                    inputValue.borderStyle !== 'none' &&
                 <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>
                     <label>Color</label>
                     <input id="borderColor" type="text" value={inputValue.borderColor} onChange={handleChange} />
@@ -132,6 +144,7 @@ export default function ControlBorder() {
                         rgba(${canvasSettings.borderColor[0]}, ${canvasSettings.borderColor[1]}, ${canvasSettings.borderColor[2]}, ${canvasSettings.borderColor[3]})), 
                         url(../../properties/transparent.svg)`}}></div>
                 </form>
+                }
                 {colorPop && <ControlColorpicker target='borderColor' type='selectedObject' />}
             </div>
         </div>

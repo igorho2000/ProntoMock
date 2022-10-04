@@ -12,49 +12,51 @@ export default function Canvas() {
 
     const draftInfo = useSelector(selectDraft);
     const canvasInfo = draftInfo.canvasSettings;
+    const selected = draftInfo.selectedObject;
     const zoom = draftInfo.statistics.zoom;
 
-    const draftElementsOutput = draftInfo.everyObject.map((item) => {
+    const draftElementsOutput = draftInfo.everyObject.map((item, index) => {
         var output = '';
         
         switch (item.type) {
             case 'Text':
-                output = <Textbox element={item} selected={false} />;
+                output = <Textbox element={item} selected={false} index={index}/>;
                 break
             case 'Ellipse':
-                output = <Shape element={item} ellipse={true} selected={false} />;
+                output = <Shape element={item} ellipse={true} selected={false} index={index}/>;
                 break
             case 'Square':
-                output = <Shape element={item} ellipse={false} selected={false} />;
+                output = <Shape element={item} ellipse={false} selected={false} index={index}/>;
                 break
             case 'Line':
-                output = <Line element={item} selected={false} />
+                output = <Line element={item} selected={false} index={index}/>
                 break
         }
 
         return output
     })
 
-    const selectedElementsOutput = draftInfo.selectedObject.map((item) => {
+    const selectedElementsOutput = draftInfo.selectedObject.map((item, index) => {
         var output = '';
         
         switch (item.type) {
             case 'Text':
-                output = <Textbox element={item} selected={true} />;
+                output = <Textbox element={item} selected={true} index={index} />;
                 break
             case 'Ellipse':
-                output = <Shape element={item} ellipse={true} selected={true} />;
+                output = <Shape element={item} ellipse={true} selected={true}  />;
                 break
             case 'Square':
-                output = <Shape element={item} ellipse={false} selected={true} />;
+                output = <Shape element={item} ellipse={false} selected={true}  />;
                 break
             case 'Line':
-                output = <Line element={item} selected={true} />
+                output = <Line element={item} selected={true}  />
                 break
         }
 
         return output
     })
+
 
     return (
         <div className='canvas'>
@@ -65,8 +67,8 @@ export default function Canvas() {
                     }} >
                     <div className='margin' style={{marginTop: `${(canvasInfo.margin[0] - 0.3) * zoom}mm`, marginRight: `${canvasInfo.margin[1]  * zoom}mm`, marginLeft: `${(canvasInfo.margin[3]) * zoom}mm`, minWidth: `${(canvasInfo.width - canvasInfo.margin[1] - canvasInfo.margin[3]) * zoom}mm`, minHeight: `${(canvasInfo.height - canvasInfo.margin[0] - canvasInfo.margin[2]) * zoom}mm`}}></div>
                     {draftElementsOutput}
-                    <Selected />
-                    {selectedElementsOutput}
+                    {selected.length > 0 && <Selected />}
+                    {selected.length > 0 && selectedElementsOutput}
                 </div>
                 
                 <div className='canvas-buffer'></div>
