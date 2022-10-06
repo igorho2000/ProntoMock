@@ -137,6 +137,12 @@ export const draftSlice = createSlice({
                 item[action.payload[0]] = action.payload[1];
             })
         },
+        ChangeEachSelectedProperties: (state, action) => {
+            // payload is an array where 0=property name and 1=an array containing new values
+            state.selectedObject.map((item, index) => {
+                item[action.payload[0]] = action.payload[1][index];
+            })
+        },
         ChangeSelectedBorderWidth: (state, action) => {
             // payload is the new borderwidth
             state.selectedObject.map((item) => {
@@ -222,7 +228,7 @@ export const draftSlice = createSlice({
     },
 });
 
-export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
+export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
     SetDraftSize, ZoomInOutDraft,
 SelectObject, DeselectObject, DeselectParticularObject} = draftSlice.actions;
 
