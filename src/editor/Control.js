@@ -6,10 +6,11 @@ import { selectDraft } from '../features/draftSlice';
 
 import ControlDocument from './controlcomps/ControlDocument';
 import ControlDimensions from './controlcomps/ControlDimensions';
-import ControlAlign from './controlcomps/ControlAlign';
 import ControlText from './controlcomps/ControlText';
 import ControlFill from './controlcomps/ControlFill';
 import ControlBorder from './controlcomps/ControlBorder';
+import ControlAlignSelection from './controlcomps/ControlAlignSelection';
+import ControlAlignToMargin from './controlcomps/ControlAlignToMargin';
 
 export default function Control() {
     const draft = useSelector(selectDraft);
@@ -55,12 +56,12 @@ export default function Control() {
             </div>}
             {['Line', 'Text', 'Ellipse', 'Square'].includes(selectedType) &&
             <div>
-                <ControlAlign selection={false} />
+                <ControlAlignToMargin />
                 <hr className='control-divider'/>
             </div>}
             {['Lines', 'Texts', 'Ellipses', 'Squares', 'Selected'].includes(selectedType) &&
             <div>
-                <ControlAlign selection={true} />
+                <ControlAlignSelection />
                 <hr className='control-divider'/>
             </div>}
             {['Text', 'Texts'].includes(selectedType) &&

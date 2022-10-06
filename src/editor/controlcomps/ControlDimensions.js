@@ -24,6 +24,18 @@ export default function ControlDimensions(props) {
         differentRadius: canvasSettings.differentRadius,
     })
 
+    React.useEffect(() => {
+        setInputValue({
+            width: canvasSettings.width,
+            height: canvasSettings.height,
+            x: canvasSettings.x,
+            y: canvasSettings.y,
+            rotate: canvasSettings.rotate,
+            radius: canvasSettings.radius,
+            differentRadius: canvasSettings.differentRadius,
+        })
+    }, [canvasSettings])
+
     function handleChange(event) {
         setInputValue((state) => (
             {...state,
@@ -79,6 +91,16 @@ export default function ControlDimensions(props) {
         }
         dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
     }
+    function handleDegreeBlur(event) {
+        if (event.target.value === '' || +event.target.value < 0 || +event.target.value >= 360 ) {
+            setInputValue((state) => (
+                {...state,
+                [event.target.id]: canvasSettings[event.target.id]}
+            ))
+            return
+        }
+        dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
+    }
     function handleCanNegativeBlur(event) {
         if (event.target.value === '') {
             setInputValue((state) => (
@@ -124,7 +146,7 @@ export default function ControlDimensions(props) {
                         <label>Height</label>
                         <input id='height' type='number' value={inputValue.height} onChange={handleChange}/>
                     </form>}
-                    <form className='control-form' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleCanZeroBlur}>
+                    <form className='control-form' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleDegreeBlur}>
                         <label>Rotate</label>
                         <input id='rotate' type='number' value={inputValue.rotate} onChange={handleChange} />
                     </form>

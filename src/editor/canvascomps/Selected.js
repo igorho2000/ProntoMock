@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectDraft, DeselectObject, DeselectParticularObject } from '../../features/draftSlice';
 
 import { ClickOutsideSelected } from '../../Functions';
+import { getSelectedItemStats, getSelectedStats } from '../../Functions';
 
 export default function Selected() {
     const dispatch = useDispatch();
@@ -16,53 +17,7 @@ export default function Selected() {
     const wrapperRef = React.useRef(null);
     ClickOutsideSelected(wrapperRef);
 
-    function DegreeCalc(degree) {
-        var rotate = 0;
-        if (degree <= 90) {
-            rotate = degree * Math.PI/180;
-        } else if (degree <= 180 && degree > 90) {
-            rotate = (180 - degree) * Math.PI/180
-        } else if (degree <= 270 && degree > 180) {
-            rotate = (degree - 180) * Math.PI/180
-        } else if (degree <= 360 && degree > 270) {
-            rotate = (360 - degree) * Math.PI/180
-        }
-        return rotate
-    }
     
-    function getDimensions() {
-        var left = 10000000;
-        var top = 10000000;
-        var width = 0;
-        var height = 0;
-        selected.map((item) => {
-            const rotate = DegreeCalc(+item.rotate);
-            const leftbound = item.type === 'Line' ? (+item.x + (+item.width) / 2) - ((+item.width) * Math.cos(rotate) + (+item.height + +item.borderWidth *2) * Math.sin(rotate)) / 2 : (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth *2) * Math.sin(rotate)) / 2;
-            const topbound = item.type === 'Line' ? (+item.y + (+item.height + +item.borderWidth) / 2) - ((+item.width) * Math.sin(rotate) + (+item.height + +item.borderWidth) * Math.cos(rotate)) / 2 : (+item.y + (+item.height + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.height + +item.borderWidth *2) * Math.cos(rotate)) / 2;
-            if (leftbound <= left) {
-                left = leftbound;
-            }
-            if (topbound <= top) {
-                top = topbound;
-            }
-        })
-        selected.map((item) => {
-            const rotate = DegreeCalc(+item.rotate);
-            const leftbound = item.type === 'Line' ? (+item.x + (+item.width) / 2) - ((+item.width) * Math.cos(rotate) + (+item.height + +item.borderWidth) * Math.sin(rotate)) / 2 : (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth *2) * Math.sin(rotate)) / 2;
-            const topbound = item.type === 'Line' ? (+item.y + (+item.height + +item.borderWidth) / 2) - ((+item.width) * Math.sin(rotate) + (+item.height + +item.borderWidth) * Math.cos(rotate)) / 2 : (+item.y + (+item.height + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.height + +item.borderWidth *2) * Math.cos(rotate)) / 2;
-            const widthcalc = item.type === 'Line' ? (+item.width) * Math.cos(rotate) + (+item.height + +item.borderWidth) * Math.sin(rotate) : (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate);
-            const heightcalc = item.type === 'Line' ? (+item.width) * Math.sin(rotate) + (+item.height + +item.borderWidth) * Math.cos(rotate) : (+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.height + +item.borderWidth * 2) * Math.cos(rotate);
-            if ((leftbound + widthcalc) >= (left + width)) {
-                width = (leftbound + widthcalc) - left;
-            }
-            if ((topbound + heightcalc) >= (top + height)) {
-                height = (topbound + heightcalc) - top;
-            }
-        })
-        
-        return [left, top, width, height]
-    }
-    const [left, top, width, height] = getDimensions();
 
     const subSelected = selected.map((item, index) => {
         if (item.type === 'Line') {
@@ -110,7 +65,14 @@ export default function Selected() {
         )
     })
     
-
+    const selectedItemStats = getSelectedItemStats(selected)
+    const selectedStats = getSelectedStats(selectedItemStats);
+    
+    const left = selectedStats.leftBound;
+    const top = selectedStats.topBound;
+    const width = selectedStats.selectedWidth;
+    const height = selectedStats.selectedHeight;
+   
     return (
         <div ref={wrapperRef}>
             <div style={{position: "absolute", border:"solid rgb(0,160,197) 0.5mm",

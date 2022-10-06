@@ -3,7 +3,7 @@ import '../editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
-    ChangeSelectedProperties,
+    ChangeSelectedProperties, ChangeSelectedBorderWidth,
     selectDraft,
 } from '../../features/draftSlice';
 
@@ -42,7 +42,7 @@ export default function ControlBorder() {
             [event.target.id]: event.target.value}
         ))
         if (event.target.value === 'none') {
-            dispatch(ChangeSelectedProperties(['borderWidth', 0]))
+            dispatch(ChangeSelectedBorderWidth(0))
             setInputValue((state) => (
                 {...state,
                 borderWidth: 0}
@@ -59,7 +59,19 @@ export default function ControlBorder() {
             ))
             return
         }
-        dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
+        dispatch(ChangeSelectedBorderWidth(inputValue[event.target.id]));
+
+        var toConvert = inputValue.borderColor.substring(1);
+        const red = parseInt(toConvert.substring(0,2), 16);
+        const green = parseInt(toConvert.substring(2,4), 16);
+        const blue = parseInt(toConvert.substring(4,6), 16);
+
+        var output = [...canvasSettings['borderColor']];
+        output[0] = red;
+        output[1] = green;
+        output[2] = blue;
+        dispatch(ChangeSelectedProperties(['borderColor', output]))
+
     }
     function handleHEXBlur(event) {
         

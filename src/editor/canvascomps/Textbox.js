@@ -28,7 +28,7 @@ export default function Textbox(props) {
             fontFamily: element.font, textAlign: element.textAlign, fontSize: `${element.size * zoom}pt`,
             color: `rgba(${element.textColor[0]},${element.textColor[1]},${element.textColor[2]},${element.textColor[3]})`, backgroundColor: `rgba(${element.fillColor[0]},${element.fillColor[1]},${element.fillColor[2]},${element.fillColor[3]})`,
             borderStyle: element.borderStyle, borderWidth: `${element.borderWidth * zoom}mm`, borderColor: `rgba(${element.borderColor[0]},${element.borderColor[1]},${element.borderColor[2]},${element.borderColor[3]})`,
-            userSelect: props.selected ? 'text' : 'none'
+            userSelect: 'none',
         }} onClick={() => {
             if (props.selected === false) {
                 dispatch(SelectObject(props.index))

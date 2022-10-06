@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { paperSizes } from './paperSizes';
 
+import { DegreeCalc } from '../Functions';
+
 const initialState = {
     draftSettings: {
         name: 'First Draft',
@@ -135,6 +137,23 @@ export const draftSlice = createSlice({
                 item[action.payload[0]] = action.payload[1];
             })
         },
+        ChangeSelectedBorderWidth: (state, action) => {
+            // payload is the new borderwidth
+            state.selectedObject.map((item) => {
+                const rotate = DegreeCalc(+item.rotate);
+
+                const offsetX = ((+action.payload - +item.borderWidth) * Math.cos(rotate) + (+action.payload - +item.borderWidth) * Math.sin(rotate));
+                const offsetY = ((+action.payload - +item.borderWidth) * Math.sin(rotate) + (+action.payload - +item.borderWidth) * Math.cos(rotate));
+
+                item.borderWidth = action.payload;
+                if (item.type === 'Line') {
+                    item.y = +item.y - offsetY / 2;
+                    return
+                }
+                item.x = +item.x - offsetX;
+                item.y = +item.y - offsetY;
+            })
+        },
         ChangeSelectedText: (state, action) => {
             // payload is an array where 0=index number and 1=new value
             state.selectedObject[action.payload[0]].value = action.payload[1];
@@ -203,7 +222,8 @@ export const draftSlice = createSlice({
     },
 });
 
-export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeSelectedText, SetDraftSize, ZoomInOutDraft,
+export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
+    SetDraftSize, ZoomInOutDraft,
 SelectObject, DeselectObject, DeselectParticularObject} = draftSlice.actions;
 
 export const selectDraft = (state) => state.draft;

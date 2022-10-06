@@ -46,7 +46,7 @@
     animation: pm 2.5s ease-in-out;
 }
 .transition-cont > div {
-    top: 300px;
+    top: 330px;
     width: 120px;
     height: 0px;
     border-radius: 7px;

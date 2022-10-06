@@ -1,11 +1,11 @@
 import React from 'react';
 import '../editor.css';
 
-export default function ControlAlign(props) {
+export default function ControlAlignToMargin() {
     return (
         <div className='control-title'>
             <div>
-                <h4 className='control-group-title'>{`Align ${props.selection ? "Selection" : "to Margin"}`}</h4>
+                <h4 className='control-group-title'>Align to Margin</h4>
             </div>
             <div className='control-group'>
                 <form className='control-form-long'>
@@ -15,8 +15,6 @@ export default function ControlAlign(props) {
                     <img src="../properties/align_vertical_top.svg" />
                     <img src="../properties/align_vertical_center.svg" />
                     <img src="../properties/align_vertical_bottom.svg" />
-                    {props.selection && <img src="../properties/horizontal_distribute.svg" />}
-                    {props.selection && <img src="../properties/vertical_distribute.svg" />}
                 </form>
                 <form className='control-form'>
                     <label style={{width: "5.5rem"}}>Move to Front</label>
