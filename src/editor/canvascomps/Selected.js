@@ -2,7 +2,8 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDraft, DeselectObject, DeselectParticularObject } from '../../features/draftSlice';
+import { selectDraft, DeselectObject, DeselectParticularObject,
+MoveSelected, ToggleMove } from '../../features/draftSlice';
 
 import { ClickOutsideSelected } from '../../Functions';
 import { getSelectedItemStats, getSelectedStats } from '../../Functions';
@@ -17,19 +18,29 @@ export default function Selected() {
     const wrapperRef = React.useRef(null);
     ClickOutsideSelected(wrapperRef);
 
-    
+    function handleDragStart(event) {
+        event.preventDefault();
+        dispatch(ToggleMove(true));
+    }
 
+    function handleDrag(event) {
+        event.preventDefault();
+    }
     const subSelected = selected.map((item, index) => {
         if (item.type === 'Line') {
             return (
-                <div style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
+                <div draggable="true" style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
                 top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.borderWidth) / +draftInfo.canvasSettings.height * 100}% + 0.4mm)`, width: `calc(${(+item.width) / +draftInfo.canvasSettings.width * 100}% + 0.4mm)`,
                 cursor: 'move', zIndex: '10000000', transform: `rotate(${+item.rotate}deg)`}}
                 onClick={(event) => {
                     if (event.shiftKey === true) {
                         dispatch(DeselectParticularObject(index));
                     }
-                }}>
+                }}
+                onDragStart={handleDragStart}
+                onDrag={handleDrag}
+                >
+                
                 </div>
             )
         } 
@@ -40,20 +51,25 @@ export default function Selected() {
                     top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.height + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.height * 100}% + 1mm)`, width: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.width * 100}% + 1mm)`,
                     transform: `rotate(${+item.rotate}deg)`, borderRadius: item.type === 'Ellipse' ? '50%' : `${item.radius[0] * zoom}mm ${item.radius[1] * zoom}mm ${item.radius[2] * zoom}mm ${item.radius[3] * zoom}mm`,
                     pointerEvents: 'none', zIndex: '10000000'}}></div>
-                    <div style={{position: "absolute", border:"solid transparent 0.2mm",
-                    top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.height + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.height * 100}% + 1mm)`, width: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.width * 100}% + 1mm)`,
+                    <div  draggable="true" style={{position: "absolute", border:"solid transparent 0.2mm",
+                    top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 1.2mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 1.2mm)`, height: `calc(${(+item.height + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.height * 100}% + 2mm)`, width: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.width * 100}% + 2mm)`,
                     transform: `rotate(${+item.rotate}deg)`, borderRadius: item.type === 'Ellipse' ? '50%' : `${item.radius[0] * zoom}mm ${item.radius[1] * zoom}mm ${item.radius[2] * zoom}mm ${item.radius[3] * zoom}mm`,
                     cursor: 'move', zIndex: `${+item.zIndex - 1}`}}
                     onClick={(event) => {
                         if (event.shiftKey === true) {
                             dispatch(DeselectParticularObject(index));
                         }
-                    }}></div>
+                    }}
+                    onDragStart={handleDragStart}
+                    onDrag={handleDrag}
+
+                    >
+                    </div>
                 </div>
             )
         }
         return (
-        <div style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
+        <div draggable="true" style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
         top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.height + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.height * 100}% + 1mm)`, width: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.width * 100}% + 1mm)`,
         transform: `rotate(${+item.rotate}deg)`, borderRadius: item.type === 'Ellipse' ? '50%' : `${item.radius[0] * zoom}mm ${item.radius[1] * zoom}mm ${item.radius[2] * zoom}mm ${item.radius[3] * zoom}mm`,
         cursor: 'move', zIndex: '10000000'}}
@@ -61,7 +77,11 @@ export default function Selected() {
             if (event.shiftKey === true) {
                 dispatch(DeselectParticularObject(index));
             }
-        }}></div>
+        }}
+        onDragStart={handleDragStart}
+        onDrag={handleDrag}
+        >
+        </div>
         )
     })
     

@@ -119,6 +119,7 @@ const initialState = {
         objectNum: 0,
         selected: 'none',
         zoom: 1,
+        move: false,
     }
 }
 
@@ -224,13 +225,29 @@ export const draftSlice = createSlice({
                     state.statistics.selected = selected + 's';
                 }
             }
+        },
+        ToggleMove: (state, action) => {
+            // payload is true or false
+            state.statistics.move = action.payload;
+        },
+        MoveSelected: (state, action) => {
+            // Payload is an object containing the difference between the new location and old location
+            // [x, y] unit in pixels (0.26458mm)
+
+            action.payload[0] = (+action.payload[0] * 0.26458) / (+state.statistics.zoom);
+            action.payload[1] = (+action.payload[1] * 0.26458) / (+state.statistics.zoom);
+            state.selectedObject.map((item) => {
+                item.x += action.payload[0];
+                item.y += action.payload[1];
+            })
+
         }
     },
 });
 
 export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
     SetDraftSize, ZoomInOutDraft,
-SelectObject, DeselectObject, DeselectParticularObject} = draftSlice.actions;
+SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected} = draftSlice.actions;
 
 export const selectDraft = (state) => state.draft;
 
