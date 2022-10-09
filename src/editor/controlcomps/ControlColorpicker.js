@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
     ChangeCanvasProperties, ChangeSelectedProperties,
+    SaveDraft,
     selectDraft,
 } from '../../features/draftSlice';
 
@@ -116,9 +117,9 @@ export default function ControlColorpicker(props) {
 
     return (
         <div className='control-form-slider-cont'>
-            <form className="control-form-slider" onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
+            <form className="control-form-slider" onSubmit={handleSubmit} onKeyUp={handleKeyUp} >
                 <label>Red</label>
-                <input type="range" id='red' aria-label={0} min="0" max="255" value={inputValue.red} className="control-form-slider-slider" onChange={handleChange}
+                <input type="range" id='red' aria-label={0} min="0" max="255" value={inputValue.red} className="control-form-slider-slider" onChange={handleChange} 
                 style={{background: `linear-gradient(to right, rgba(0, ${inputValue.green}, ${inputValue.blue}, ${inputValue.opacity}), rgba(255, ${inputValue.green}, ${inputValue.blue}, ${inputValue.opacity})), url(../../properties/transparent.svg)`}} ></input>
                 <input id='red' aria-label={0} className="control-form-slider-input" type='number' value={inputValue.red} onChange={handleChange}/>
             </form>

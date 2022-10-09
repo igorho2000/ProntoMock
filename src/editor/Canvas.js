@@ -69,7 +69,6 @@ export default function Canvas() {
           var selectedString = ''
           // ctrl V
           if (key == 86 && ctrl) {
-            ev.preventDefault();
             if (localStorage.getItem('clipboard') === null) {
                 return
             }
@@ -83,7 +82,6 @@ export default function Canvas() {
           }
           // ctrl C
           else if (key == 67 && ctrl) { 
-            ev.preventDefault();
             selected.map((item) => {
               selectedString += JSON.stringify(item) + '/';
             })
@@ -100,14 +98,11 @@ export default function Canvas() {
             ev.preventDefault();
             dispatch(DeleteSelected());
           }
-          // undo
-        //   else if (key == 90 && ctrl) {
-        //     ev.preventDefault();
-        //     if (saved.length <= 1) {
-        //       return
-        //     } 
-        //     dispatch(UndoAction());          
-        // }
+        //   undo
+          else if (key == 90 && ctrl) {
+            ev.preventDefault();
+            dispatch(UndoAction());          
+        }
       }
     
     React.useEffect(() => {

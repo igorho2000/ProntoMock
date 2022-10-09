@@ -2,7 +2,7 @@ import React from 'react';
 import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDraft, ZoomInOutDraft } from '../features/draftSlice';
+import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft } from '../features/draftSlice';
 
 export default function Elements() {
     const dispatch = useDispatch();
@@ -63,7 +63,7 @@ export default function Elements() {
                 </div>
             </div>
             <div className='elements elements-control'>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => dispatch(UndoAction())}>
                     <img className='elements-icon elements-control-icon' src="../properties/undo.svg" />
                     <div className='elements-description'>Undo</div>
                 </div>

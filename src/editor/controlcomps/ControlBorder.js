@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
     ChangeSelectedProperties, ChangeSelectedBorderWidth,
-    selectDraft,
+    selectDraft, SaveDraft
 } from '../../features/draftSlice';
 
 import ControlColorpicker from './ControlColorpicker';
@@ -49,6 +49,7 @@ export default function ControlBorder() {
             ))
         }
         dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
+        dispatch(SaveDraft());
     }
 
     function handleBlur(event) {
@@ -71,7 +72,7 @@ export default function ControlBorder() {
         output[1] = green;
         output[2] = blue;
         dispatch(ChangeSelectedProperties(['borderColor', output]))
-
+        dispatch(SaveDraft());
     }
     function handleHEXBlur(event) {
         
@@ -105,6 +106,7 @@ export default function ControlBorder() {
         output[1] = green;
         output[2] = blue;
         dispatch(ChangeSelectedProperties([event.target.id, output]))
+        dispatch(SaveDraft());
     }
 
     function handleSubmit(event) {

@@ -3,7 +3,7 @@ import '../editor.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDraft, ChangeSelectedProperties } from '../../features/draftSlice';
+import { selectDraft, ChangeSelectedProperties, SaveDraft } from '../../features/draftSlice';
 
 import { getSelectedItemStats } from '../../Functions';
 
@@ -22,28 +22,34 @@ export default function ControlAlignToMargin() {
     function AlignLeft() {
         const output = +margin[3] + +selectedItemStats[0].widthDif;
         dispatch(ChangeSelectedProperties(['x', output]));
+        dispatch(SaveDraft());
     }
 
     function AlignRight() {
         const output = pageWidth - +margin[1] - +selectedItemStats[0].visualWidth + +selectedItemStats[0].widthDif;
         dispatch(ChangeSelectedProperties(['x', output]));
+        dispatch(SaveDraft());
     }
     function AlignTop() {
         const output = +margin[0] + +selectedItemStats[0].heightDif;
         dispatch(ChangeSelectedProperties(['y', output]));
+        dispatch(SaveDraft());
     }
 
     function AlignBottom() {
         const output = pageHeight - +margin[2] - +selectedItemStats[0].visualHeight + +selectedItemStats[0].heightDif;
         dispatch(ChangeSelectedProperties(['y', output]));
+        dispatch(SaveDraft());
     }
     function AlignHorizontalCenter() {
         const output = (pageWidth - +margin[1] - +margin[3] - +selectedItemStats[0].visualWidth) / 2  + +margin[3] + +selectedItemStats[0].widthDif;
         dispatch(ChangeSelectedProperties(['x', output]));
+        dispatch(SaveDraft());
     }
     function AlignVerticalCenter() {
         const output = (pageHeight - +margin[0] - +margin[2] - +selectedItemStats[0].visualHeight) / 2  + +margin[0] + +selectedItemStats[0].heightDif;
         dispatch(ChangeSelectedProperties(['y', output]));
+        dispatch(SaveDraft());
     }
 
 

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     ChangeCanvasProperties, SetDraftSize,
     selectDraft,
+    SaveDraft,
 } from '../../features/draftSlice';
 
 import ControlColorpicker from './ControlColorpicker';

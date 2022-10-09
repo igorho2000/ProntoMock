@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
     ChangeSelectedProperties,
+    SaveDraft,
     selectDraft,
 } from '../../features/draftSlice';
 
@@ -66,6 +67,7 @@ export default function ControlFill() {
         output[1] = green;
         output[2] = blue;
         dispatch(ChangeSelectedProperties([event.target.id, output]))
+        dispatch(SaveDraft());
     }
 
     function handleSubmit(event) {

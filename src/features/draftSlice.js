@@ -110,7 +110,97 @@ const initialState = {
         
         
     ],
-    savedVersions: [],
+    savedVersions: [
+        [
+            {
+                type: 'Square',
+                width: 25,
+                height: 25,
+                x: 0,
+                y: 0,
+                rotate: 0,
+                radius: [0,0,0,0],
+                differentRadius: false,
+                zIndex: 2,
+                fillColor: [150,150,150,1],
+                borderStyle: 'none',
+                borderWidth: 0,
+                borderColor: [0,0,0,1],
+            },
+            {
+                type: 'Text',
+                value: `Hi, it's Igor`,
+                width: 20,
+                height: 20,
+                x: 0,
+                y: 30,
+                rotate: 0,
+                radius: [0,0,0,0],
+                differentRadius: false,
+                zIndex: 1,
+                bold: true,
+                underline: true,
+                italic: true,
+                size: 14,
+                textAlign: 'left',
+                font: 'Sans Serif',
+                textColor: [0,0,0,1],
+                fillColor: [255,255,255,1],
+                borderStyle: 'none',
+                borderWidth: 0,
+                borderColor: [0,0,0,1],
+            },
+            {
+                type: 'Text',
+                value: `Hi, it's Dorothy`,
+                width: 20,
+                height: 20,
+                x: 10,
+                y: 70,
+                rotate: 0,
+                radius: [5,5,5,5],
+                differentRadius: false,
+                zIndex: 2,
+                bold: true,
+                underline: true,
+                italic: true,
+                size: 12,
+                textAlign: 'left',
+                font: 'Ariel',
+                textColor: [0,0,0,1],
+                fillColor: [255,255,255,1],
+                borderStyle: 'none',
+                borderWidth: 0,
+                borderColor: [0,0,0,1],
+            },
+            {
+                type: 'Line',
+                height: 0,
+                width: 50,
+                x: 1,
+                y: 60,
+                rotate: 0,
+                zIndex: 30,
+                borderStyle: 'solid',
+                borderWidth: 1,
+                borderColor: [0,0,0,1],
+            },
+            {
+                type: 'Ellipse',
+                width: 25,
+                height: 25,
+                x: 30,
+                y: 0,
+                rotate: 0,
+                zIndex: 3,
+                fillColor: [230,255,255,1],
+                borderStyle: 'none',
+                borderWidth: 0,
+                borderColor: [0,0,0,1],
+            }
+            
+        ]
+    ],
     statistics: {
         minZIndex: 10000000,
         maxZIndex: 10000000,
@@ -260,12 +350,15 @@ export const draftSlice = createSlice({
             }
         },
         UndoAction: (state) => {
+            if (state.savedVersions.length <= 1) {
+                return
+            }
             var toEverything = state.selectedObject.splice(0, state.selectedObject.length);
             state.everyObject = state.everyObject.concat(toEverything);
             state.everyObject.splice(0, state.everyObject.length);
-            const toReplace = state.savedVersions[state.savedVersions.length - 2];
-            state.everyObject = state.everyObject.concat(toReplace);
+            state.everyObject = [...state.savedVersions[state.savedVersions.length - 2]]
             state.savedVersions.pop();
+            state.statistics.selected = 'none';
         },
         PasteSelected: (state, action) => {
             // payload is an array containing paste items
@@ -292,7 +385,6 @@ export const draftSlice = createSlice({
                 }
             }
         },
-        // Figure this out!!!!
         DuplicateSelected: (state) => {
             state.everyObject = state.everyObject.concat(state.selectedObject);
         },

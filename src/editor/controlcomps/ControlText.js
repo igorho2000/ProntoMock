@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
     ChangeSelectedProperties,
+    SaveDraft,
     selectDraft,
 } from '../../features/draftSlice';
 
@@ -46,6 +47,7 @@ export default function ControlText() {
             [event.target.id]: event.target.value}
         ))
         dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
+        dispatch(SaveDraft());
     }
 
     function handleBlur(event) {
@@ -57,6 +59,7 @@ export default function ControlText() {
             return
         }
         dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
+        dispatch(SaveDraft());
     }
     function handleHEXBlur(event) {
         
@@ -90,6 +93,7 @@ export default function ControlText() {
         output[1] = green;
         output[2] = blue;
         dispatch(ChangeSelectedProperties([event.target.id, output]))
+        dispatch(SaveDraft());
     }
 
     function handleSubmit(event) {

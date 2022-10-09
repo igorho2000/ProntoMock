@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
     ChangeSelectedProperties,
+    SaveDraft,
     selectDraft,
 } from '../../features/draftSlice';
 
@@ -87,6 +88,7 @@ export default function ControlDimensions(props) {
             [event.target.id]: rounded
             }
         ))
+        dispatch(SaveDraft());
     }
     function handleCanZeroBlur(event) {
         if (event.target.value === '' || +event.target.value < 0 ) {
@@ -97,6 +99,7 @@ export default function ControlDimensions(props) {
             return
         }
         dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
+        dispatch(SaveDraft());
     }
     function handleDegreeBlur(event) {
         if (event.target.value === '' || +event.target.value < 0 || +event.target.value >= 360 ) {
@@ -107,6 +110,7 @@ export default function ControlDimensions(props) {
             return
         }
         dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
+        dispatch(SaveDraft());
     }
     function handleCanNegativeBlur(event) {
         if (event.target.value === '') {
@@ -123,6 +127,7 @@ export default function ControlDimensions(props) {
             [event.target.id]: rounded
             }
         ))
+        dispatch(SaveDraft());
     }
 
     function handleSubmit(event) {

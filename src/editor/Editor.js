@@ -6,7 +6,7 @@ import {
     selectEveryPopup, resetPopups, showPopup
 } from '../features/popupSlice';
 import {
-    selectDraft, ToggleMove
+    selectDraft, ToggleMove, SaveDraft
 } from '../features/draftSlice'
 import {
     selectCurrentProject
@@ -26,6 +26,9 @@ export default function Editor() {
 
     return (
         <div onMouseUp={() => {
+            if (draftInfo.statistics.move === true) {
+                dispatch(SaveDraft());
+            }
             if (draftInfo.statistics.selected !== 'none') {
                 dispatch(ToggleMove(false))
             }
