@@ -14,7 +14,10 @@ function App() {
   const everyPopup = useSelector(selectEveryPopup);
 
   return (
-    <div>
+    <div onContextMenu={(event) => {
+      event.preventDefault();
+    }}
+    >
       
       <Routes>
             

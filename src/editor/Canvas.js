@@ -2,7 +2,8 @@ import React from 'react';
 import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDraft, MoveSelected } from '../features/draftSlice';
+import { selectDraft, MoveSelected,
+    DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected } from '../features/draftSlice';
 import Line from './canvascomps/Line';
 import Shape from './canvascomps/Shape';
 import Textbox from './canvascomps/Textbox';
@@ -12,6 +13,7 @@ export default function Canvas() {
 
     const draftInfo = useSelector(selectDraft);
     const canvasInfo = draftInfo.canvasSettings;
+    const saved = draftInfo.savedVersions;
     const selected = draftInfo.selectedObject;
     const zoom = draftInfo.statistics.zoom;
 
@@ -58,6 +60,62 @@ export default function Canvas() {
 
         return output
     })
+
+    function handleKeyDown(ev) {
+        ev = ev || window.event;
+          var key = ev.which || ev.keyCode;
+          var ctrl = ev.ctrlKey ? ev.ctrlKey : ((key === 17)
+              ? true : false);
+          var selectedString = ''
+          // ctrl V
+          if (key == 86 && ctrl) {
+            ev.preventDefault();
+            if (localStorage.getItem('clipboard') === null) {
+                return
+            }
+            const paste = localStorage.getItem('clipboard').split('/');
+            paste.splice(-1,1);
+            const pasteArray = paste.map((item) => (
+              JSON.parse(item)
+            ))
+            dispatch(PasteSelected(pasteArray));
+            dispatch(SaveDraft());
+          }
+          // ctrl C
+          else if (key == 67 && ctrl) { 
+            ev.preventDefault();
+            selected.map((item) => {
+              selectedString += JSON.stringify(item) + '/';
+            })
+            localStorage.setItem('clipboard', selectedString);
+          }
+          // ctrl D
+          else if (key == 68 && ctrl) {
+            ev.preventDefault();
+            dispatch(DuplicateSelected());
+            dispatch(MoveSelected([10, 10]));
+          }
+          // delete 
+          else if (key === 46) {
+            ev.preventDefault();
+            dispatch(DeleteSelected());
+          }
+          // undo
+        //   else if (key == 90 && ctrl) {
+        //     ev.preventDefault();
+        //     if (saved.length <= 1) {
+        //       return
+        //     } 
+        //     dispatch(UndoAction());          
+        // }
+      }
+    
+    React.useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown, false)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown, false)
+        }
+    }, [selected, saved])
 
 
     return (

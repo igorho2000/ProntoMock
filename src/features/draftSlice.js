@@ -110,9 +110,7 @@ const initialState = {
         
         
     ],
-    savedVersions: {
-
-    },
+    savedVersions: [],
     statistics: {
         minZIndex: 10000000,
         maxZIndex: 10000000,
@@ -184,18 +182,24 @@ export const draftSlice = createSlice({
             var toSelected = state.everyObject.splice(action.payload, 1)
             state.selectedObject = state.selectedObject.concat(toSelected);
 
-            if (state.statistics.selected === 'none') {
-                state.statistics.selected = toSelected[0].type;
-                return
-            } 
-            if (state.statistics.selected === toSelected[0].type) {
-                if (state.statistics.selected[-1] === 's') {
-                    return
-                }
-                state.statistics.selected += 's'
+            if (state.selectedObject.length === 0) {
+                state.statistics.selected = 'none';
                 return
             }
-            state.statistics.selected = 'Selected';
+            if (state.selectedObject.length === 1) {
+                state.statistics.selected = state.selectedObject[0].type;
+                return
+            }
+            const selected = state.selectedObject[0].type;
+            for (var i = 0; i < state.selectedObject.length; i++) {
+                if (state.selectedObject[i].type !== selected) {
+                    state.statistics.selected = 'Selected';
+                    break
+                }
+                if (i === state.selectedObject.length - 1) {
+                    state.statistics.selected = selected + 's';
+                }
+            }
         },
         DeselectObject: (state) => {
             state.everyObject = state.everyObject.concat(state.selectedObject);
@@ -237,17 +241,68 @@ export const draftSlice = createSlice({
             action.payload[0] = (+action.payload[0] * 0.26458) / (+state.statistics.zoom);
             action.payload[1] = (+action.payload[1] * 0.26458) / (+state.statistics.zoom);
             state.selectedObject.map((item) => {
-                item.x += action.payload[0];
-                item.y += action.payload[1];
+                item.x = (+item.x + +action.payload[0]).toFixed(2);
+                item.y = (+item.y + +action.payload[1]).toFixed(2);
             })
 
-        }
+        },
+        DeleteSelected: (state) => {
+            state.selectedObject.splice(0, state.selectedObject.length);
+            state.statistics.selected = 'none';
+        }, 
+        SaveDraft: (state) => {
+            var toConcat = state.selectedObject.splice(0, state.selectedObject.length);
+            var toSave = state.everyObject.concat(toConcat);
+            state.savedVersions = [...state.savedVersions, toSave];
+            state.selectedObject = state.selectedObject.concat(toConcat);
+            if (state.savedVersions.length > 50) {
+                state.savedVersions.shift();
+            }
+        },
+        UndoAction: (state) => {
+            var toEverything = state.selectedObject.splice(0, state.selectedObject.length);
+            state.everyObject = state.everyObject.concat(toEverything);
+            state.everyObject.splice(0, state.everyObject.length);
+            const toReplace = state.savedVersions[state.savedVersions.length - 2];
+            state.everyObject = state.everyObject.concat(toReplace);
+            state.savedVersions.pop();
+        },
+        PasteSelected: (state, action) => {
+            // payload is an array containing paste items
+            var toEverything = state.selectedObject.splice(0, state.selectedObject.length);
+            state.everyObject = state.everyObject.concat(toEverything);
+            state.selectedObject = state.selectedObject.concat(action.payload);
+
+            if (state.selectedObject.length === 0) {
+                state.statistics.selected = 'none';
+                return
+            }
+            if (state.selectedObject.length === 1) {
+                state.statistics.selected = state.selectedObject[0].type;
+                return
+            }
+            const selected = state.selectedObject[0].type;
+            for (var i = 0; i < state.selectedObject.length; i++) {
+                if (state.selectedObject[i].type !== selected) {
+                    state.statistics.selected = 'Selected';
+                    break
+                }
+                if (i === state.selectedObject.length - 1) {
+                    state.statistics.selected = selected + 's';
+                }
+            }
+        },
+        // Figure this out!!!!
+        DuplicateSelected: (state) => {
+            state.everyObject = state.everyObject.concat(state.selectedObject);
+        },
     },
 });
 
 export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
-    SetDraftSize, ZoomInOutDraft,
-SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected} = draftSlice.actions;
+            SetDraftSize, ZoomInOutDraft,
+            SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected,
+            DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected} = draftSlice.actions;
 
 export const selectDraft = (state) => state.draft;
 

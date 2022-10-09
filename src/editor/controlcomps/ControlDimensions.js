@@ -75,11 +75,18 @@ export default function ControlDimensions(props) {
         if (event.target.value === '' || +event.target.value <= 0 ) {
             setInputValue((state) => (
                 {...state,
-                [event.target.id]: canvasSettings[event.target.id]}
+                [event.target.id]: canvasSettings[event.target.id]
+                }
             ))
             return
         }
-        dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
+        const rounded = (+inputValue[event.target.id]).toFixed(2)
+        dispatch(ChangeSelectedProperties([event.target.id, rounded]));
+        setInputValue((state) => (
+            {...state,
+            [event.target.id]: rounded
+            }
+        ))
     }
     function handleCanZeroBlur(event) {
         if (event.target.value === '' || +event.target.value < 0 ) {
@@ -109,7 +116,13 @@ export default function ControlDimensions(props) {
             ))
             return
         }
-        dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id]]));
+        const rounded = (+inputValue[event.target.id]).toFixed(2)
+        dispatch(ChangeSelectedProperties([event.target.id, rounded]));
+        setInputValue((state) => (
+            {...state,
+            [event.target.id]: rounded
+            }
+        ))
     }
 
     function handleSubmit(event) {
