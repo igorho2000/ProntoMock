@@ -47,7 +47,6 @@ export default function ControlText() {
             [event.target.id]: event.target.value}
         ))
         dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
-        dispatch(SaveDraft());
     }
 
     function handleBlur(event) {
@@ -111,6 +110,7 @@ export default function ControlText() {
             [event.target.id]: state[event.target.id] ? false : true
         }))
         dispatch(ChangeSelectedProperties([event.target.id, inputValue[event.target.id] ? false : true]))
+        dispatch(SaveDraft());
     }
     function toggleAlign(event) {
         setInputValue((state) => ({
@@ -118,6 +118,7 @@ export default function ControlText() {
             [event.target.id]: event.target.ariaLabel
         }))
         dispatch(ChangeSelectedProperties([event.target.id, event.target.ariaLabel]))
+        dispatch(SaveDraft());
     }
 
     const [colorPop, setColorPop] = React.useState(false);

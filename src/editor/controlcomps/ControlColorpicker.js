@@ -98,6 +98,12 @@ export default function ControlColorpicker(props) {
             event.target.blur();
         }
     }
+    function handleBlur(event) {
+        dispatch(SaveDraft())
+    }
+    function handleMouseUp(event) {
+        dispatch(SaveDraft())
+    }
     function defaultColor(array) {
         setInputValue({
             red: array[0],
@@ -112,6 +118,7 @@ export default function ControlColorpicker(props) {
             return
         }
         dispatch(ChangeSelectedProperties([props.target, array]));
+        dispatch(SaveDraft());
     }
 
 
@@ -120,26 +127,26 @@ export default function ControlColorpicker(props) {
             <form className="control-form-slider" onSubmit={handleSubmit} onKeyUp={handleKeyUp} >
                 <label>Red</label>
                 <input type="range" id='red' aria-label={0} min="0" max="255" value={inputValue.red} className="control-form-slider-slider" onChange={handleChange} 
-                style={{background: `linear-gradient(to right, rgba(0, ${inputValue.green}, ${inputValue.blue}, ${inputValue.opacity}), rgba(255, ${inputValue.green}, ${inputValue.blue}, ${inputValue.opacity})), url(../../properties/transparent.svg)`}} ></input>
-                <input id='red' aria-label={0} className="control-form-slider-input" type='number' value={inputValue.red} onChange={handleChange}/>
+                style={{background: `linear-gradient(to right, rgba(0, ${inputValue.green}, ${inputValue.blue}, ${inputValue.opacity}), rgba(255, ${inputValue.green}, ${inputValue.blue}, ${inputValue.opacity})), url(../../properties/transparent.svg)`}} onMouseUp={handleMouseUp} ></input>
+                <input id='red' aria-label={0} className="control-form-slider-input" type='number' value={inputValue.red} onChange={handleChange} onBlur={handleBlur} />
             </form>
             <form className="control-form-slider" onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Green</label>
                 <input id='green' aria-label={1} type="range" min="0" max="255" value={inputValue.green} className="control-form-slider-slider" onChange={handleChange}
-                style={{background: `linear-gradient(to right, rgba(${inputValue.red}, 0, ${inputValue.blue}, ${inputValue.opacity}), rgba(${inputValue.red}, 255, ${inputValue.blue}, ${inputValue.opacity})), url(../../properties/transparent.svg)`}}></input>
-                <input id='green' aria-label={1} className="control-form-slider-input" type='number' value={inputValue.green} onChange={handleChange} />
+                style={{background: `linear-gradient(to right, rgba(${inputValue.red}, 0, ${inputValue.blue}, ${inputValue.opacity}), rgba(${inputValue.red}, 255, ${inputValue.blue}, ${inputValue.opacity})), url(../../properties/transparent.svg)`}} onMouseUp={handleMouseUp} ></input>
+                <input id='green' aria-label={1} className="control-form-slider-input" type='number' value={inputValue.green} onChange={handleChange} onBlur={handleBlur} />
             </form>
             <form className="control-form-slider" onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Blue</label>
                 <input id='blue' aria-label={2} type="range" min="0" max="255" value={inputValue.blue} className="control-form-slider-slider" onChange={handleChange}
-                style={{background: `linear-gradient(to right, rgba(${inputValue.red}, ${inputValue.green}, 0, ${inputValue.opacity}), rgba(${inputValue.red}, ${inputValue.green}, 255, ${inputValue.opacity})), url(../../properties/transparent.svg)`}}></input>
-                <input id='blue' aria-label={2} className="control-form-slider-input" type='number' value={inputValue.blue} onChange={handleChange} />
+                style={{background: `linear-gradient(to right, rgba(${inputValue.red}, ${inputValue.green}, 0, ${inputValue.opacity}), rgba(${inputValue.red}, ${inputValue.green}, 255, ${inputValue.opacity})), url(../../properties/transparent.svg)`}} onMouseUp={handleMouseUp} ></input>
+                <input id='blue' aria-label={2} className="control-form-slider-input" type='number' value={inputValue.blue} onChange={handleChange} onBlur={handleBlur} />
             </form>
             <form className="control-form-slider" onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Opacity</label>
                 <input id='opacity' aria-label={3} type="range" min="0" max="1" step="0.01" value={inputValue.opacity} className="control-form-slider-slider" onChange={handleChange}
-                style={{background: `linear-gradient(to right, rgba(${inputValue.red}, ${inputValue.green}, ${inputValue.blue}, 0), rgba(${inputValue.red}, ${inputValue.green}, ${inputValue.blue}, 255)), url(../../properties/transparent.svg)`}}></input>
-                <input id='opacity' aria-label={3} className="control-form-slider-input" type='number' value={inputValue.opacity} onChange={handleChange} />
+                style={{background: `linear-gradient(to right, rgba(${inputValue.red}, ${inputValue.green}, ${inputValue.blue}, 0), rgba(${inputValue.red}, ${inputValue.green}, ${inputValue.blue}, 255)), url(../../properties/transparent.svg)`}} onMouseUp={handleMouseUp} ></input>
+                <input id='opacity' aria-label={3} className="control-form-slider-input" type='number' value={inputValue.opacity} onChange={handleChange} onBlur={handleBlur} />
             </form>
             <div className='control-form-color-pick'>
                 {outputDefaultOne}

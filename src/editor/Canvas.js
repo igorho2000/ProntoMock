@@ -92,11 +92,13 @@ export default function Canvas() {
             ev.preventDefault();
             dispatch(DuplicateSelected());
             dispatch(MoveSelected([10, 10]));
+            dispatch(SaveDraft());
           }
           // delete 
           else if (key === 46) {
             ev.preventDefault();
             dispatch(DeleteSelected());
+            dispatch(SaveDraft());
           }
         //   undo
           else if (key == 90 && ctrl) {
@@ -124,7 +126,9 @@ export default function Canvas() {
                 
                 <div id='draft' className='draft' style={{minWidth: `${canvasInfo.width * zoom}mm`, minHeight: `${canvasInfo.height * zoom}mm`, backgroundColor: `rgba(${canvasInfo.fillColor[0]}, ${canvasInfo.fillColor[1]}, ${canvasInfo.fillColor[2]}, ${canvasInfo.fillColor[3]})`,
                     }} >
+                    {draftInfo.exporting === false && 
                     <div className='margin' style={{marginTop: `${(canvasInfo.margin[0] - 0.3) * zoom}mm`, marginRight: `${canvasInfo.margin[1]  * zoom}mm`, marginLeft: `${(canvasInfo.margin[3]) * zoom}mm`, minWidth: `${(canvasInfo.width - canvasInfo.margin[1] - canvasInfo.margin[3]) * zoom}mm`, minHeight: `${(canvasInfo.height - canvasInfo.margin[0] - canvasInfo.margin[2]) * zoom}mm`}}></div>
+                    }
                     {draftElementsOutput}
                     {selected.length > 0 && <Selected />}
                     {selected.length > 0 && selectedElementsOutput}

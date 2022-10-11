@@ -4,11 +4,9 @@ import { paperSizes } from './paperSizes';
 import { DegreeCalc } from '../Functions';
 
 const initialState = {
-    draftSettings: {
+    canvasSettings: {
         name: 'First Draft',
         date: '9/22/2022',
-    },
-    canvasSettings: {
         size: 'Custom',
         unit: 'mm',
         width: 100,
@@ -208,7 +206,8 @@ const initialState = {
         selected: 'none',
         zoom: 1,
         move: false,
-    }
+    },
+    exporting: false,
 }
 
 export const draftSlice = createSlice({
@@ -388,13 +387,17 @@ export const draftSlice = createSlice({
         DuplicateSelected: (state) => {
             state.everyObject = state.everyObject.concat(state.selectedObject);
         },
+        ToggleExport: (state, action) => {
+            // payload is true or false
+            state.exporting = action.payload;
+        },
     },
 });
 
 export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
             SetDraftSize, ZoomInOutDraft,
             SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected,
-            DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected} = draftSlice.actions;
+            DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, ToggleExport} = draftSlice.actions;
 
 export const selectDraft = (state) => state.draft;
 

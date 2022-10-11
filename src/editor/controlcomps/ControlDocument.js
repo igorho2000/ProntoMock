@@ -20,6 +20,7 @@ export default function ControlDocument() {
     const dispatch = useDispatch();
 
     const [inputValue, setInputValue] = React.useState({
+        name: canvasSettings.name,
         size: canvasSettings.size,
         unit: canvasSettings.unit,
         width: canvasSettings.width,
@@ -182,6 +183,10 @@ export default function ControlDocument() {
             <h4 className='control-group-title'>Document</h4>
         </div>
         <div className='control-group'>
+            <form className='control-form-long' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
+                <label>Name</label>
+                <input style={{width: '12rem'}} value={inputValue.name} id="name" onChange={handleChange} />
+            </form>
             <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Size</label>
                 <select value={inputValue.size} id="size" onChange={handleSizeSelectChange} style={{width: '8rem'}}>

@@ -35,10 +35,6 @@ export default function Editor() {
             
         }} >
             <Header />
-            <div className="editor-header-bottom">
-                <h3>Editing:</h3>
-                <h3>{draftInfo.draftSettings.name}</h3>
-            </div>
             <Elements />
             <Canvas />
             <Control />

@@ -11,20 +11,11 @@ import ControlFill from './controlcomps/ControlFill';
 import ControlBorder from './controlcomps/ControlBorder';
 import ControlAlignSelection from './controlcomps/ControlAlignSelection';
 import ControlAlignToMargin from './controlcomps/ControlAlignToMargin';
+import ControlExport from './controlcomps/ControlExport';
 
 export default function Control() {
     const draft = useSelector(selectDraft);
     const selectedType = draft.statistics.selected;
-
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
-    function handleKeyUp(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            event.target.blur();
-        }
-    }
 
     return (
         <div className='control'>
@@ -79,27 +70,8 @@ export default function Control() {
                 <ControlBorder />
                 <hr className='control-divider'/>
             </div>}
+            <ControlExport />
             
-            <div className='control-title'>
-                <div>
-                    <h4 className='control-group-title'>Export</h4>
-                </div>
-                <div className='control-group'>
-                    <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
-                        <label>Format</label>
-                        <select>
-                            <option>PDF</option>
-                            <option>PNG</option>
-                            <option>JPG</option>
-                        </select>
-                    </form>
-                    <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
-                        <label>Name</label>
-                        <input style={{width: "12rem"}} type="text" value="First Draft Export" />
-                    </form>
-                    <button>Download File</button>
-                </div>
-            </div>
             <br />
             <br />
         </div>
