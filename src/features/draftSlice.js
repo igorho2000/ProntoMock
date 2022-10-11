@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { paperSizes } from './paperSizes';
+import { defaultObject } from './defaultObjects';
 
 import { DegreeCalc } from '../Functions';
 
@@ -391,13 +392,18 @@ export const draftSlice = createSlice({
             // payload is true or false
             state.exporting = action.payload;
         },
+        AddObject: (state, action) => {
+            // payload is the index number of the new default object
+            const toEverything = defaultObject[action.payload]
+            state.everyObject.push(toEverything);
+        }
     },
 });
 
 export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
             SetDraftSize, ZoomInOutDraft,
             SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected,
-            DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, ToggleExport} = draftSlice.actions;
+            DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, ToggleExport, AddObject} = draftSlice.actions;
 
 export const selectDraft = (state) => state.draft;
 

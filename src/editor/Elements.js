@@ -2,7 +2,7 @@ import React from 'react';
 import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft } from '../features/draftSlice';
+import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft, AddObject } from '../features/draftSlice';
 
 export default function Elements() {
     const dispatch = useDispatch();
@@ -37,22 +37,34 @@ export default function Elements() {
     return (
         <div>
             <div className='elements'>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => {
+                    dispatch(AddObject(0));
+                    dispatch(SaveDraft());
+                }}>
                     <img className='elements-icon' src="../properties/text.svg" />
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Text</div>
                 </div>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => {
+                    dispatch(AddObject(1));
+                    dispatch(SaveDraft());
+                }}>
                     <img className='elements-icon' src="../properties/rectangle.svg" />
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Rectangle</div>
                 </div>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => {
+                    dispatch(AddObject(2));
+                    dispatch(SaveDraft());
+                }}>
                     <img className='elements-icon' src="../properties/ellipse.svg" />
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Ellipse</div>
                 </div>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => {
+                    dispatch(AddObject(3));
+                    dispatch(SaveDraft());
+                }}>
                     <img className='elements-icon' src="../properties/line.svg" />
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Line</div>

@@ -1,7 +1,8 @@
-export const defaultText = {
+export const defaultObject = [{
     type: 'Text',
+    value: `Enter Text`,
     width: 50,
-    height: 10,
+    height: 25,
     x: 0,
     y: 0,
     rotate: 0,
@@ -15,13 +16,12 @@ export const defaultText = {
     textAlign: 'left',
     font: 'Ariel',
     textColor: [0,0,0,1],
-    fillColor: [255,255,255,0],
-    borderStyle: 'none',
-    borderWidth: 0,
+    fillColor: [0,0,0,0],
+    borderStyle: 'solid',
+    borderWidth: 0.5,
     borderColor: [0,0,0,1],
-}
-
-export const defaultSquare = {
+},
+{
     type: 'Square',
     width: 25,
     height: 25,
@@ -31,13 +31,12 @@ export const defaultSquare = {
     radius: [0,0,0,0],
     differentRadius: false,
     zIndex: 1,
-    fillColor: [255,255,255,0],
+    fillColor: [190,190,190,1],
     borderStyle: 'none',
     borderWidth: 0,
     borderColor: [0,0,0,1],
-}
-
-export const defaultEllipse = {
+},
+{
     type: 'Ellipse',
     width: 25,
     height: 25,
@@ -45,20 +44,21 @@ export const defaultEllipse = {
     y: 0,
     rotate: 0,
     zIndex: 1,
-    fillColor: [255,255,255,0],
+    fillColor: [190,190,190,1],
     borderStyle: 'none',
     borderWidth: 0,
     borderColor: [0,0,0,1],
-}
-
-export const defaultLine = {
+},
+{
+    height: 0,
     type: 'Line',
-    width: 25,
+    width: 50,
     x: 0,
     y: 0,
     rotate: 0,
     zIndex: 1,
-    borderStyle: 'none',
-    borderWidth: 0,
+    borderStyle: 'solid',
+    borderWidth: 2,
     borderColor: [0,0,0,1],
 }
+]
