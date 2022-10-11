@@ -119,18 +119,39 @@ export function getSelectedItemStats(selected) {
         centerTop: +item.y,
       }
     }
+    var borderRadius = [+item.width / 2, +item.width / 2, +item.width / 2, +item.width / 2]
+
+    if (item.type === 'Square' || item.type === 'Text') {
+      borderRadius.splice(0, 4);
+      borderRadius = borderRadius.concat(item.radius);
+      const width = +item.width;
+      const height = +item.height;
+      borderRadius = borderRadius.map((item) => {
+        if (+item > width) {
+          return width / 2;
+        }
+        if (+item > height) {
+          return height / 2;
+        }
+        return item
+      })
+      
+    }
+
+    const borderRadiusAdjustment = Math.sin(Math.abs(rotate * 2)) * (Math.sqrt(Math.pow(Math.min(...borderRadius), 2) * 2) - Math.min(...borderRadius))
+
     return {
       index: index,
       totalWidth: +item.width + 2 * +item.borderWidth,
       totalHeight: +item.height + 2 * +item.borderWidth,
-      visualWidth: (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate), 
-      visualHeight: (+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.height + +item.borderWidth * 2) * Math.cos(rotate),
-      widthDif: ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate) - (+item.width + 2 * +item.borderWidth)) / 2, 
-      heightDif: ((+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.height + +item.borderWidth * 2) * Math.cos(rotate) - (+item.height + 2 * +item.borderWidth)) / 2,
-      visualLeft: (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth *2) * Math.sin(rotate)) / 2,
-      visualTop: (+item.y + (+item.height + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.height + +item.borderWidth *2) * Math.cos(rotate)) / 2,
-      visualRight: (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth *2) * Math.sin(rotate)) / 2 + (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate),
-      visualBottom: (+item.y + (+item.height + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.height + +item.borderWidth *2) * Math.cos(rotate)) / 2 + (+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.height + +item.borderWidth * 2) * Math.cos(rotate),
+      visualWidth: (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate) - 2 * borderRadiusAdjustment, 
+      visualHeight: (+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.height + +item.borderWidth * 2) * Math.cos(rotate) - 2 * borderRadiusAdjustment,
+      widthDif: ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate) - (+item.width + 2 * +item.borderWidth)) / 2 - borderRadiusAdjustment, 
+      heightDif: ((+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.height + +item.borderWidth * 2) * Math.cos(rotate) - (+item.height + 2 * +item.borderWidth)) / 2 - borderRadiusAdjustment,
+      visualLeft: (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth *2) * Math.sin(rotate)) / 2 + borderRadiusAdjustment,
+      visualTop: (+item.y + (+item.height + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.height + +item.borderWidth *2) * Math.cos(rotate)) / 2 + borderRadiusAdjustment,
+      visualRight: (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth *2) * Math.sin(rotate)) / 2 + (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate) - borderRadiusAdjustment,
+      visualBottom: (+item.y + (+item.height + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.height + +item.borderWidth *2) * Math.cos(rotate)) / 2 + (+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.height + +item.borderWidth * 2) * Math.cos(rotate) - borderRadiusAdjustment,
       centerLeft: +item.x + (+item.width) / 2,
       centerTop: +item.y + (+item.height) / 2,
       

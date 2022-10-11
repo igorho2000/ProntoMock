@@ -53,6 +53,13 @@
     height: 2.2rem;
     
 }
+.elements-add-circle {
+    position: absolute;
+    width: 0.9rem;
+    transform: translate3d(-0.6rem, -0.6rem, 0);
+    opacity: 0;
+    transition: opacity 0.1s;
+}
 .elements-description {
     position: absolute;
     left: 60px;
@@ -61,12 +68,11 @@
     border-radius: 4px;
     padding: 0 3px 2px;
     font-size: 0.8rem;
-    display: none;
     opacity: 0;
     transition: opacity 0.1s;
 }
-.elements-function:hover > .elements-description {
-    display: block;
+.elements-function:hover > .elements-description,
+.elements-function:hover > .elements-add-circle  {
     opacity: 1;
 }
 

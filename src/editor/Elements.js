@@ -39,26 +39,32 @@ export default function Elements() {
             <div className='elements'>
                 <div className='elements-function'>
                     <img className='elements-icon' src="../properties/text.svg" />
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Text</div>
                 </div>
                 <div className='elements-function'>
                     <img className='elements-icon' src="../properties/rectangle.svg" />
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Rectangle</div>
                 </div>
                 <div className='elements-function'>
                     <img className='elements-icon' src="../properties/ellipse.svg" />
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Ellipse</div>
                 </div>
                 <div className='elements-function'>
                     <img className='elements-icon' src="../properties/line.svg" />
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Line</div>
                 </div>
                 <div className='elements-function'>
                     <img className='elements-icon' src="../properties/pen.svg" />
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Pen</div>
                 </div>
                 <div className='elements-function'>
                     <img className='elements-icon' src="../properties/icon.svg" />
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Icon</div>
                 </div>
             </div>
