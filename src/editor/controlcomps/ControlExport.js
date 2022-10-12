@@ -8,9 +8,7 @@ import {
     selectDraft, ToggleExport
 } from '../../features/draftSlice';
 
-import html2canvas from 'html2canvas';
 import * as htmlToImage from 'html-to-image';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 import {jsPDF} from 'jspdf';
 
 export default function ControlExport() {

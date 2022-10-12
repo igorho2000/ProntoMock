@@ -4,10 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { selectDraft, MoveSelected,
     DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, SortEveryObjectByZ } from '../features/draftSlice';
+
+import { selectEveryPopup, showPopup, getCoordinates } from '../features/popupSlice';
+
 import Line from './canvascomps/Line';
 import Shape from './canvascomps/Shape';
 import Textbox from './canvascomps/Textbox';
 import Selected from './canvascomps/Selected';
+
+import { getSelectedItemStats, getSelectedStats } from '../Functions';
+import CanvasRightClick from './canvascomps/CanvasRightClick';
 
 export default function Canvas() {
 
@@ -16,6 +22,8 @@ export default function Canvas() {
     const saved = draftInfo.savedVersions;
     const selected = draftInfo.selectedObject;
     const zoom = draftInfo.statistics.zoom;
+
+    const popup = useSelector(selectEveryPopup);
 
     const dispatch = useDispatch();
 
@@ -127,11 +135,25 @@ export default function Canvas() {
         }
     }, [selected, saved])
 
+    const selectedItemStats = getSelectedItemStats(selected)
+    const selectedStats = getSelectedStats(selectedItemStats);
+    
+    const left = selectedStats.leftBound;
+    const top = selectedStats.topBound;
+    const width = selectedStats.selectedWidth;
+    const height = selectedStats.selectedHeight;
+
 
     return (
         <div className='canvas' onMouseMove={(event) => {
             if (draftInfo.statistics.move === true) {
                 dispatch(MoveSelected([+event.movementX, +event.movementY]))
+            }
+        }}
+        onMouseUp={(event) => {
+            if (event.nativeEvent.which === 3) {
+                dispatch(showPopup(['CanvasRightClick', 0]))
+                dispatch(getCoordinates([+event.clientX, +event.clientY]))
             }
         }}>
             <div className='draft-cont'>
@@ -148,9 +170,9 @@ export default function Canvas() {
                 </div>
                 
                 <div className='canvas-buffer'></div>
-               
+                
             </div>
-            
+            {popup.CanvasRightClick[0] && selected.length === 0 ? <CanvasRightClick /> : <div></div>}
         </div>
     )
 }

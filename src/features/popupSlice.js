@@ -19,6 +19,7 @@ const initialState = {
         // Editor Popups
         SelectedRightClick: [],
         CanvasRightClick: [],
+        Coordinates: [0, 0],
     },
 }
 
@@ -50,10 +51,14 @@ export const popupSlice = createSlice({
         transition: (state) => {
             state.everyPopup.Transition = true;
         },
+        getCoordinates: (state, action) => {
+            state.everyPopup.Coordinates[0] = action.payload[0];
+            state.everyPopup.Coordinates[1] = action.payload[1];
+        }
     },
 });
 
-export const {resetPopups, showPopup, transition} = popupSlice.actions;
+export const {resetPopups, showPopup, transition, getCoordinates} = popupSlice.actions;
 
 export const selectEveryPopup = (state) => state.popup.everyPopup;
 

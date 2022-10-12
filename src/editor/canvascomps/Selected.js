@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectDraft, DeselectObject, DeselectParticularObject,
 MoveSelected, ToggleMove } from '../../features/draftSlice';
 
+import { selectEveryPopup, showPopup, getCoordinates } from '../../features/popupSlice';
+
 import { ClickOutsideSelected } from '../../Functions';
 import { getSelectedItemStats, getSelectedStats } from '../../Functions';
 
@@ -16,6 +18,8 @@ export default function Selected() {
     const draftInfo = useSelector(selectDraft);
     const selected = draftInfo.selectedObject;
     const zoom = draftInfo.statistics.zoom;
+
+    const popup = useSelector(selectEveryPopup);
 
     const wrapperRef = React.useRef(null);
     ClickOutsideSelected(wrapperRef);
@@ -41,6 +45,12 @@ export default function Selected() {
                 }}
                 onDragStart={handleDragStart}
                 onDrag={handleDrag}
+                onMouseUp={(event) => {
+                    if (event.nativeEvent.which === 3) {
+                        dispatch(showPopup(['SelectedRightClick', 0]))
+                        dispatch(getCoordinates([+event.clientX, +event.clientY]))
+                    }
+                }}
                 >
                 
                 </div>
@@ -64,7 +74,14 @@ export default function Selected() {
                     }}
                     onDragStart={handleDragStart}
                     onDrag={handleDrag}
-
+                    onMouseUp={(event) => {
+                        if (event.nativeEvent.which === 3) {
+                            dispatch(showPopup(['SelectedRightClick', 0]))
+                            dispatch(getCoordinates([+event.clientX, +event.clientY]))
+        
+                        }
+        
+                    }}
                     >
                     </div>
                 </div>
@@ -79,9 +96,16 @@ export default function Selected() {
             if (event.shiftKey === true) {
                 dispatch(DeselectParticularObject(index));
             }
+            
         }}
         onDragStart={handleDragStart}
         onDrag={handleDrag}
+        onMouseUp={(event) => {
+            if (event.nativeEvent.which === 3) {
+                dispatch(showPopup(['SelectedRightClick', 0]))
+                dispatch(getCoordinates([+event.clientX, +event.clientY]))
+            }
+        }}
         >
         </div>
         )
@@ -117,7 +141,7 @@ export default function Selected() {
                 </div>
             </div>
             {subSelected}
-            <SelectedRightClick />
+            {popup.SelectedRightClick[0] && <SelectedRightClick />}
         </div>
         
     )

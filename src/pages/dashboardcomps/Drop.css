@@ -307,3 +307,49 @@ select {
         display: none;
     }
 }
+
+
+/* Right Click */
+.selectright {
+    position: fixed;
+}
+.selectright h3 {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+.selectright p {
+    font-size: 0.7rem;
+}
+.selectright-copy,
+.selectright-cut,
+.selectright-duplicate,
+.selectright-delete,
+.selectright-download,
+.selectright-undo,
+.selectright-paste {
+    transition: transform 0.2s;
+}
+.selectright-download {
+    transform: translate3d(0, -2px, 0);
+}
+.projectdrop-list:hover .selectright-copy {
+    transform: translate3d(-1px, 1px, 0);
+}
+.projectdrop-list:hover .selectright-cut {
+    transform: rotate(20deg);
+}
+.projectdrop-list:hover .selectright-duplicate {
+    transform: translate3d(-1px, -1px, 0);
+}
+.projectdrop-list:hover .selectright-delete {
+    transform: translate3d(0, -2px, 0);
+}
+.projectdrop-list:hover .selectright-download {
+    transform: translate3d(0, 2px, 0);
+}
+.projectdrop-list:hover .selectright-paste {
+    transform: translate3d(0, -2px, 0);
+}
+.projectdrop-list:hover .selectright-undo {
+    transform: rotate(-40deg) translate3d(-2px, 2px, 0);
+}
