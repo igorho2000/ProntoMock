@@ -100,10 +100,10 @@
 
 /* AccountDrop */
 .accountdrop {
-    right: 0.5rem;
+    right: 30rem;
     margin: 0;
     z-index: 11;
-    top: 66px;
+    top: 30rm;
     position: fixed;
 }
 .accountdrop h3 {

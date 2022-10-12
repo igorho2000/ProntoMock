@@ -8,6 +8,8 @@ MoveSelected, ToggleMove } from '../../features/draftSlice';
 import { ClickOutsideSelected } from '../../Functions';
 import { getSelectedItemStats, getSelectedStats } from '../../Functions';
 
+import SelectedRightClick from './SelectedRightClick';
+
 export default function Selected() {
     const dispatch = useDispatch();
     
@@ -115,6 +117,7 @@ export default function Selected() {
                 </div>
             </div>
             {subSelected}
+            <SelectedRightClick />
         </div>
         
     )

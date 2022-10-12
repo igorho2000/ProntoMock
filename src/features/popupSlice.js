@@ -17,7 +17,8 @@ const initialState = {
         ProjectSettings: [],
         NewProject: [],
         // Editor Popups
-        DraftSettings: [],
+        SelectedRightClick: [],
+        CanvasRightClick: [],
     },
 }
 
@@ -38,7 +39,8 @@ export const popupSlice = createSlice({
             state.everyPopup.NewDraft = [false];
             state.everyPopup.ProjectSettings = [false];
             state.everyPopup.NewProject = [false];
-            state.everyPopup.DraftSettings = [false];
+            state.everyPopup.SelectedRightClick = [false];
+            state.everyPopup.CanvasRightClick = [false];
         },
         showPopup: (state, action) => {
             var popupType = action.payload[0];

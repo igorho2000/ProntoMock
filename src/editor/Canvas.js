@@ -3,7 +3,7 @@ import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectDraft, MoveSelected,
-    DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected } from '../features/draftSlice';
+    DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, SortEveryObjectByZ } from '../features/draftSlice';
 import Line from './canvascomps/Line';
 import Shape from './canvascomps/Shape';
 import Textbox from './canvascomps/Textbox';
@@ -78,6 +78,7 @@ export default function Canvas() {
               JSON.parse(item)
             ))
             dispatch(PasteSelected(pasteArray));
+            dispatch(SortEveryObjectByZ())
             dispatch(SaveDraft());
           }
           // ctrl C
@@ -87,17 +88,29 @@ export default function Canvas() {
             })
             localStorage.setItem('clipboard', selectedString);
           }
+        //    ctrl X
+          else if (key == 88 && ctrl) {
+            selected.map((item) => {
+                selectedString += JSON.stringify(item) + '/';
+              })
+            localStorage.setItem('clipboard', selectedString);
+            dispatch(DeleteSelected());
+            dispatch(SortEveryObjectByZ());
+            dispatch(SaveDraft());
+          }
           // ctrl D
           else if (key == 68 && ctrl) {
             ev.preventDefault();
             dispatch(DuplicateSelected());
             dispatch(MoveSelected([10, 10]));
+            dispatch(SortEveryObjectByZ())
             dispatch(SaveDraft());
           }
           // delete 
           else if (key === 46) {
             ev.preventDefault();
             dispatch(DeleteSelected());
+            dispatch(SortEveryObjectByZ())
             dispatch(SaveDraft());
           }
         //   undo
