@@ -26,7 +26,7 @@ const initialState = {
             rotate: 0,
             radius: [0,0,0,0],
             differentRadius: false,
-            zIndex: 2,
+            zIndex: 1002,
             fillColor: [150,150,150,1],
             borderStyle: 'none',
             borderWidth: 0,
@@ -42,7 +42,7 @@ const initialState = {
             rotate: 0,
             radius: [0,0,0,0],
             differentRadius: false,
-            zIndex: 1,
+            zIndex: 1001,
             bold: true,
             underline: true,
             italic: true,
@@ -65,7 +65,7 @@ const initialState = {
             rotate: 0,
             radius: [5,5,5,5],
             differentRadius: false,
-            zIndex: 2,
+            zIndex: 1003,
             bold: true,
             underline: true,
             italic: true,
@@ -85,7 +85,7 @@ const initialState = {
             x: 1,
             y: 60,
             rotate: 0,
-            zIndex: 30,
+            zIndex: 1004,
             borderStyle: 'solid',
             borderWidth: 1,
             borderColor: [0,0,0,1],
@@ -97,7 +97,7 @@ const initialState = {
             x: 30,
             y: 0,
             rotate: 0,
-            zIndex: 3,
+            zIndex: 1005,
             fillColor: [230,255,255,1],
             borderStyle: 'none',
             borderWidth: 0,
@@ -120,7 +120,7 @@ const initialState = {
                 rotate: 0,
                 radius: [0,0,0,0],
                 differentRadius: false,
-                zIndex: 2,
+                zIndex: 1002,
                 fillColor: [150,150,150,1],
                 borderStyle: 'none',
                 borderWidth: 0,
@@ -136,7 +136,7 @@ const initialState = {
                 rotate: 0,
                 radius: [0,0,0,0],
                 differentRadius: false,
-                zIndex: 1,
+                zIndex: 1001,
                 bold: true,
                 underline: true,
                 italic: true,
@@ -159,7 +159,7 @@ const initialState = {
                 rotate: 0,
                 radius: [5,5,5,5],
                 differentRadius: false,
-                zIndex: 2,
+                zIndex: 1003,
                 bold: true,
                 underline: true,
                 italic: true,
@@ -179,7 +179,7 @@ const initialState = {
                 x: 1,
                 y: 60,
                 rotate: 0,
-                zIndex: 30,
+                zIndex: 1004,
                 borderStyle: 'solid',
                 borderWidth: 1,
                 borderColor: [0,0,0,1],
@@ -191,7 +191,7 @@ const initialState = {
                 x: 30,
                 y: 0,
                 rotate: 0,
-                zIndex: 3,
+                zIndex: 1005,
                 fillColor: [230,255,255,1],
                 borderStyle: 'none',
                 borderWidth: 0,
@@ -395,13 +395,32 @@ export const draftSlice = createSlice({
         AddObject: (state, action) => {
             // payload is the index number of the new default object
             const toEverything = defaultObject[action.payload]
+            toEverything.zIndex = state.everyObject.length + state.selectedObject.length + 1000
             state.everyObject.push(toEverything);
+        },
+        SortEveryObjectByZ: (state) => {
+            state.everyObject = state.everyObject.sort((a, b) => (+a.zIndex > +b.zIndex) ? 1 : -1)
+            for (let i = 0; i < state.everyObject.length; i++) {
+                state.everyObject[i].zIndex = i + 1001;
+            }
+        },
+        MoveSelectedToFront: (state) => {
+            state.selectedObject = state.selectedObject.sort((a, b) => (+a.zIndex > +b.zIndex) ? 1 : -1)
+            for (let i = 0; i < state.everyObject.length; i++) {
+                state.everyObject[i].zIndex = i;
+            }
+        },
+        MoveSelectedToBack: (state) => {
+            state.selectedObject = state.selectedObject.sort((a, b) => (+a.zIndex > +b.zIndex) ? 1 : -1)
+            for (let i = 0; i < state.everyObject.length; i++) {
+                state.everyObject[i].zIndex = i + 100000;
+            }
         }
     },
 });
 
 export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
-            SetDraftSize, ZoomInOutDraft,
+            SetDraftSize, ZoomInOutDraft, SortEveryObjectByZ, MoveSelectedToBack, MoveSelectedToFront,
             SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected,
             DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, ToggleExport, AddObject} = draftSlice.actions;
 

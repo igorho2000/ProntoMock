@@ -18,6 +18,8 @@ export default function Line(props) {
             left: `${element.x / draftInfo.canvasSettings.width * 100}%`, top: `${element.y / draftInfo.canvasSettings.height * 100}%`, transform: `rotate(${element.rotate}deg)`, 
             zIndex: element.zIndex, borderLeftStyle: 'none', borderRightStyle: 'none', borderBottomStyle: 'none',
             borderTopStyle: element.borderStyle, borderTopWidth: `${element.borderWidth * zoom}mm`, borderTopColor: `rgba(${element.borderColor[0]},${element.borderColor[1]},${element.borderColor[2]},${element.borderColor[3]})`
-        }} onClick={() => dispatch(SelectObject(props.index))} />
+        }} onClick={() => {
+            dispatch(SelectObject(props.index));
+        }} />
     )
 }

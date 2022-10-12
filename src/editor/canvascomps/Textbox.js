@@ -45,7 +45,7 @@ export default function Textbox(props) {
             userSelect: 'none',
         }} onClick={() => {
             if (props.selected === false) {
-                dispatch(SelectObject(props.index))
+                dispatch(SelectObject(props.index));
             } 
             }} />
     )

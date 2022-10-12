@@ -4,7 +4,7 @@ import {
     resetPopups, showPopup,
     selectEveryPopup,
 } from './features/popupSlice';
-import { DeselectObject } from './features/draftSlice';
+import { DeselectObject, SortEveryObjectByZ } from './features/draftSlice';
 
 // Function that detects clicks outside popups
 
@@ -60,6 +60,7 @@ export function useOutsideClick(ref) {
           }
           
           dispatch(DeselectObject());
+          dispatch(SortEveryObjectByZ());
         }
       }
       // Bind the event listener

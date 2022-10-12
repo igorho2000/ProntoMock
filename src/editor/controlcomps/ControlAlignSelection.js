@@ -3,7 +3,8 @@ import '../editor.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDraft, ChangeSelectedProperties, ChangeEachSelectedProperties, SaveDraft } from '../../features/draftSlice';
+import { selectDraft, ChangeSelectedProperties, MoveSelectedToBack, MoveSelectedToFront,
+    ChangeEachSelectedProperties, SaveDraft } from '../../features/draftSlice';
 
 import { getSelectedItemStats, getSelectedStats } from '../../Functions';
 
@@ -80,11 +81,17 @@ export default function ControlAlignSelection() {
                 </form>
                 <form className='control-form'>
                     <label style={{width: "5.5rem"}}>Move to Front</label>
-                    <img src="../properties/move_up.svg" />
+                    <img src="../properties/move_up.svg" onClick={() => {
+                        dispatch(MoveSelectedToFront());
+                        dispatch(SaveDraft());
+                    }} />
                 </form>
                 <form className='control-form'>
                     <label style={{width: "5.5rem"}}>Move to Back</label>
-                    <img src="../properties/move_down.svg" />
+                    <img src="../properties/move_down.svg" onClick={() => {
+                        dispatch(MoveSelectedToBack());
+                        dispatch(SaveDraft());
+                    }} />
                 </form>
             </div>
         </div>

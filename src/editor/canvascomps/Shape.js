@@ -18,6 +18,8 @@ export default function Shape(props) {
             borderRadius: props.ellipse ? '50%' : `${element.radius[0] * zoom}mm ${element.radius[1] * zoom}mm ${element.radius[2] * zoom}mm ${element.radius[3] * zoom}mm`, zIndex: element.zIndex,
             backgroundColor: `rgba(${element.fillColor[0]},${element.fillColor[1]},${element.fillColor[2]},${element.fillColor[3]})`,
             borderStyle: element.borderStyle, borderWidth: `${element.borderWidth * zoom}mm`, borderColor: `rgba(${element.borderColor[0]},${element.borderColor[1]},${element.borderColor[2]},${element.borderColor[3]})`
-        }} onClick={() => dispatch(SelectObject(props.index))}></div>
+        }} onClick={() => {
+            dispatch(SelectObject(props.index));
+        }}></div>
     )
 }

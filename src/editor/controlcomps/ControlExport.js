@@ -18,6 +18,7 @@ export default function ControlExport() {
     const dispatch = useDispatch();
     const draft = useSelector(selectDraft);
     const canvasSettings = draft.canvasSettings;
+    const zoom = +draft.statistics.zoom;
 
     const [inputValue, setInputValue] = React.useState({
         fileName: canvasSettings.name,
@@ -57,7 +58,7 @@ export default function ControlExport() {
     const [download, setDownload] = React.useState('');
 
     function savepng() {
-        htmlToImage.toPng(document.querySelector('#draft'), {width: +canvasSettings.width * 3.7795276, height: +canvasSettings.height * 3.7795276, canvasWidth: +canvasSettings.width * 20, canvasHeight: +canvasSettings.height * 20}).then(
+        htmlToImage.toPng(document.querySelector('#draft'), {width: +canvasSettings.width * 3.7795276 * zoom, height: +canvasSettings.height * 3.7795276 * zoom, canvasWidth: +canvasSettings.width * 20, canvasHeight: +canvasSettings.height * 20}).then(
             function (dataUrl) {
                 var element = document.createElement('a');
                 element.setAttribute('href', dataUrl);
@@ -85,7 +86,7 @@ export default function ControlExport() {
     // }
         
     function savejpg() {
-        htmlToImage.toJpeg(document.querySelector('#draft'), {width: +canvasSettings.width * 3.7795276, height: +canvasSettings.height * 3.7795276, canvasWidth: +canvasSettings.width * 20, canvasHeight: +canvasSettings.height * 20}).then(
+        htmlToImage.toJpeg(document.querySelector('#draft'), {width: +canvasSettings.width * 3.7795276 * zoom, height: +canvasSettings.height * 3.7795276 * zoom, canvasWidth: +canvasSettings.width * 20, canvasHeight: +canvasSettings.height * 20}).then(
             function (dataUrl) {
                 var element = document.createElement('a');
                 element.setAttribute('href', dataUrl);
@@ -99,7 +100,7 @@ export default function ControlExport() {
     }
     
     function savepdf() {
-        htmlToImage.toPng(document.querySelector('#draft'), {width: +canvasSettings.width * 3.7795276, height: +canvasSettings.height * 3.7795276, canvasWidth: +canvasSettings.width * 20, canvasHeight: +canvasSettings.height * 20}).then(
+        htmlToImage.toPng(document.querySelector('#draft'), {width: +canvasSettings.width * 3.7795276 * zoom, height: +canvasSettings.height * 3.7795276 * zoom, canvasWidth: +canvasSettings.width * 20, canvasHeight: +canvasSettings.height * 20}).then(
             function (dataUrl) {
                 var pdf = new jsPDF('p', 'mm', [+canvasSettings.width, +canvasSettings.height]);
                 pdf.addImage(dataUrl, 'PNG', 0, 0, +canvasSettings.width, +canvasSettings.height, '', 'FAST');
