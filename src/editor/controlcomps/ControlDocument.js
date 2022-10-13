@@ -229,7 +229,7 @@ export default function ControlDocument() {
             
             <div className='control-form-check'>
                 <input type="checkbox" aria-label='margin' id="differentMargin" checked={inputValue.differentMargin} onChange={handleCheckChange} />
-                <label for="differentMargin">Different margin on each side</label>
+                <label htmlFor="differentMargin">Different margin on each side</label>
             </div>
             <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>
                 <label>Fill</label>

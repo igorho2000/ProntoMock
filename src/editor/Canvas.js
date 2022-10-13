@@ -32,16 +32,16 @@ export default function Canvas() {
         
         switch (item.type) {
             case 'Text':
-                output = <Textbox element={item} selected={false} index={index}/>;
+                output = <Textbox element={item} selected={false} index={index} key={`everyObject${index}`} />;
                 break
             case 'Ellipse':
-                output = <Shape element={item} ellipse={true} selected={false} index={index}/>;
+                output = <Shape element={item} ellipse={true} selected={false} index={index} key={`everyObject${index}`} />;
                 break
             case 'Square':
-                output = <Shape element={item} ellipse={false} selected={false} index={index}/>;
+                output = <Shape element={item} ellipse={false} selected={false} index={index} key={`everyObject${index}`} />;
                 break
             case 'Line':
-                output = <Line element={item} selected={false} index={index}/>
+                output = <Line element={item} selected={false} index={index} key={`everyObject${index}`} />
                 break
         }
 
@@ -53,16 +53,16 @@ export default function Canvas() {
         
         switch (item.type) {
             case 'Text':
-                output = <Textbox element={item} selected={true} index={index} />;
+                output = <Textbox element={item} selected={true} index={index} key={`selectedObject${index}`}  />;
                 break
             case 'Ellipse':
-                output = <Shape element={item} ellipse={true} selected={true}  />;
+                output = <Shape element={item} ellipse={true} selected={true} index={index} key={`selectedObject${index}`} />;
                 break
             case 'Square':
-                output = <Shape element={item} ellipse={false} selected={true}  />;
+                output = <Shape element={item} ellipse={false} selected={true} index={index} key={`selectedObject${index}`} />;
                 break
             case 'Line':
-                output = <Line element={item} selected={true}  />
+                output = <Line element={item} selected={true} index={index} key={`selectedObject${index}`} />
                 break
         }
 

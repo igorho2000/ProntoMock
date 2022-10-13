@@ -35,7 +35,7 @@ export default function Selected() {
     const subSelected = selected.map((item, index) => {
         if (item.type === 'Line') {
             return (
-                <div draggable="true" style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
+                <div draggable="true" key={`subselected${index}`} style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
                 top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.borderWidth) / +draftInfo.canvasSettings.height * 100}% + 0.4mm)`, width: `calc(${(+item.width) / +draftInfo.canvasSettings.width * 100}% + 0.4mm)`,
                 cursor: 'move', zIndex: '10000000', transform: `rotate(${+item.rotate}deg)`}}
                 onClick={(event) => {
@@ -58,7 +58,7 @@ export default function Selected() {
         } 
         if (item.type === 'Text') {
             return (
-                <div>
+                <div  key={`subselected${index}`} >
                     <div style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
                     top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.height + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.height * 100}% + 1mm)`, width: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.width * 100}% + 1mm)`,
                     transform: `rotate(${+item.rotate}deg)`, borderRadius: item.type === 'Ellipse' ? '50%' : `${item.radius[0] * zoom}mm ${item.radius[1] * zoom}mm ${item.radius[2] * zoom}mm ${item.radius[3] * zoom}mm`,
@@ -88,7 +88,7 @@ export default function Selected() {
             )
         }
         return (
-        <div draggable="true" style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
+        <div draggable="true" key={`subselected${index}`} style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
         top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.height + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.height * 100}% + 1mm)`, width: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.width * 100}% + 1mm)`,
         transform: `rotate(${+item.rotate}deg)`, borderRadius: item.type === 'Ellipse' ? '50%' : `${item.radius[0] * zoom}mm ${item.radius[1] * zoom}mm ${item.radius[2] * zoom}mm ${item.radius[3] * zoom}mm`,
         cursor: 'move', zIndex: '10000000'}}

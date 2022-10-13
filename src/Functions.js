@@ -58,7 +58,10 @@ export function useOutsideClick(ref) {
           if (event.target.offsetParent.className === 'control') {
             return
           }
-          
+          if (event.target.className === 'element') {
+            dispatch(DeselectObject());
+            return
+          }
           dispatch(DeselectObject());
           dispatch(SortEveryObjectByZ());
         }

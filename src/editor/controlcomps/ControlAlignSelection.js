@@ -62,6 +62,57 @@ export default function ControlAlignSelection() {
         dispatch(ChangeEachSelectedProperties(['y', output]));
         dispatch(SaveDraft());
     }
+    function DistributeHorizontal() {
+        if (selectedItemStats.length === 2) {
+            return
+        }
+        const totalElements = selectedItemStats.length;
+        const sortByLeft = selectedItemStats.sort((a, b) => a.visualLeft > b.visualLeft ? 1 : -1);
+        const LeftBound = sortByLeft.shift();
+        const sortByRight = sortByLeft.sort((a, b) => a.visualRight > b.visualRight ? -1 : 1);
+        const RightBound = sortByRight.shift();
+        const sortByCenter = sortByRight.sort((a, b) => a.centerLeft > b.centerLeft ? 1 : -1);
+        var newCenters = []
+        for (let i = 0; i < totalElements; i++) {
+            newCenters[i] = LeftBound.centerLeft + ((RightBound.centerLeft - LeftBound.centerLeft) / (totalElements - 1)) * i
+        }
+        sortByCenter.unshift(LeftBound);
+        sortByCenter.push(RightBound);
+        for (let i = 0; i < totalElements; i++) {
+            sortByCenter[i].centerLeft = newCenters[i];
+            sortByCenter[i].visualLeft = newCenters[i] - sortByCenter[i].visualWidth / 2
+        }
+        const toOutput = sortByCenter.sort((a, b) => a.index > b.index ? 1 : -1);
+        const output = toOutput.map((item) => (item.visualLeft + item.widthDif))
+        dispatch(ChangeEachSelectedProperties(['x', output]));
+        dispatch(SaveDraft());
+    }
+    
+    function DistributeVertical() {
+        if (selectedItemStats.length === 2) {
+            return
+        }
+        const totalElements = selectedItemStats.length;
+        const sortByTop = selectedItemStats.sort((a, b) => a.visualTop > b.visualTop ? 1 : -1);
+        const TopBound = sortByTop.shift();
+        const sortByBottom = sortByTop.sort((a, b) => a.visualBottom > b.visualBottom ? -1 : 1);
+        const BottomBound = sortByBottom.shift();
+        const sortByCenter = sortByBottom.sort((a, b) => a.centerTop > b.centerTop ? 1 : -1);
+        var newCenters = []
+        for (let i = 0; i < totalElements; i++) {
+            newCenters[i] = TopBound.centerTop + ((BottomBound.centerTop - TopBound.centerTop) / (totalElements - 1)) * i
+        }
+        sortByCenter.unshift(TopBound);
+        sortByCenter.push(BottomBound);
+        for (let i = 0; i < totalElements; i++) {
+            sortByCenter[i].centerTop = newCenters[i];
+            sortByCenter[i].visualTop = newCenters[i] - sortByCenter[i].visualHeight / 2
+        }
+        const toOutput = sortByCenter.sort((a, b) => a.index > b.index ? 1 : -1);
+        const output = toOutput.map((item) => (item.visualTop + item.heightDif))
+        dispatch(ChangeEachSelectedProperties(['y', output]));
+        dispatch(SaveDraft());
+    }
 
     return (
         <div className='control-title'>
@@ -76,8 +127,8 @@ export default function ControlAlignSelection() {
                     <img src="../properties/align_vertical_top.svg" onClick={AlignTop} />
                     <img src="../properties/align_vertical_center.svg" onClick={AlignVerticalCenter} />
                     <img src="../properties/align_vertical_bottom.svg" onClick={AlignBottom} />
-                    <img src="../properties/horizontal_distribute.svg" />
-                    <img src="../properties/vertical_distribute.svg" />
+                    <img src="../properties/horizontal_distribute.svg" onClick={DistributeHorizontal} />
+                    <img src="../properties/vertical_distribute.svg" onClick={DistributeVertical} />
                 </form>
                 <form className='control-form'>
                     <label style={{width: "5.5rem"}}>Move to Front</label>

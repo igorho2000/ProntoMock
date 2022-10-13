@@ -189,7 +189,7 @@ export default function ControlDimensions(props) {
                     { props.radius && 
                     <div className='control-form-check'>
                         <input type="checkbox" aria-label='radius' id="differentRadius" checked={inputValue.differentRadius} onChange={handleCheckChange} />
-                        <label for="differentRadius">Different radius on each corner</label>
+                        <label htmlFor="differentRadius">Different radius on each corner</label>
                     </div>
                     }
                 </div>

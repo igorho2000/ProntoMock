@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { selectDraft, SelectObject, ChangeSelectedText, SaveDraft } from '../../features/draftSlice';
+import { selectDraft, SelectObject, ChangeSelectedText, SaveDraft, SortEveryObjectByZ } from '../../features/draftSlice';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -35,7 +35,7 @@ export default function Textbox(props) {
     // Need to hook up textvalue to store (Maybe split up the rendering of every vs selected object)
 
     return (
-        <textarea className={props.selected && 'selectedText'} value={props.selected ? textValue : element.value} readOnly={props.selected ? false : true} onChange={HandleChange} style={{
+        <textarea className={props.selected ? 'selectedText' : 'element'} value={props.selected ? textValue : element.value} readOnly={props.selected ? false : true} onChange={HandleChange} style={{
             padding: '0', overflow: "hidden", position: 'absolute', resize: 'none', width:`${element.width / draftInfo.canvasSettings.width * 100}%`, height:`${element.height / draftInfo.canvasSettings.height * 100}%`,
             left: `${element.x / draftInfo.canvasSettings.width * 100}%`, top: `${element.y / draftInfo.canvasSettings.height * 100}%`, transform: `rotate(${element.rotate}deg)`, borderRadius: `${element.radius[0] * zoom}mm ${element.radius[1] * zoom}mm ${element.radius[2] * zoom}mm ${element.radius[3] * zoom}mm`, zIndex: element.zIndex,
             fontWeight: element.bold ? '700' : '400', textDecorationLine: element.underline ? 'underline' : 'none', fontStyle: element.italic ? 'italic' : 'normal',
@@ -46,6 +46,7 @@ export default function Textbox(props) {
         }} onClick={() => {
             if (props.selected === false) {
                 dispatch(SelectObject(props.index));
+                // dispatch(SortEveryObjectByZ());
             } 
             }} />
     )
