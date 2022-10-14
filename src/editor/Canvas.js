@@ -166,7 +166,11 @@ export default function Canvas() {
                     }
                     {draftElementsOutput}
                     {selected.length > 0 && <Selected />}
-                    {selected.length > 0 && selectedElementsOutput}
+                    {/* <div id='selected' style={{border:"solid rgb(0,160,197) 0.5mm",
+                    marginTop: `${(top - 1.5) / +draftInfo.canvasSettings.height * 200}%`, marginLeft: `${(left - 1.5) / +draftInfo.canvasSettings.width * 100}%`, height: `${(height + 2) / +draftInfo.canvasSettings.height * 100}%`, width: `${(width + 2) / +draftInfo.canvasSettings.width * 100}%`,
+                    zIndex: '10000001'}}> */}
+                        {selected.length > 0 && selectedElementsOutput}
+                    {/* </div> */}
                 </div>
                 
                 <div className='canvas-buffer'></div>

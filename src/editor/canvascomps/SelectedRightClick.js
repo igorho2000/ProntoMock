@@ -25,22 +25,22 @@ export default function SelectedRightClick() {
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
 
-    function savepng() {
-        htmlToImage.toPng(document.querySelector('#selected')).then(
-            function (dataUrl) {
-                var element = document.createElement('a');
-                element.setAttribute('href', dataUrl);
-                element.setAttribute('download',`${canvasSettings.name}-element.png`);
-                element.style.display = 'none';
-                document.body.appendChild(element);
-                element.click();
-                document.body.removeChild(element);
-            }
-        )
-    }
+    // function savepng() {
+    //     htmlToImage.toPng(document.querySelector('.selectedExport')).then(
+    //         function (dataUrl) {
+    //             var element = document.createElement('a');
+    //             element.setAttribute('href', dataUrl);
+    //             element.setAttribute('download',`${canvasSettings.name}-element.png`);
+    //             element.style.display = 'none';
+    //             document.body.appendChild(element);
+    //             element.click();
+    //             document.body.removeChild(element);
+    //         }
+    //     )
+    // }
     
     return (
-        <div className="projectdrop selectright" style={{left: popup.Coordinates[0] < window.innerWidth - 510 ? popup.Coordinates[0] - 13 : popup.Coordinates[0] - 210, top: popup.Coordinates[1] < window.innerHeight - 170 ? popup.Coordinates[1] + 3 : popup.Coordinates[1] - 170, minHeight: 'fit-content', minWidth: 'fit-content', zIndex: '10000003'}} ref={wrapperRef}>
+        <div className="projectdrop selectright" style={{left: popup.Coordinates[0] < window.innerWidth - 510 ? popup.Coordinates[0] - 13 : popup.Coordinates[0] - 210, top: popup.Coordinates[1] < window.innerHeight - 140 ? popup.Coordinates[1] + 3 : popup.Coordinates[1] - 140, minHeight: 'fit-content', minWidth: 'fit-content', zIndex: '10000003'}} ref={wrapperRef}>
             <div className="projectdrop-list" onClick={() => {
                 var selectedString = ''
                 selected.map((item) => {
@@ -95,14 +95,14 @@ export default function SelectedRightClick() {
                 <h3>Delete</h3>
                 <p>Delete</p>
             </div>
-            <div className="projectdrop-list" onClick={() => {
+            {/* <div className="projectdrop-list" onClick={() => {
                 savepng();
                 dispatch(resetPopups());
             }}>
                 <img className="draftdrop-iconbase" src="../../properties/download.svg" alt="download bottom" />
                 <img className="draftdrop-iconmove selectright-download" src="../../properties/download-top.svg" alt="download top" />
                 <h3>Export As PNG</h3>
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -70,9 +70,9 @@ export default function Elements() {
                     <div className='elements-description'>Line</div>
                 </div>
                 <div className='elements-function'>
-                    <img className='elements-icon' src="../properties/pen.svg" />
+                    <img className='elements-icon' src="../properties/image.svg" />
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
-                    <div className='elements-description'>Pen</div>
+                    <div className='elements-description'>Image</div>
                 </div>
                 <div className='elements-function'>
                     <img className='elements-icon' src="../properties/icon.svg" />

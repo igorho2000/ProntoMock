@@ -11,8 +11,13 @@ import {
 import ControlColorpicker from './ControlColorpicker';
 import { RGBtoHEX } from '../../Functions';
 
-export default function ControlText() {
+import { allFonts } from '../../features/AllFonts';
 
+
+
+export default function ControlText() {
+    
+    // console.log(allFonts)
     const draftSettings = useSelector(selectDraft);
     const canvasSettings = draftSettings.selectedObject[0];
 
@@ -47,6 +52,7 @@ export default function ControlText() {
             [event.target.id]: event.target.value}
         ))
         dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
+        dispatch(SaveDraft());
     }
 
     function handleBlur(event) {
@@ -128,6 +134,9 @@ export default function ControlText() {
         ))
     }
 
+    const fontsOutput = allFonts.map((item, index) => {
+        return (<option style={{fontFamily: item}} key={`theDamnFont${index}`}>{item}</option>)})
+
     return (
         <div className='control-title'>
             <div>
@@ -154,16 +163,8 @@ export default function ControlText() {
                 </form>
                 <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                     <label>Font</label>
-                    <select id='font' value={inputValue.font} onChange={handleSelectChange} style={{width: '10rem'}}>
-                        <option>Ariel</option>
-                        <option>Verdana</option>
-                        <option>Tahoma</option>
-                        <option>Trebuchet MS</option>
-                        <option>Times New Roman</option>
-                        <option>Georgia</option>
-                        <option>Garamond</option>
-                        <option>Courier New</option>
-                        <option>Brush Script MT</option>
+                    <select id='font' value={inputValue.font} onChange={handleSelectChange} style={{width: '10rem', fontFamily: inputValue.font}}>
+                        {fontsOutput}
                     </select>
                 </form>
                 <form className='control-form-color' onSubmit={handleSubmit} onKeyUp={handleKeyUp} onBlur={handleHEXBlur}>

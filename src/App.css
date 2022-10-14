@@ -5,3 +5,79 @@
 h1 {
     font-family: 'Josefin Sans', sans-serif;
 }
+
+@font-face {
+    font-family: 'Noto Serif TC';
+    src: url(http://fonts.gstatic.com/s/notoseriftc/v23/XLY9IZb5bJNDGYxLBibeHZ0BvtssbX9GTsoOAX4.otf);
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url(http://fonts.gstatic.com/s/notosans/v27/o-0NIpQlx3QUlC5A4PNjXhFlY9aA5Wl6PQ.ttf);
+}
+@font-face {
+    font-family: 'Noto Serif TC';
+    src: url(http://fonts.gstatic.com/s/notoseriftc/v23/XLY9IZb5bJNDGYxLBibeHZ0BvtssbX9GTsoOAX4.otf);
+}
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url(http://fonts.gstatic.com/s/josefinsans/v25/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQXMFrLgTsQV0.ttf);
+}
+@font-face {
+    font-family: 'Lobster';
+    src: url(http://fonts.gstatic.com/s/lobster/v28/neILzCirqoswsqX9_oWsMqEzSJQ.ttf);
+}@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5WZLCzYlKw.ttf);
+}@font-face {
+    font-family: 'Open Sans';
+    src: url(http://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4nY1M2xLER.ttf);
+}@font-face {
+    font-family: 'Lato';
+    src: url(http://fonts.gstatic.com/s/lato/v23/S6uyw4BMUTPHvxk6XweuBCY.ttf);
+}@font-face {
+    font-family: 'Oswald';
+    src: url(http://fonts.gstatic.com/s/oswald/v49/TK3_WkUHHAIjg75cFRf3bXL8LICs1_FvgUFoZAaRliE.ttf);
+}@font-face {
+    font-family: 'Nunito Sans';
+    src: url(http://fonts.gstatic.com/s/nunitosans/v12/pe0qMImSLYBIv1o4X1M8cfe6Kdpickwp.ttf);
+}@font-face {
+    font-family: 'Merriweather';
+    src: url(http://fonts.gstatic.com/s/merriweather/v30/u-440qyriQwlOrhSvowK_l5OeyxNV-bnrw.ttf);
+}@font-face {
+    font-family: 'Barlow';
+    src: url(http://fonts.gstatic.com/s/barlow/v12/7cHpv4kjgoGqM7EPC8E46HsxnA.ttf);
+}@font-face {
+    font-family: 'Anton';
+    src: url(http://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm0K08i4gS7lu.ttf);
+}@font-face {
+    font-family: 'Dancing Script';
+    src: url(http://fonts.gstatic.com/s/dancingscript/v24/If2cXTr6YS-zF4S-kcSWSVi_sxjsohD9F50Ruu7BMSoHTeB9ptDqpw.ttf);
+}@font-face {
+    font-family: 'Bebas Neue';
+    src: url(http://fonts.gstatic.com/s/bebasneue/v9/JTUSjIg69CK48gW7PXooxW5rygbi49c.ttf);
+}@font-face {
+    font-family: 'Caveat';
+    src: url(http://fonts.gstatic.com/s/caveat/v17/WnznHAc5bAfYB2QRah7pcpNvOx-pjfJ9SIKjYBxPigs.ttf);
+}@font-face {
+    font-family: 'Satisfy';
+    src: url(http://fonts.gstatic.com/s/satisfy/v17/rP2Hp2yn6lkG50LoOZSCHBeHFl0.ttf);
+}@font-face {
+    font-family: 'Fredoka One';
+    src: url(http://fonts.gstatic.com/s/fredokaone/v13/k3kUo8kEI-tA1RRcTZGmTmHBA6aF8Bf_.ttf);
+}@font-face {
+    font-family: 'Kalam';
+    src: url(http://fonts.gstatic.com/s/kalam/v16/YA9dr0Wd4kDdMuhWMibDszkB.ttf);
+}@font-face {
+    font-family: 'Francois One';
+    src: url(http://fonts.gstatic.com/s/francoisone/v20/_Xmr-H4zszafZw3A-KPSZutNxgKQu_avAg.ttf);
+}@font-face {
+    font-family: 'Cookie';
+    src: url(http://fonts.gstatic.com/s/cookie/v17/syky-y18lb0tSbfNlQCT9tPdpw.ttf);
+}@font-face {
+    font-family: 'Luckiest Guy';
+    src: url(http://fonts.gstatic.com/s/luckiestguy/v18/_gP_1RrxsjcxVyin9l9n_j2RStR3qDpraA.ttf);
+}@font-face {
+    font-family: 'Poiret One';
+    src: url(http://fonts.gstatic.com/s/poiretone/v14/UqyVK80NJXN4zfRgbdfbk5lWVscxdKE.ttf);
+}
