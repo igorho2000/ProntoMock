@@ -102,7 +102,22 @@ const initialState = {
             borderStyle: 'none',
             borderWidth: 0,
             borderColor: [0,0,0,1],
-        }
+        },
+        {
+            type: 'Image',
+            src: '../../logo192.png',
+            width: 25,
+            height: 25,
+            x: 40,
+            y: 80,
+            rotate: 0,
+            radius: [0,0,0,0],
+            differentRadius: false,
+            zIndex: 1,
+            borderStyle: 'none',
+            borderWidth: 0,
+            borderColor: [0,0,0,1],
+        },
         
     ],
     selectedObject: [
@@ -196,7 +211,22 @@ const initialState = {
                 borderStyle: 'none',
                 borderWidth: 0,
                 borderColor: [0,0,0,1],
-            }
+            },
+            {
+                type: 'Image',
+                src: '../../logo192.png',
+                width: 25,
+                height: 25,
+                x: 40,
+                y: 80,
+                rotate: 0,
+                radius: [0,0,0,0],
+                differentRadius: false,
+                zIndex: 1,
+                borderStyle: 'none',
+                borderWidth: 0,
+                borderColor: [0,0,0,1],
+            },
             
         ]
     ],

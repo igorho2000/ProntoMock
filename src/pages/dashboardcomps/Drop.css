@@ -353,3 +353,46 @@ select {
 .projectdrop-list:hover .selectright-undo {
     transform: rotate(-40deg) translate3d(-2px, 2px, 0);
 }
+
+/* Image Uploader */
+.imageuploader-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 160px;
+    height: fit-content;
+    flex-direction: column;
+}
+.imageuploader {
+    background-color: rgb(239, 239, 239);
+    border: 1.5px solid lightblue;
+    text-align: center;
+    font-weight: 600;
+    color: gray;
+    line-height: 150px;
+    border-radius: 15px;
+    width: 160px;
+    height: 160px;
+    cursor: pointer;
+}
+.imageuploader-cont button {
+    font-size: 0.9rem;
+    font-weight: 400;
+    border-radius: 1rem;
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+    box-shadow: 2px 3.5px transparent;
+    transition: box-shadow 0.2s;
+    background-color: #004e68;
+    color: white;
+    margin: 6px 0 2px;
+}
+.imageuploader-cont button:nth-child(2){
+    background-color: rgb(134, 134, 134);
+    margin-left: 5px;
+}
+.imageuploader-cont button:hover {
+    box-shadow: 2px 3.5px rgb(178, 178, 178);
+}

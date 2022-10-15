@@ -11,6 +11,7 @@ import Line from './canvascomps/Line';
 import Shape from './canvascomps/Shape';
 import Textbox from './canvascomps/Textbox';
 import Selected from './canvascomps/Selected';
+import Image from './canvascomps/Image'
 
 import { getSelectedItemStats, getSelectedStats } from '../Functions';
 import CanvasRightClick from './canvascomps/CanvasRightClick';
@@ -43,6 +44,9 @@ export default function Canvas() {
             case 'Line':
                 output = <Line element={item} selected={false} index={index} key={`everyObject${index}`} />
                 break
+            case 'Image':
+                output = <Image element={item} selected={false} index={index} key={`everyObject${index}`} />
+                break
         }
 
         return output
@@ -63,6 +67,9 @@ export default function Canvas() {
                 break
             case 'Line':
                 output = <Line element={item} selected={true} index={index} key={`selectedObject${index}`} />
+                break
+            case 'Image':
+                output = <Image element={item} selected={true} index={index} key={`everyObject${index}`} />
                 break
         }
 

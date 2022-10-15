@@ -30,7 +30,7 @@ export default function Control() {
                 <hr className='control-divider'/>
             </div>
             }
-            {['Square', 'Text', 'Texts', 'Squares'].includes(selectedType) && 
+            {['Square', 'Text', 'Image', 'Texts', 'Squares', 'Images'].includes(selectedType) && 
             <div>
                 <ControlDimensions radius={true} line={false}/>
                 <hr className='control-divider'/>
@@ -45,12 +45,12 @@ export default function Control() {
                 <ControlDimensions radius={false} line={true}/>
                 <hr className='control-divider'/>
             </div>}
-            {['Line', 'Text', 'Ellipse', 'Square'].includes(selectedType) &&
+            {['Line', 'Text', 'Ellipse', 'Square', 'Image'].includes(selectedType) &&
             <div>
                 <ControlAlignToMargin />
                 <hr className='control-divider'/>
             </div>}
-            {['Lines', 'Texts', 'Ellipses', 'Squares', 'Selected'].includes(selectedType) &&
+            {['Lines', 'Texts', 'Ellipses', 'Squares', 'Selected', 'Images'].includes(selectedType) &&
             <div>
                 <ControlAlignSelection />
                 <hr className='control-divider'/>
@@ -60,7 +60,7 @@ export default function Control() {
                 <ControlText />
                 <hr className='control-divider'/>
             </div>}
-            {['Line', 'Lines', 'Selected', 'none'].includes(selectedType) === false &&
+            {['Line', 'Lines', 'Selected', 'none', 'Image', 'Images'].includes(selectedType) === false &&
             <div>
                 <ControlFill />
                 <hr className='control-divider'/>
@@ -68,10 +68,11 @@ export default function Control() {
             {selectedType !== 'none' &&
             <div>
                 <ControlBorder />
-                <hr className='control-divider'/>
+                
             </div>}
-            <ControlExport />
-            
+            {['none'].includes(selectedType) &&
+                <ControlExport />
+            }
             <br />
             <br />
         </div>

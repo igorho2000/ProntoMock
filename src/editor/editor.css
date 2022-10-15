@@ -170,7 +170,7 @@ textarea:focus {
     margin-top: 8px;
 }
 .control-group button:hover {
-    box-shadow: 2px 3.5px gray;
+    box-shadow: 2px 3.5px rgb(178, 178, 178);
 }
 .control-divider {
     margin-bottom: 10px;
@@ -335,6 +335,7 @@ textarea:focus {
         display: none;
     }
     .canvas {
+        max-width: 100vw;
         width: 100vw;
     }
 }

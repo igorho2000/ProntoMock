@@ -3,10 +3,14 @@ import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft, AddObject } from '../features/draftSlice';
+import ImageUploader from './canvascomps/ImageUploader';
+
+import { selectEveryPopup, showPopup } from '../features/popupSlice';
 
 export default function Elements() {
     const dispatch = useDispatch();
     const draftInfo = useSelector(selectDraft);
+    const popup = useSelector(selectEveryPopup);
 
     const [zoom, setZoom] = React.useState(Math.round(draftInfo.statistics.zoom * 100));
 
@@ -69,7 +73,7 @@ export default function Elements() {
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Line</div>
                 </div>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => dispatch(showPopup(['ImageUploader', 0]))}>
                     <img className='elements-icon' src="../properties/image.svg" />
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Image</div>
@@ -98,6 +102,7 @@ export default function Elements() {
                     <div className='elements-description'>Zoom Out</div>
                 </div>
             </div>
+            {popup.ImageUploader[0] && <ImageUploader />}
         </div>
         
     )

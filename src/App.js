@@ -16,6 +16,13 @@ function App() {
   return (
     <div onContextMenu={(event) => {
       event.preventDefault();
+    }} onDragOver={(event) => {
+      // if (event.target.className === 'imageuploader') {
+      //   return
+      // }
+      event.preventDefault();
+    }} onDrop={(event) => {
+      event.preventDefault();
     }}
     >
       

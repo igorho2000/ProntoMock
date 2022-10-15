@@ -60,5 +60,20 @@ export const defaultObject = [{
     borderStyle: 'solid',
     borderWidth: 2,
     borderColor: [0,0,0,1],
-}
+},
+{
+    type: 'Image',
+    src: '',
+    width: 25,
+    height: 25,
+    x: 40,
+    y: 80,
+    rotate: 0,
+    radius: [0,0,0,0],
+    differentRadius: false,
+    zIndex: 1,
+    borderStyle: 'none',
+    borderWidth: 0,
+    borderColor: [0,0,0,1],
+},
 ]

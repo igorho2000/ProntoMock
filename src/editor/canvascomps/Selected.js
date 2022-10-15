@@ -124,11 +124,11 @@ export default function Selected() {
             <div style={{position: "absolute", border:"solid rgb(0,160,197) 0.5mm",
             top: `${(top - 1.5) / +draftInfo.canvasSettings.height * 100}%`, left: `${(left - 1.5) / +draftInfo.canvasSettings.width * 100}%`, height: `${(height + 2) / +draftInfo.canvasSettings.height * 100}%`, width: `${(width + 2) / +draftInfo.canvasSettings.width * 100}%`,
             pointerEvents: 'none', zIndex: '10000001'}}>
-                {(width*zoom > 16 && ['Ellipse', 'Line', 'Square', 'Text'].includes(draftInfo.statistics.selected) && (+selected[0].rotate <= 45 || +selected[0].rotate >= 315)) &&
+                {(width*zoom > 16 && ['Ellipse', 'Line', 'Square', 'Text', 'Image'].includes(draftInfo.statistics.selected) && (+selected[0].rotate <= 45 || +selected[0].rotate >= 315)) &&
                     <div style={{position: 'absolute', width: '8mm', height: '2mm', borderRadius: '1.5mm', backgroundColor: 'rgb(98, 201, 245)', zIndex: '10000001',
                     top: 'calc(100% - 1mm)', left: 'calc(50% - 4mm)', pointerEvents: 'auto', cursor: 's-resize', boxShadow: '0 0.2mm lightGray'}}></div>
                 }    
-                {(height*zoom > 16 && ['Ellipse', 'Line', 'Square', 'Text'].includes(draftInfo.statistics.selected) && (+selected[0].rotate <= 45 || +selected[0].rotate >= 315)) &&
+                {(height*zoom > 16 && ['Ellipse', 'Line', 'Square', 'Text', 'Image'].includes(draftInfo.statistics.selected) && (+selected[0].rotate <= 45 || +selected[0].rotate >= 315)) &&
                     <div style={{position: 'absolute', width: '2mm', height: '8mm', borderRadius: '1.5mm', backgroundColor: 'rgb(98, 201, 245)', zIndex: '10000001',
                     left: 'calc(100% - 1mm)', top: 'calc(50% - 4mm)', pointerEvents: 'auto', cursor: 'e-resize', boxShadow: '0.2mm 0 lightGray'}}></div>
 
