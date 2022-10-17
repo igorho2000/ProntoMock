@@ -113,12 +113,27 @@ const initialState = {
             rotate: 0,
             radius: [0,0,0,0],
             differentRadius: false,
-            zIndex: 1,
+            zIndex: 1006,
             borderStyle: 'none',
             borderWidth: 0,
             borderColor: [0,0,0,1],
         },
-        
+        {
+            type: 'Icon',
+            code: 'e95e',
+            class: 'material-icons',
+            width: 25,
+            x: 0,
+            y: 0,
+            rotate: 0,
+            radius: [0,0,0,0],
+            differentRadius: false,
+            zIndex: 1007,
+            borderStyle: 'none',
+            borderWidth: 0,
+            borderColor: [0,0,0,1],
+            fillColor: [0,0,0,1],
+        },
     ],
     selectedObject: [
         
@@ -227,7 +242,22 @@ const initialState = {
                 borderWidth: 0,
                 borderColor: [0,0,0,1],
             },
-            
+            {
+                type: 'Icon',
+                code: 'e95e',
+                class: 'material-icons',
+                width: 6,
+                x: 0,
+                y: 0,
+                rotate: 0,
+                radius: [0,0,0,0],
+                differentRadius: false,
+                zIndex: 1,
+                borderStyle: 'none',
+                borderWidth: 0,
+                borderColor: [0,0,0,1],
+                fillColor: [0,0,0,1],
+            },
         ]
     ],
     statistics: {
@@ -424,8 +454,17 @@ export const draftSlice = createSlice({
         },
         AddObject: (state, action) => {
             // payload is the index number of the new default object
-            const toEverything = defaultObject[action.payload]
+            const toEverything = {...defaultObject[action.payload]}
             toEverything.zIndex = state.everyObject.length + state.selectedObject.length + 1000
+            state.everyObject.push(toEverything);
+        },
+        AddImage: (state, action) => {
+            // payload is an array 0=link, 1=width, 2=height
+            var toEverything = {...defaultObject[4]};
+            toEverything.zIndex = state.everyObject.length + state.selectedObject.length + 1000;
+            toEverything.src = action.payload[0];
+            toEverything.width = action.payload[1];
+            toEverything.height = action.payload[2];
             state.everyObject.push(toEverything);
         },
         SortEveryObjectByZ: (state) => {
@@ -452,7 +491,7 @@ export const draftSlice = createSlice({
 export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
             SetDraftSize, ZoomInOutDraft, SortEveryObjectByZ, MoveSelectedToBack, MoveSelectedToFront,
             SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected,
-            DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, ToggleExport, AddObject} = draftSlice.actions;
+            DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, ToggleExport, AddObject, AddImage} = draftSlice.actions;
 
 export const selectDraft = (state) => state.draft;
 

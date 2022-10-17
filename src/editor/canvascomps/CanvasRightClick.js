@@ -30,7 +30,7 @@ export default function CanvasRightClick() {
                 if (localStorage.getItem('clipboard') === null) {
                     return
                 }
-                const paste = localStorage.getItem('clipboard').split('/');
+                const paste = localStorage.getItem('clipboard').split('/\}{|');
                 paste.splice(-1,1);
                 const pasteArray = paste.map((item) => (
                   JSON.parse(item)

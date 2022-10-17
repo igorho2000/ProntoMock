@@ -15,6 +15,7 @@ import Image from './canvascomps/Image'
 
 import { getSelectedItemStats, getSelectedStats } from '../Functions';
 import CanvasRightClick from './canvascomps/CanvasRightClick';
+import Icon from './canvascomps/Icon';
 
 export default function Canvas() {
 
@@ -47,6 +48,9 @@ export default function Canvas() {
             case 'Image':
                 output = <Image element={item} selected={false} index={index} key={`everyObject${index}`} />
                 break
+            case 'Icon':
+                output = <Icon element={item} selected={false} index={index} key={`everyObject${index}`} />
+                break
         }
 
         return output
@@ -69,7 +73,10 @@ export default function Canvas() {
                 output = <Line element={item} selected={true} index={index} key={`selectedObject${index}`} />
                 break
             case 'Image':
-                output = <Image element={item} selected={true} index={index} key={`everyObject${index}`} />
+                output = <Image element={item} selected={true} index={index} key={`selectedObject${index}`} />
+                break
+            case 'Icon':
+                output = <Icon element={item} selected={true} index={index} key={`selectedObject${index}`} />
                 break
         }
 
@@ -87,7 +94,7 @@ export default function Canvas() {
             if (localStorage.getItem('clipboard') === null) {
                 return
             }
-            const paste = localStorage.getItem('clipboard').split('/');
+            const paste = localStorage.getItem('clipboard').split('/\}{|');
             paste.splice(-1,1);
             const pasteArray = paste.map((item) => (
               JSON.parse(item)
@@ -99,14 +106,14 @@ export default function Canvas() {
           // ctrl C
           else if (key == 67 && ctrl) { 
             selected.map((item) => {
-              selectedString += JSON.stringify(item) + '/';
+              selectedString += JSON.stringify(item) + '/\}{|';
             })
             localStorage.setItem('clipboard', selectedString);
           }
         //    ctrl X
           else if (key == 88 && ctrl) {
             selected.map((item) => {
-                selectedString += JSON.stringify(item) + '/';
+                selectedString += JSON.stringify(item) + '/\}{|';
               })
             localStorage.setItem('clipboard', selectedString);
             dispatch(DeleteSelected());

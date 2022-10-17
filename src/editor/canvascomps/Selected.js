@@ -56,6 +56,29 @@ export default function Selected() {
                 </div>
             )
         } 
+        if (item.type === 'Icon') {
+            return (
+                <div draggable="true" key={`subselected${index}`} style={{position: "absolute", border:"solid rgb(0,160,197) 0.2mm",
+                top: `calc(${(+item.y) / +draftInfo.canvasSettings.height * 100}% - 0.6mm)`, left: `calc(${(+item.x) / +draftInfo.canvasSettings.width * 100}% - 0.6mm)`, height: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.height * 100}% + 0.4mm)`, width: `calc(${(+item.width + (+item.borderWidth) * 2) / +draftInfo.canvasSettings.width * 100}% + 0.4mm)`,
+                cursor: 'move', zIndex: '10000000', transform: `rotate(${+item.rotate}deg)`, borderRadius: `${item.radius[0] * zoom}mm ${item.radius[1] * zoom}mm ${item.radius[2] * zoom}mm ${item.radius[3] * zoom}mm`}}
+                onClick={(event) => {
+                    if (event.shiftKey === true) {
+                        dispatch(DeselectParticularObject(index));
+                    }
+                }}
+                onDragStart={handleDragStart}
+                onDrag={handleDrag}
+                onMouseUp={(event) => {
+                    if (event.nativeEvent.which === 3) {
+                        dispatch(showPopup(['SelectedRightClick', 0]))
+                        dispatch(getCoordinates([+event.clientX, +event.clientY]))
+                    }
+                }}
+                >
+                
+                </div>
+            )
+        } 
         if (item.type === 'Text') {
             return (
                 <div  key={`subselected${index}`} >

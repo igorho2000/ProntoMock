@@ -6,7 +6,7 @@ import {
     resetPopups, selectEveryPopup
 } from '../../features/popupSlice';
 
-import { selectDraft, SortEveryObjectByZ, SaveDraft, PasteSelected, UndoAction} from "../../features/draftSlice";
+import { selectDraft, SaveDraft, AddImage} from "../../features/draftSlice";
 
 import { useOutsideClick } from "../../Functions";
 
@@ -43,6 +43,15 @@ export default function ImageUploader() {
             imagefile: event.dataTransfer.files[0],
             imageURL: URL.createObjectURL(event.dataTransfer.files[0]),
         })
+
+    }
+    function handleClick() {
+        const imageWidth = +document.querySelector('#uploadedimage').naturalWidth / 3.779528;
+        const imageHeight = +document.querySelector('#uploadedimage').naturalHeight / 3.779528;
+        console.log(inputValue.imageURL)
+        dispatch(AddImage([inputValue.imageURL, imageWidth, imageHeight]));
+        dispatch(SaveDraft());
+        dispatch(resetPopups());
     }
     
     return (
@@ -52,11 +61,12 @@ export default function ImageUploader() {
                     <label htmlFor="imageuploader" className="imageuploader" style={{opacity: inputValue.imagefile === null ? '1' : '0'}} onDragOver={(event) => event.preventDefault} onDragEnter={(event) => event.preventDefault} 
                     onDrop={handleDrop} 
                     >Drop to Upload</label>
-                    <div>
-                        <button>Add Image</button>
+                    <div style={{display: inputValue.imageURL === null ? 'none' : 'block'}} >
+                        <button onClick={handleClick}>Add Image</button>
                         <button onClick={() => dispatch(resetPopups())}>Cancel</button>
                     </div>
                 </div>
+                <img id='uploadedimage' src={inputValue.imageURL} style={{display: 'none'}}></img>
                 <input id='imageuploader' type='file' style={{display:'none'}} accept="image/png, image/jpeg, .svg, image/svg+xml" onChange={handleChange}></input>
             </form>
         </div>

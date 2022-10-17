@@ -125,7 +125,7 @@ export function getSelectedItemStats(selected) {
     }
     var borderRadius = [+item.width / 2, +item.width / 2, +item.width / 2, +item.width / 2]
 
-    if (item.type === 'Square' || item.type === 'Text') {
+    if (item.type === 'Square' || item.type === 'Text' || item.type === 'Image') {
       borderRadius.splice(0, 4);
       borderRadius = borderRadius.concat(item.radius);
       const width = +item.width;
@@ -141,8 +141,38 @@ export function getSelectedItemStats(selected) {
       })
       
     }
+    if (item.type === 'Icon') {
+      borderRadius.splice(0, 4);
+      borderRadius = borderRadius.concat(item.radius);
+      const width = +item.width;
+      borderRadius = borderRadius.map((item) => {
+        if (+item > width) {
+          return width / 2;
+        }
+        return item
+      })
+      
+    }
 
     const borderRadiusAdjustment = Math.sin(Math.abs(rotate * 2)) * (Math.sqrt(Math.pow(Math.min(...borderRadius), 2) * 2) - Math.min(...borderRadius))
+
+    if (item.type === 'Icon') {
+      return {
+        index: index,
+        totalWidth: +item.width + 2 * +item.borderWidth,
+        totalHeight: +item.width + 2 * +item.borderWidth,
+        visualWidth: (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.width + +item.borderWidth * 2) * Math.sin(rotate) - 2 * borderRadiusAdjustment, 
+        visualHeight: (+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.width + +item.borderWidth * 2) * Math.cos(rotate) - 2 * borderRadiusAdjustment,
+        widthDif: ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.width + +item.borderWidth * 2) * Math.sin(rotate) - (+item.width + 2 * +item.borderWidth)) / 2 - borderRadiusAdjustment, 
+        heightDif: ((+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.width + +item.borderWidth * 2) * Math.cos(rotate) - (+item.width + 2 * +item.borderWidth)) / 2 - borderRadiusAdjustment,
+        visualLeft: (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.width + +item.borderWidth *2) * Math.sin(rotate)) / 2 + borderRadiusAdjustment,
+        visualTop: (+item.y + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.width + +item.borderWidth *2) * Math.cos(rotate)) / 2 + borderRadiusAdjustment,
+        visualRight: (+item.x + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.width + +item.borderWidth *2) * Math.sin(rotate)) / 2 + (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.width + +item.borderWidth * 2) * Math.sin(rotate) - borderRadiusAdjustment,
+        visualBottom: (+item.y + (+item.width + +item.borderWidth * 2) / 2) - ((+item.width + +item.borderWidth *2) * Math.sin(rotate) + (+item.width + +item.borderWidth *2) * Math.cos(rotate)) / 2 + (+item.width + +item.borderWidth * 2) * Math.sin(rotate) + (+item.width + +item.borderWidth * 2) * Math.cos(rotate) - borderRadiusAdjustment,
+        centerLeft: +item.x + (+item.width) / 2,
+        centerTop: +item.y + (+item.width) / 2,
+      }
+    }
 
     return {
       index: index,

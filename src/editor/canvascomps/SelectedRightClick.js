@@ -44,7 +44,7 @@ export default function SelectedRightClick() {
             <div className="projectdrop-list" onClick={() => {
                 var selectedString = ''
                 selected.map((item) => {
-                    selectedString += JSON.stringify(item) + '/';
+                    selectedString += JSON.stringify(item) + '/\}{|';
                   })
                 localStorage.setItem('clipboard', selectedString);
                 dispatch(resetPopups());
@@ -57,7 +57,7 @@ export default function SelectedRightClick() {
             <div className="projectdrop-list" onClick={() => {
                 var selectedString = ''
                 selected.map((item) => {
-                    selectedString += JSON.stringify(item) + '/';
+                    selectedString += JSON.stringify(item) + '/\}{|';
                   })
                 localStorage.setItem('clipboard', selectedString);
                 dispatch(DeleteSelected());

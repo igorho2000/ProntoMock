@@ -45,12 +45,17 @@ export default function Control() {
                 <ControlDimensions radius={false} line={true}/>
                 <hr className='control-divider'/>
             </div>}
-            {['Line', 'Text', 'Ellipse', 'Square', 'Image'].includes(selectedType) &&
+            {['Icon', 'Icons'].includes(selectedType) &&
+            <div>
+                <ControlDimensions radius={true} line={true}/>
+                <hr className='control-divider'/>
+            </div>}
+            {['Line', 'Text', 'Ellipse', 'Square', 'Image', 'Icon'].includes(selectedType) &&
             <div>
                 <ControlAlignToMargin />
                 <hr className='control-divider'/>
             </div>}
-            {['Lines', 'Texts', 'Ellipses', 'Squares', 'Selected', 'Images'].includes(selectedType) &&
+            {['Lines', 'Texts', 'Ellipses', 'Squares', 'Selected', 'Images', 'Icons'].includes(selectedType) &&
             <div>
                 <ControlAlignSelection />
                 <hr className='control-divider'/>
