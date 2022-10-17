@@ -80,7 +80,7 @@ export const defaultObject = [{
     type: 'Icon',
     code: '',
     class: 'material-icons',
-    width: 6,
+    width: 15,
     x: 0,
     y: 0,
     rotate: 0,

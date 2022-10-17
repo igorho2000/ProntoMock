@@ -355,7 +355,8 @@ select {
 }
 
 /* Image Uploader */
-.imageuploader-cont {
+.imageuploader-cont,
+.iconadder-cont {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -376,7 +377,8 @@ select {
     height: 160px;
     cursor: pointer;
 }
-.imageuploader-cont button {
+.imageuploader-cont button,
+.iconadder-cont button {
     font-size: 0.9rem;
     font-weight: 400;
     border-radius: 1rem;
@@ -389,10 +391,36 @@ select {
     color: white;
     margin: 6px 0 2px;
 }
-.imageuploader-cont button:nth-child(2){
+.imageuploader-cont button:nth-child(2),
+.iconadder-cont button:nth-child(2) {
     background-color: rgb(134, 134, 134);
     margin-left: 5px;
 }
-.imageuploader-cont button:hover {
+.imageuploader-cont button:hover,
+.iconadder-cont button:hover {
     box-shadow: 2px 3.5px rgb(178, 178, 178);
+}
+
+/* Icon Adder */
+.iconadder-cont select {
+    font-size: 0.8rem;
+    border: transparent 1px solid;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 3px 0 5px 5px ;
+}
+.iconadder-search {
+    font-size: 0.8rem;
+    border: transparent 1px solid;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 3px
+}
+.iconadder-cont select:hover,
+.iconadder-search:hover {
+    border-color: lightgray;
+}
+.iconadder-cont select:focus,
+.iconadder-search:focus {
+    border-color: #22b1e0;
 }

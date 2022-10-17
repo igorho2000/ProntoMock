@@ -6,6 +6,7 @@ import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft, AddObject } from '.
 import ImageUploader from './canvascomps/ImageUploader';
 
 import { selectEveryPopup, showPopup } from '../features/popupSlice';
+import IconAdder from './canvascomps/IconAdder';
 
 export default function Elements() {
     const dispatch = useDispatch();
@@ -78,7 +79,7 @@ export default function Elements() {
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Image</div>
                 </div>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => dispatch(showPopup(['IconAdder', 0]))}>
                     <img className='elements-icon' src="../properties/icon.svg" />
                     <img className='elements-add-circle' src="../properties/add-circle.svg" />
                     <div className='elements-description'>Icon</div>
@@ -103,6 +104,7 @@ export default function Elements() {
                 </div>
             </div>
             {popup.ImageUploader[0] && <ImageUploader />}
+            {popup.IconAdder[0] && <IconAdder />}
         </div>
         
     )

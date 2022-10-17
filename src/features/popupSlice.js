@@ -20,6 +20,7 @@ const initialState = {
         SelectedRightClick: [],
         CanvasRightClick: [],
         ImageUploader: [],
+        IconAdder: [],
         Coordinates: [0, 0],
     },
 }
@@ -44,6 +45,7 @@ export const popupSlice = createSlice({
             state.everyPopup.SelectedRightClick = [false];
             state.everyPopup.CanvasRightClick = [false];
             state.everyPopup.ImageUploader = [false];
+            state.everyPopup.IconAdder = [false];
         },
         showPopup: (state, action) => {
             var popupType = action.payload[0];

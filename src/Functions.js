@@ -62,6 +62,10 @@ export function useOutsideClick(ref) {
             dispatch(DeselectObject());
             return
           }
+          if (event.target.id === 'iconelement') {
+            dispatch(DeselectObject());
+            return
+          }
           dispatch(DeselectObject());
           dispatch(SortEveryObjectByZ());
         }
