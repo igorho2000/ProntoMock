@@ -3,6 +3,7 @@ import { paperSizes } from './paperSizes';
 import { defaultObject } from './defaultObjects';
 
 import { DegreeCalc } from '../Functions';
+import { act } from 'react-dom/test-utils';
 
 const initialState = {
     canvasSettings: {
@@ -388,7 +389,7 @@ export const draftSlice = createSlice({
             state.statistics[action.payload[0]] = action.payload[1];
         },
         MoveSelected: (state, action) => {
-            // Payload is an object containing the difference between the new location and old location
+            // Payload is an array containing the difference between the new location and old location
             // [x, y] unit in pixels (0.26458mm)
 
             action.payload[0] = (+action.payload[0] * 0.26458) / (+state.statistics.zoom);
@@ -399,7 +400,7 @@ export const draftSlice = createSlice({
             })
         },
         SizeXSelected: (state, action) => {
-            // Payload is an object containing the difference between the new location and old location
+            // Payload is an array containing the difference between the new location and old location
             // [x, y] unit in pixels (0.26458mm)
             action.payload[0] = (+action.payload[0] * 0.26458) / (+state.statistics.zoom);
             state.selectedObject.map((item) => {
@@ -407,16 +408,54 @@ export const draftSlice = createSlice({
             })
         },
         SizeYSelected: (state, action) => {
-            // Payload is an object containing the difference between the new location and old location
+            // Payload is an array containing the difference between the new location and old location
             // [x, y] unit in pixels (0.26458mm)
             action.payload[1] = (+action.payload[1] * 0.26458) / (+state.statistics.zoom);
+            if (state.statistics.selected === 'Line') {
+                state.selectedObject.map((item) => {
+                    item.width = (+item.width + +action.payload[1]).toFixed(2);
+                    item.y = (+item.y + +action.payload[1]).toFixed(2);
+                })
+                return
+            }
             state.selectedObject.map((item) => {
                 item.height = (+item.height + +action.payload[1]).toFixed(2);
             })
         },
         SizeXYSelected: (state, action) => {
-            // Payload is an object containing the difference between the new location and old location
+            // Payload is an array containing the difference between the new location and old location
             // [x, y] unit in pixels (0.26458mm)
+            // 2= selectedItemInfo 3= selectedStats
+            
+            action.payload[0] = (+action.payload[0] * 0.26458) / (+state.statistics.zoom);
+            action.payload[1] = (+action.payload[1] * 0.26458) / (+state.statistics.zoom);
+            if (action.payload[0] * action.payload[1] < 0) {
+                return
+            }
+
+            action.payload[0] = action.payload[0] > action.payload[1] ? action.payload[0] : action.payload[1] * (action.payload[3].selectedWidth / action.payload[3].selectedHeight);
+            action.payload[1] = action.payload[1] > action.payload[0] ? action.payload[1] : action.payload[0] * (action.payload[3].selectedHeight / action.payload[3].selectedWidth);
+            
+            for (let i = 0; i<state.selectedObject.length; i++) {
+                const widthPercentage = action.payload[2][i].visualWidth / action.payload[3].selectedWidth;
+                const heightPercentage = action.payload[2][i].visualHeight / action.payload[3].selectedHeight;
+                const toLeftBoundPercentage = (action.payload[2][i].visualLeft - action.payload[3].leftBound) / action.payload[3].selectedWidth;
+                const toTopBoundPercentage = (action.payload[2][i].visualTop - action.payload[3].topBound) / action.payload[3].selectedHeight;
+                const widthDifPercentage = action.payload[2][i].widthDif / action.payload[2][i].visualWidth;
+                const heightDifPercentage = action.payload[2][i].heightDif / action.payload[2][i].visualHeight;
+                state.selectedObject[i].x = +state.selectedObject[i].x + action.payload[0] * (toLeftBoundPercentage + widthDifPercentage);
+                state.selectedObject[i].y = +state.selectedObject[i].y + action.payload[1] * (toTopBoundPercentage + heightDifPercentage);
+                if (action.payload[2][i].type === 'Line') {
+                    state.selectedObject[i].width = +state.selectedObject[i].width + action.payload[0] * (widthPercentage - 2 * widthDifPercentage);
+                    continue
+                }
+                if (action.payload[2][i].type === 'Icon') {
+                    state.selectedObject[i].width = +state.selectedObject[i].width + action.payload[0] * (widthPercentage - 2 * widthDifPercentage);
+                    continue
+                }
+                state.selectedObject[i].width = +state.selectedObject[i].width + action.payload[0] * (widthPercentage - 2 * widthDifPercentage);
+                state.selectedObject[i].height = +state.selectedObject[i].height + action.payload[1] * (heightPercentage - 2 * heightDifPercentage);
+            }
         },
         DeleteSelected: (state) => {
             state.selectedObject.splice(0, state.selectedObject.length);

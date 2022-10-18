@@ -193,7 +193,7 @@ export default function Canvas() {
                 dispatch(SizeYSelected([+event.movementX, +event.movementY]))
             }
             else if (draftInfo.statistics.sizeXY === true) {
-                dispatch(SizeXYSelected([+event.movementX, +event.movementY]))
+                dispatch(SizeXYSelected([+event.movementX, +event.movementY, selectedItemStats, selectedStats]))
             }
         }}
         onMouseUp={(event) => {

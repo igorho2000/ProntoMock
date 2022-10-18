@@ -113,6 +113,7 @@ export function getSelectedItemStats(selected) {
     if (item.type === 'Line') {
       return {
         index: index,
+        type: item.type,
         totalWidth: +item.width,
         totalHeight: +item.borderWidth,
         visualWidth: (+item.width) * Math.cos(rotate) + (+item.height + +item.borderWidth) * Math.sin(rotate), 
@@ -163,6 +164,7 @@ export function getSelectedItemStats(selected) {
     if (item.type === 'Icon') {
       return {
         index: index,
+        type: item.type,
         totalWidth: +item.width + 2 * +item.borderWidth,
         totalHeight: +item.width + 2 * +item.borderWidth,
         visualWidth: (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.width + +item.borderWidth * 2) * Math.sin(rotate) - 2 * borderRadiusAdjustment, 
@@ -180,6 +182,7 @@ export function getSelectedItemStats(selected) {
 
     return {
       index: index,
+      type: item.type,
       totalWidth: +item.width + 2 * +item.borderWidth,
       totalHeight: +item.height + 2 * +item.borderWidth,
       visualWidth: (+item.width + +item.borderWidth * 2) * Math.cos(rotate) + (+item.height + +item.borderWidth * 2) * Math.sin(rotate) - 2 * borderRadiusAdjustment, 
