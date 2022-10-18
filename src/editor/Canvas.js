@@ -3,7 +3,7 @@ import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectDraft, MoveSelected,
-    DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, SortEveryObjectByZ } from '../features/draftSlice';
+    DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, SortEveryObjectByZ, ZoomInOutDraft, SizeXSelected, SizeYSelected, SizeXYSelected } from '../features/draftSlice';
 
 import { selectEveryPopup, showPopup, getCoordinates } from '../features/popupSlice';
 
@@ -149,6 +149,29 @@ export default function Canvas() {
         }
     }, [selected, saved])
 
+    // function handleScroll(ev) {
+    //     ev.preventDefault();
+    //     ev.stopPropagation();
+    //     ev = ev || window.event;
+    //     var key = ev.which || ev.keyCode;
+    //     var ctrl = ev.ctrlKey ? ev.ctrlKey : ((key === 17)
+    //         ? true : false);
+    //     if (ctrl && ev.deltaY > 0) {
+    //         dispatch(ZoomInOutDraft(+zoom - 0.05))
+    //         return
+    //     }
+    //     if (ctrl && ev.deltaY < 0) {
+    //         dispatch(ZoomInOutDraft(+zoom + 0.05))
+    //         return
+    //     }
+    // }
+    // React.useEffect(() => {
+    //     window.addEventListener('mousewheel', handleScroll, false)
+    //     return () => {
+    //         window.removeEventListener('mousewheel', handleScroll, false)
+    //     }
+    // }, [zoom])
+
     const selectedItemStats = getSelectedItemStats(selected)
     const selectedStats = getSelectedStats(selectedItemStats);
     
@@ -163,13 +186,24 @@ export default function Canvas() {
             if (draftInfo.statistics.move === true) {
                 dispatch(MoveSelected([+event.movementX, +event.movementY]))
             }
+            else if (draftInfo.statistics.sizeX === true) {
+                dispatch(SizeXSelected([+event.movementX, +event.movementY]))
+            }
+            else if (draftInfo.statistics.sizeY === true) {
+                dispatch(SizeYSelected([+event.movementX, +event.movementY]))
+            }
+            else if (draftInfo.statistics.sizeXY === true) {
+                dispatch(SizeXYSelected([+event.movementX, +event.movementY]))
+            }
         }}
         onMouseUp={(event) => {
             if (event.nativeEvent.which === 3) {
                 dispatch(showPopup(['CanvasRightClick', 0]))
                 dispatch(getCoordinates([+event.clientX, +event.clientY]))
             }
-        }}>
+        }} onWheel={(event) => {
+            event.preventDefault();
+        }} >
             <div className='draft-cont'>
                 <div className='canvas-buffer'></div>
                 

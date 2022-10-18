@@ -26,7 +26,7 @@ export default function Selected() {
 
     function handleDragStart(event) {
         event.preventDefault();
-        dispatch(ToggleMove(true));
+        dispatch(ToggleMove(['move', true]));
     }
 
     function handleDrag(event) {
@@ -148,19 +148,35 @@ export default function Selected() {
             top: `${(top - 1.5) / +draftInfo.canvasSettings.height * 100}%`, left: `${(left - 1.5) / +draftInfo.canvasSettings.width * 100}%`, height: `${(height + 2) / +draftInfo.canvasSettings.height * 100}%`, width: `${(width + 2) / +draftInfo.canvasSettings.width * 100}%`,
             pointerEvents: 'none', zIndex: '10000001'}}>
                 {(width*zoom > 16 && ['Ellipse', 'Line', 'Square', 'Text', 'Image'].includes(draftInfo.statistics.selected) && (+selected[0].rotate <= 45 || +selected[0].rotate >= 315)) &&
-                    <div style={{position: 'absolute', width: '8mm', height: '2mm', borderRadius: '1.5mm', backgroundColor: 'rgb(98, 201, 245)', zIndex: '10000001',
-                    top: 'calc(100% - 1mm)', left: 'calc(50% - 4mm)', pointerEvents: 'auto', cursor: 's-resize', boxShadow: '0 0.2mm lightGray'}}></div>
+                    <div draggable={true} style={{position: 'absolute', width: '8mm', height: '2mm', borderRadius: '1.5mm', backgroundColor: 'rgb(98, 201, 245)', zIndex: '10000001',
+                    top: 'calc(100% - 1mm)', left: 'calc(50% - 4mm)', pointerEvents: 'auto', cursor: 's-resize', boxShadow: '0 0.2mm lightGray'}}
+                    onDrag={handleDrag} onDragStart={(event) => {
+                        event.preventDefault();
+                        dispatch(ToggleMove(['sizeY', true]))
+                    }}></div>
                 }    
                 {(height*zoom > 16 && ['Ellipse', 'Line', 'Square', 'Text', 'Image'].includes(draftInfo.statistics.selected) && (+selected[0].rotate <= 45 || +selected[0].rotate >= 315)) &&
-                    <div style={{position: 'absolute', width: '2mm', height: '8mm', borderRadius: '1.5mm', backgroundColor: 'rgb(98, 201, 245)', zIndex: '10000001',
-                    left: 'calc(100% - 1mm)', top: 'calc(50% - 4mm)', pointerEvents: 'auto', cursor: 'e-resize', boxShadow: '0.2mm 0 lightGray'}}></div>
+                    <div draggable={true} style={{position: 'absolute', width: '2mm', height: '8mm', borderRadius: '1.5mm', backgroundColor: 'rgb(98, 201, 245)', zIndex: '10000001',
+                    left: 'calc(100% - 1mm)', top: 'calc(50% - 4mm)', pointerEvents: 'auto', cursor: 'e-resize', boxShadow: '0.2mm 0 lightGray'}}
+                    onDrag={handleDrag} onDragStart={(event) => {
+                        event.preventDefault();
+                        dispatch(ToggleMove(['sizeX', true]))
+                    }} ></div>
 
                 }
                 <div>
-                    <div style={{position: 'absolute', width: '6mm', height: '2.5mm', borderRadius: '1.5mm', backgroundColor: 'rgb(19, 174, 240)', zIndex: '10000001',
-                    top: 'calc(100% - 1.25mm)', left: 'calc(100% - 5mm)', pointerEvents: 'auto', cursor: 'se-resize', boxShadow: '0 0.2mm lightGray'}}></div>
-                    <div style={{position: 'absolute', width: '2.5mm', height: '6mm', borderRadius: '1.5mm', backgroundColor: 'rgb(19, 174, 240)', zIndex: '10000001',
-                    left: 'calc(100% - 1.25mm)', top: 'calc(100% - 4.75mm)', pointerEvents: 'auto', cursor: 'se-resize', boxShadow: '0.2mm 0 lightGray'}}></div>
+                    <div draggable={true} style={{position: 'absolute', width: '6mm', height: '2.5mm', borderRadius: '1.5mm', backgroundColor: 'rgb(19, 174, 240)', zIndex: '10000001',
+                    top: 'calc(100% - 1.25mm)', left: 'calc(100% - 5mm)', pointerEvents: 'auto', cursor: 'se-resize', boxShadow: '0 0.2mm lightGray'}}
+                    onDrag={handleDrag} onDragStart={(event) => {
+                        event.preventDefault();
+                        dispatch(ToggleMove(['sizeXY', true]))
+                    }}></div>
+                    <div draggable={true} style={{position: 'absolute', width: '2.5mm', height: '6mm', borderRadius: '1.5mm', backgroundColor: 'rgb(19, 174, 240)', zIndex: '10000001',
+                    left: 'calc(100% - 1.25mm)', top: 'calc(100% - 4.75mm)', pointerEvents: 'auto', cursor: 'se-resize', boxShadow: '0.2mm 0 lightGray'}}
+                    onDrag={handleDrag} onDragStart={(event) => {
+                        event.preventDefault();
+                        dispatch(ToggleMove(['sizeXY', true]))
+                    }}></div>
                 </div>
             </div>
             {subSelected}

@@ -26,11 +26,15 @@ export default function Editor() {
 
     return (
         <div onMouseUp={() => {
-            if (draftInfo.statistics.move === true) {
+            if (draftInfo.statistics.move === true || draftInfo.statistics.sizeX === true
+                || draftInfo.statistics.sizeY === true || draftInfo.statistics.sizeXY === true) {
                 dispatch(SaveDraft());
             }
             if (draftInfo.statistics.selected !== 'none') {
-                dispatch(ToggleMove(false))
+                dispatch(ToggleMove(['move', false]))
+                dispatch(ToggleMove(['sizeX', false]))
+                dispatch(ToggleMove(['sizeY', false]))
+                dispatch(ToggleMove(['sizeXY', false]))
             }
             
         }} >

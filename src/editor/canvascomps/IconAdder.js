@@ -61,7 +61,7 @@ export default function IconAdder() {
         }))
     }
 
-    var filterAllIcons = allIcons.filter((element) => (element[0].includes(inputValue.search)))
+    var filterAllIcons = allIcons.filter((element) => (element[0].includes(inputValue.search.replace(' ', '_').toLowerCase())))
 
     var iconOutput = [];
     for (let i=0; i<16; i++) {
