@@ -50,6 +50,15 @@ export default function Dashboard() {
                 {outputStarredProjectDraft}
                 {outputProjectDraft}
             </div>
+            {
+                currentProject[0].drafts.length + currentProject[0].starredDrafts.length === 0 
+                &&
+                <div className="dashboard-empty">
+                    <h3>There are no drafts in this project.</h3>
+                    <p>Click on "New Draft" to add a design.</p>
+                </div>
+            }
+            
             <button className="dashboard-button" onClick={() => dispatch((showPopup(['NewDraft', 0])))}>
                 <p className="dashboard-button-text">New Draft</p>
                 <img src="../dashboard/create.svg" alt="create new draft icon" />

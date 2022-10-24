@@ -185,6 +185,13 @@
     font-size: 1.2rem;
     margin-right: 8px
 }
+.dashboard-empty {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20vh;
+}
 
 @media (max-width: 960px) {
     .dashboard-body {

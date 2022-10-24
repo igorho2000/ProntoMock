@@ -9,34 +9,7 @@ const initialState = {
             starredDrafts: [],
             team: []
         },
-        {
-            name: 'RoadRule',
-            drafts: [],
-            starredDrafts: [],
-            team: []
-        },
-        {
-            name: 'Pa Movie',
-            drafts: [],
-            starredDrafts: [],
-            team: []
-        },
-        {
-            name: 'Good Rent',
-            drafts: [],
-            starredDrafts: [],
-            team: []
-        },
-        {
-            name: 'Restful Trip',
-            drafts: [{
-                name: 'Project Promotion Poster',
-                type: 'A3 Horizontal',
-                date: '8/6/2022',
-            },],
-            starredDrafts: [],
-            team: []
-        },
+       
     ],
     currentProject: [
         {

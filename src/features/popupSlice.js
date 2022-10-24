@@ -22,6 +22,9 @@ const initialState = {
         ImageUploader: [],
         IconAdder: [],
         Coordinates: [0, 0],
+        // Account
+        SignIn: [],
+        SignUp: [],
     },
 }
 
@@ -46,6 +49,8 @@ export const popupSlice = createSlice({
             state.everyPopup.CanvasRightClick = [false];
             state.everyPopup.ImageUploader = [false];
             state.everyPopup.IconAdder = [false];
+            state.everyPopup.SignIn = [false];
+            state.everyPopup.SignUp = [false];
         },
         showPopup: (state, action) => {
             var popupType = action.payload[0];

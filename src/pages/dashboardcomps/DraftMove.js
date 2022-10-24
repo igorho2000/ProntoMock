@@ -54,7 +54,7 @@ export default function DraftMove(props) {
                     </select>
                 </div>
 
-                <div className="draftrename-buttoncont">
+                <div className="draftrename-buttoncont" style={{marginTop: '5px'}}>
                     <button className="draftrename-cancel" onClick={() => dispatch(resetPopups())}>Cancel</button>
                     <input className="draftrename-submit" type="submit" value="Move" />
                 </div>
