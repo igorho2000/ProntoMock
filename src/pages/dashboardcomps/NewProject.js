@@ -16,7 +16,7 @@ export default function NewProject() {
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
 
-    const [inputValue, setInputValue] = React.useState('');
+    const [inputValue, setInputValue] = React.useState('My New Project');
 
     function handleChange(event) {
         setInputValue(event.target.value);
@@ -30,19 +30,21 @@ export default function NewProject() {
     }
 
     return (
-        <div className="draftrename newproject" ref={wrapperRef} >
-            <h4 className="draftrename-title">New Project</h4>
-            <div className="projectsettings-cont">
-                
-                <form className="newproject-form" onSubmit={handleSubmit}>
-                    <h5 className="projectsettings-section">Enter Project Name</h5>
-                    <input className="draftrename-input" type="text" value={inputValue} onChange={handleChange} />
-                    <div className="draftrename-buttoncont">
-                        <button className="draftrename-cancel" onClick={() => dispatch(resetPopups())}>Cancel</button>
-                        <input className="draftrename-submit" type="submit" value="Create Project"/>
+        <div className="popupform-positioner">
+            <div className="popupform" ref={wrapperRef} >
+                <h4>New Project</h4>
+                <form className="popupform-form" onSubmit={handleSubmit}>
+                    <div className="popupform-input">
+                        <label>Name</label>
+                        <input type="text" value={inputValue} onChange={handleChange} />
+                    </div>
+                    <div className="popupform-buttoncont">
+                        <button className="popupform-button" onClick={() => dispatch(resetPopups())}>Cancel</button>
+                        <input className="popupform-button popupform-button-blue popupform-button-right" type="submit" value="Create Project"/>
                     </div>
                 </form>
             </div>
         </div>
+        
     )
 }

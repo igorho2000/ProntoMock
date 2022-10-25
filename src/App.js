@@ -7,11 +7,26 @@ import Home from './pages/Home';
 import Transition from './pages/Transition';
 import Editor from './editor/Editor';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {selectEveryPopup} from './features/popupSlice';
+
+import {auth} from './Firebase';
+
+import {changeUserState} from './features/projectSlice'
 
 function App() {
   const everyPopup = useSelector(selectEveryPopup);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        dispatch(changeUserState(user.displayName))
+      } else {
+        dispatch(changeUserState(null))
+      }
+    }) 
+  })
 
   return (
     <div onContextMenu={(event) => {

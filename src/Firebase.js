@@ -3,7 +3,6 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, Go
         signInWithRedirect } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCwo7PJogsP2O0CRqbds2PyPvw_LXodKuM",
     authDomain: "prontomock-abed0.firebaseapp.com",
@@ -14,11 +13,11 @@ const firebaseConfig = {
     measurementId: "G-RHKRYVX78B"
 }
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const provider = new GoogleAuthProvider();
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export function handleSignUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password).then((cred) => {
@@ -34,4 +33,9 @@ export function handleSignIn(email, password) {
 
 export function handleSignInGoogle() {
     signInWithRedirect(auth, provider);
+}
+
+export function handleSignOut() {
+    auth.signOut().then(() => {
+    })
 }

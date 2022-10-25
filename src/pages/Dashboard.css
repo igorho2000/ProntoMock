@@ -127,7 +127,7 @@
     align-items: center;
     flex-direction: column;
     height: fit-content;
-    background-color: rgb(238, 238, 238);
+    background-color: white;
 }
 .dashboard-draft-cont {
     display: flex;
@@ -169,15 +169,14 @@
     border: transparent solid 2px;
     border-radius: 2rem;
     padding: 8px 15px;
-    background-color:  rgb(134, 134, 134);
+    background-color: #004e68;
     align-items: center;
     box-shadow: 4px 4px transparent;
     transition: background-color, box-shadow 0.3s;
     cursor: pointer;
 }
 .dashboard-button:hover {
-    background-color: rgb(99, 99, 99);
-    box-shadow: 2px 4px rgb(178, 178, 178);
+    box-shadow: 2px 3.5px gray;
 }
 .dashboard-button-text {
     color: white;

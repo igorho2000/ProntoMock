@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
 const initialState = {
+    user: '',
     everyProject: [
-        
         {
             name: 'ProntoMock',
             drafts: [],
@@ -46,6 +47,9 @@ export const projectSlice = createSlice({
     name: 'project',
     initialState,
     reducers: {
+        changeUserState: (state, action) => {
+            state.user = action.payload;
+        },
         switchProject: (state, action) => {
             // Payload is the index number
             var toList = state.currentProject.splice(0, 1);
@@ -124,11 +128,12 @@ export const projectSlice = createSlice({
     },
 });
 
-export const {switchProject, renameProject, deleteProject, newProject,
+export const {changeUserState, switchProject, renameProject, deleteProject, newProject,
               starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft, 
               renameProjectDraft, moveProjectDraft, newProjectDraft} = projectSlice.actions;
 
 export const selectEveryProject = (state) => state.project.everyProject;
 export const selectCurrentProject = (state) => state.project.currentProject;
+export const selectUser = (state) => state.project.user;
 
 export default projectSlice.reducer;

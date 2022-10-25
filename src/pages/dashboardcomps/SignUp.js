@@ -7,7 +7,8 @@ import {
 } from '../../features/popupSlice';
 
 import { useOutsideClick } from "../../Functions";
-import { handleSignUp, handleSignInGoogle } from "../../Firebase";
+
+import { handleSignIn, handleSignInGoogle } from "../../Firebase";
 
 export default function SignUp() {
     const wrapperRef = React.useRef(null);
@@ -17,8 +18,10 @@ export default function SignUp() {
     const [inputValue, setInputValue] = React.useState({
         email: '',
         password: '',
-        emailCorrect: true,
-        passwordCorrect: true,
+        emailCorrect: false,
+        confirmEmailCorrect: true,
+        passwordCorrect: false,
+        confirmPasswordCorrect: true,
         canSubmit: false,
     });
 
@@ -27,7 +30,7 @@ export default function SignUp() {
             ...state,
             email: event.target.value,
         }));
-        if (event.target.value.includes('@') === false || event.target.value.includes('.') === false || event.target.value[0] === '@' || event.target.value[event.target.value.length - 1] === '@') {
+        if (event.target.value.includes('@') === false || event.target.value[0] === '@' || event.target.value[event.target.value.length - 1] === '@') {
             setInputValue((state) => ({
                 ...state,
                 emailCorrect: false,
@@ -38,6 +41,7 @@ export default function SignUp() {
         setInputValue((state) => ({
             ...state,
             emailCorrect: true,
+            confirmEmailCorrect: true,
         }));
         if (inputValue.passwordCorrect === true) {
             setInputValue((state) => ({
@@ -62,6 +66,7 @@ export default function SignUp() {
         setInputValue((state) => ({
             ...state,
             passwordCorrect: true,
+            confirmPasswordCorrect: true,
         }));
         if (inputValue.emailCorrect === true) {
             setInputValue((state) => ({
@@ -70,51 +75,82 @@ export default function SignUp() {
             }));
         }
     }
-
+    function handleEmailBlur() {
+        if (inputValue.emailCorrect) {
+            setInputValue((state) => ({
+                ...state,
+                confirmEmailCorrect: true
+            }))
+            return
+        }
+        setInputValue((state) => ({
+            ...state,
+            confirmEmailCorrect: false
+        }))
+    }
+    function handlePasswordBlur() {
+        if (inputValue.passwordCorrect) {
+            setInputValue((state) => ({
+                ...state,
+                confirmPasswordCorrect: true
+            }))
+            return
+        }
+        setInputValue((state) => ({
+            ...state,
+            confirmPasswordCorrect: false
+        }))
+    }
     function handleSubmit(event) {
         event.preventDefault();
-        handleSignUp(inputValue.email, inputValue.password);
+        handleSignIn(inputValue.email, inputValue.password)
         dispatch(resetPopups());
     }
 
     return (
-        <div className="draftrename account-signinup" ref={wrapperRef} style={{padding: '15px 20px'}} >
-            <h4 className="draftrename-title">Sign Up</h4>
-            
-            <form className="newdraft-form" onSubmit={handleSubmit}>
-                <div style={{display: 'flex', alignItems:'baseline'}} >
-                    <h5 className="projectsettings-section">Email</h5>
-                    {
-                        inputValue.emailCorrect === false
-                        &&
-                        <p style={{color: 'maroon', marginLeft: '10px', fontSize: '0.9rem', fontWeight: '600'}} >Format Incorrect</p>
-                    }
-                </div>
-                <input className="draftrename-input newdraft-input"  style={{marginBottom: '5px'}} type="email" value={inputValue.email} onChange={handleEmailChange} />
-                <div style={{display: 'flex', alignItems:'baseline'}} >
-                    <h5 className="projectsettings-section">Password</h5>
-                    {
-                        inputValue.passwordCorrect === false
-                        &&
-                        <p style={{color: 'maroon', marginLeft: '10px', fontSize: '0.9rem', fontWeight: '600'}} >Less than 6 characters</p>
-                    }
-                </div>
-                <input className="draftrename-input newdraft-input" type="password" value={inputValue.password} onChange={handlePasswordChange} />
-                <div className="draftrename-buttoncont" style={{marginBottom: '5px'}} >
-                    <button className="draftrename-submit" onClick={() => {
-                        handleSignInGoogle();
-                        dispatch(resetPopups());
-                    }}>Sign In with Google</button>
-                </div>
-                <div className="draftrename-buttoncont">
-                    <button className="draftrename-cancel" onClick={() => dispatch(resetPopups())}>Cancel</button>
-                    {
-                        inputValue.canSubmit 
-                        &&
-                        <input className="draftrename-submit" type='submit' value='Create Account'/>
-                    }
-                </div>
-            </form>
+        <div className="popupform-positioner">
+            <div className="popupform" ref={wrapperRef} >
+                <h4>Sign Up</h4>
+                <form className="popupform-form" onSubmit={handleSubmit}>
+                    <div className="popupform-input" >
+                        <label>Email</label>
+                        <input className="popupform-input-border" type="email" value={inputValue.email} onChange={handleEmailChange} onBlur={handleEmailBlur} />
+                    </div>
+                    <div className="popupform-notice" >
+                        {
+                            inputValue.confirmEmailCorrect === false
+                            &&
+                            <p style={{color: 'maroon', fontSize: '0.9rem', fontWeight: '600'}} >Format Incorrect</p>
+                        }
+                    </div>
+                    <div className="popupform-input" >
+                        <label>Password</label>
+                        <input className="popupform-input-border" type="password" value={inputValue.password} onChange={handlePasswordChange} onBlur={handlePasswordBlur} />
+                    </div>
+                    <div className="popupform-notice" >
+                        {
+                            inputValue.confirmPasswordCorrect === false
+                            &&
+                            <p style={{color: 'maroon', fontSize: '0.9rem', fontWeight: '600'}} >Less than 6 characters</p>
+                        }
+                    </div>
+                    <div className="popupform-buttoncont" style={{marginTop: '16px'}}>
+                        <button className="popupform-button popupform-button-right popupform-button-gray" onClick={() => {
+                            handleSignInGoogle();
+                            dispatch(resetPopups());
+                        }}><img src='../../dashboard/google-logo.svg' />Sign Up with Google</button>
+                    </div>
+                    <div className="popupform-buttoncont">
+                        <button className="popupform-button popupform-button-right" onClick={() => dispatch(resetPopups())}>Cancel</button>
+                        {
+                            inputValue.canSubmit 
+                            &&
+                            <input className="popupform-button popupform-button-blue popupform-button-right" style={{marginLeft: '5px'}} type='submit' value='Log In'/>
+                        }
+                    </div>
+                </form>
+            </div>
         </div>
+        
     )
 }

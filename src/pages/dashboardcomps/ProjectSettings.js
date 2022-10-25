@@ -8,6 +8,7 @@ import {
 import {
     switchProject, renameProject, deleteProject,
     selectCurrentProject,
+    selectEveryProject,
 } from '../../features/projectSlice';
 
 import { useOutsideClick } from "../../Functions";
@@ -18,6 +19,7 @@ export default function ProjectSettings(props) {
     const dispatch = useDispatch();
 
     const currentProject = useSelector(selectCurrentProject);
+    const everyProject = useSelector(selectEveryProject)
 
     const [nameValue, setNameValue] = React.useState(currentProject[0].name);
 
@@ -38,22 +40,29 @@ export default function ProjectSettings(props) {
     }
 
     return (
-        <div className="draftrename projectsettings" ref={wrapperRef} >
-            <h4 className="draftrename-title">Project Settings</h4>
-            <div className="projectsettings-cont">
-                <h5 className="projectsettings-section">Rename Project</h5>
-                <form className="projectsettings-form" onSubmit={handleRenameSubmit}>
-                    <input className="draftrename-input" type="text" value={nameValue} onChange={handleRenameChange} />
-                    <input className="draftrename-submit" type="submit" value="Rename"/>
+        <div className="popupform-positioner">
+            <div className="popupform" ref={wrapperRef} >
+                <h4 className="popupform-title">Project Settings</h4>
+                <form className="popupform-form" onSubmit={handleRenameSubmit}>
+                    <div className="popupform-input">
+                        <label>Rename</label>
+                        <input type="text" value={nameValue} onChange={handleRenameChange} />
+                    </div>
                 </form>
-                <h5 className="projectsettings-section">Edit Collaborators</h5>
-            </div>
-           
-            
-            <div className="draftrename-buttoncont">
-                <button className="draftrename-cancel" onClick={() => dispatch(resetPopups())}>Finish</button>
-                <button className="draftrename-delete" onClick={handleDeletion}>Delete Project</button>
+                <div className="popupform-input">
+                    <label>Team</label>
+                </div>
+                <div className="popupform-buttoncont">
+                    <button className="popupform-button popupform-button-blue" onClick={() => {
+                        dispatch(renameProject(nameValue));
+                        dispatch(resetPopups());
+                    }}>Finish</button>
+                    {everyProject.length > 0 &&
+                    <button className="popupform-button popupform-button-red popupform-right" onClick={handleDeletion}>Delete Project</button>
+                    }
+                </div>
             </div>
         </div>
+        
     )
 }

@@ -125,49 +125,92 @@
     transform: translateX(0.3rem);
 }
 
-/* DraftRename */
-.draftrename {
-    width: 270px;
-    height: 120px;
-    background-color: rgb(211, 211, 211);
+/* Consistent Styles */
+.popupform-positioner {
     position: fixed;
-    left: calc(50vw - 135px);
-    top: 35vh;
-    border-radius: 15px;
-    box-shadow: 0px 0px 7px rgb(103, 103, 103);
-    padding: 15px 5px;
-}
-.draftrename-form {
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+.popupform {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 7px rgb(103, 103, 103);
+    border: rgb(192, 192, 192) solid 0.5px;
+    pointer-events: auto;
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    align-items: center;
 }
-.draftrename-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    text-align: center;
+.popupform h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
 }
-.draftrename-input {
-    width: 80%;
+.popupform-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.popupform-input {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+.popupform-notice {
+    padding-left: 85px;
+    align-self: baseline;
+    margin-top: -4px
+}
+.popupform-input label {
+    width: 80px;
+    margin-right: 5px;
+    color: #8E8E8E;
+    font-size: 1rem;
+    border-bottom: transparent solid 2px;
+}
+.popupform-input input,
+.popupform-input select {
+    width: 180px;
     font-size: 1rem;
     border-radius: 5px;
-    padding: 4px 8px;
+    padding: 2px 4px;
     border: none;
-    border-bottom: transparent solid 3.5px;
+    border-bottom: transparent solid 2px;
     transition: border-bottom 0.3s;
 }
-.draftrename-input:hover {
-    border-bottom: gray solid 3.5px;
+.popupform-input select {
+    width: 188px;
 }
-.draftrename-input:focus {
+.popupform-input input:hover,
+.popupform-input select:hover,
+.popupform-input-border {
+    border-bottom: gray solid 2px !important; 
+}
+.popupform-input input:focus,
+.popupform-input select:focus,
+.popupform-input-border:focus {
     outline: none;
-    border-bottom: #3688a3 solid 3.5px;
+    border-bottom: #3688a3 solid 2px !important;
 }
-.draftrename-cancel,
-.draftrename-submit,
-.draftrename-delete {
+.popupform-input option {
+    outline: none;
+    cursor: pointer;
+}
+.popupform-buttoncont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+.popupform-button {
     font-size: 1rem;
     font-weight: 400;
     border-radius: 1rem;
@@ -176,137 +219,31 @@
     cursor: pointer;
     box-shadow: 2px 3.5px transparent;
     transition: box-shadow 0.2s;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
-.draftrename-cancel:hover,
-.draftrename-submit:hover,
-.draftrename-delete:hover {
+.popupform-button img {
+    height: 1.1rem;
+    margin-right: 8px;
+}
+.popupform-button:hover {
     box-shadow: 2px 3.5px gray;
 }
-.draftrename-cancel {
-    margin-right: 10px;
+.popupform-button-right {
+    margin-right: 0;
 }
-.draftrename-submit {
+.popupform-button-blue {
     background-color: #004e68;
     color: white
 }
-.draftrename-delete {
-    color: white;
+.popupform-button-red {
     background-color: maroon;
+    color: white
 }
-.draftrename-buttoncont {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@media (max-width: 960px) {
-    .draftrename {
-        top: 40vh;
-    }
-}
-
-/* DraftMove */
-.draftmove {
-    height: 135px;
-}
-.draftmove-input {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-.draftmove-input > label {
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-}
-select {
-    cursor: pointer;
-}
-.draftmove-input option {
-    outline: none;
-    cursor: pointer;
-}
-/* ProjectSettings */
-.projectsettings {
-    height: 250px;
-    top: 30vh;
-    width: 300px;
-    left: calc(50vw - 150px);
-}
-.projectsettings-cont {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
-.projectsettings-form {
-    display: flex;
-    margin-bottom: 15px;
-}
-.projectsettings-form > .draftrename-input {
-    margin-right: 10px;
-}
-.projectsettings-section {
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-
-/* NewProject */
-.newproject {
-    height: 135px;
-}
-.newproject-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.newproject-form > .draftrename-input{
-    margin-bottom: 15px;
-}
-
-
-
-/* NewDraft */
-.newdraft,
-.account-signinup {
-    top: 30vh;
-    height: 240px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.newdraft-form {
-    display: flex;
-    flex-direction: column;
-    width: 260px;
-    padding: 10px;
-}
-.newdraft-input {
-    width: 245px;
-    margin-bottom: 15px;
-}
-.newdraft-drop {
-    width: 260px;
-    margin-bottom: 8px;
-}
-.newdraft-radio {
-    margin-bottom: 15px;
-    margin-right: 2px;
-}
-.newdraft-radiotext {
-    margin-right: 12px;
-}
-
-@media (max-width: 960px) {
-    .newdraft {
-        display: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .newdraft {
-        display: none;
-    }
+.popupform-button-gray {
+    background-color: rgb(172, 172, 172);
+    color: white
 }
 
 

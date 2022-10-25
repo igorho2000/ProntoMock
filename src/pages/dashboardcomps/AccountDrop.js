@@ -8,6 +8,8 @@ import {
 
 import { useOutsideClick } from "../../Functions";
 
+import { handleSignOut } from "../../Firebase";
+
 export default function AccountDrop() {
 
     const wrapperRef = React.useRef(null);
@@ -24,7 +26,8 @@ export default function AccountDrop() {
                 <h3>Settings</h3>
             </div>
             <div className="projectdrop-list" onClick={() => {
-            dispatch(resetPopups());
+                handleSignOut();
+                dispatch(resetPopups());
             }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/logout.svg" alt="log out left portion" />
                 <img className="draftdrop-iconmove accountdrop-logout" src="../../dashboard/logout-arrow.svg" alt="log out rignt portion" />

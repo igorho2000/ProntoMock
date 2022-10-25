@@ -44,21 +44,23 @@ export default function DraftMove(props) {
     }
 
     return (
-        <div className="draftrename draftmove" ref={wrapperRef} >
-            <form className="draftrename-form" onSubmit={handleSubmit}>
-                <h4 className="draftrename-title">Move Draft</h4>
-                <div className="draftmove-input">
-                    <label>{`Moving "${props.name}" to...`}</label>
-                    <select className="draftrename-input" value={inputValue.value} onChange={handleChange} id="projects">
-                        {datalist}
-                    </select>
-                </div>
-
-                <div className="draftrename-buttoncont" style={{marginTop: '5px'}}>
-                    <button className="draftrename-cancel" onClick={() => dispatch(resetPopups())}>Cancel</button>
-                    <input className="draftrename-submit" type="submit" value="Move" />
-                </div>
-            </form>
+        <div className="popupform-positioner">
+            <div className="popupform" ref={wrapperRef} >
+                <h4 className="popupform-title">Move Draft</h4>
+                <form className="popupform-form" onSubmit={handleSubmit}>
+                    <div className="popupform-input">
+                        <label>Move to</label>
+                        <select value={inputValue.value} onChange={handleChange} id="projects">
+                            {datalist}
+                        </select>
+                    </div>
+                    <div className="popupform-buttoncont" style={{marginTop: '5px'}}>
+                        <button className="popupform-button" onClick={() => dispatch(resetPopups())}>Cancel</button>
+                        <input className="popupform-button popupform-button-blue popupform-button-right" type="submit" value="Move" />
+                    </div>
+                </form>
+            </div>
         </div>
+        
     )
 }

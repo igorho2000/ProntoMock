@@ -57,22 +57,27 @@ export default function NewDraft() {
     }
 
     return (
-        <div className="draftrename newdraft" ref={wrapperRef} >
-            <h4 className="draftrename-title">New Draft</h4>
-            
-            <form className="newdraft-form" onSubmit={handleSubmit}>
-                <h5 className="projectsettings-section">Draft Name</h5>
-                <input className="draftrename-input newdraft-input" type="text" value={inputValue.name} onChange={handleNameChange} />
-                <h5 className="projectsettings-section">Draft Settings</h5>
-                <select className="draftrename-input newdraft-drop" id="projects" value={inputValue.size} onChange={handleSizeChange}>
-                    {outputPaperSizes}
-                </select>
-                <br />
-                <div className="draftrename-buttoncont">
-                    <button className="draftrename-cancel" onClick={() => dispatch(resetPopups())}>Cancel</button>
-                    <input className="draftrename-submit" type='submit' value='Create Draft' />
-                </div>
-            </form>
+        <div className="popupform-positioner">
+            <div className="popupform" ref={wrapperRef} >
+                <h4>New Draft</h4>
+                <form className="popupform-form" onSubmit={handleSubmit}>
+                    <div className="popupform-input">
+                        <label>Name</label>
+                        <input type="text" value={inputValue.name} onChange={handleNameChange} />
+                    </div>
+                    <div className="popupform-input">
+                        <label>Size</label>
+                        <select id="projects" value={inputValue.size} onChange={handleSizeChange}>
+                            {outputPaperSizes}
+                        </select>
+                    </div>
+                    <div className="popupform-buttoncont">
+                        <button className="popupform-button" onClick={() => dispatch(resetPopups())}>Cancel</button>
+                        <input className="popupform-button popupform-button-blue popupform-button-right" type='submit' value='Create Draft' />
+                    </div>
+                </form>
+            </div>
         </div>
+        
     )
 }

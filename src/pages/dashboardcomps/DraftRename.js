@@ -30,15 +30,20 @@ export default function DraftRename(props) {
     }
 
     return (
-        <div className="draftrename" ref={wrapperRef}>
-            <form className="draftrename-form" onSubmit={handleSubmit}>
-                <h4 className="draftrename-title">Rename Draft</h4>
-                <input className="draftrename-input" type="text" value={inputValue} onChange={handleChange} />
-                <div className="draftrename-buttoncont">
-                    <button className="draftrename-cancel" onClick={() => dispatch(resetPopups())}>Cancel</button>
-                    <input className="draftrename-submit" type="submit" value="Rename" />
-                </div>
-            </form>
+        <div className="popupform-positioner">
+            <div className="popupform" ref={wrapperRef}>
+                <h4>Rename Draft</h4>
+                <form className="popupform-form" onSubmit={handleSubmit}>
+                    <div className="popupform-input">
+                        <label>New Name</label>
+                        <input type="text" value={inputValue} onChange={handleChange} />
+                    </div>
+                    <div className="popupform-buttoncont">
+                        <button className="popupform-button" onClick={() => dispatch(resetPopups())}>Cancel</button>
+                        <input className="popupform-button popupform-button-right popupform-button-blue" type="submit" value="Rename" />
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

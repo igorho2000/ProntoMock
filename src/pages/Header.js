@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    selectCurrentProject,
+    selectCurrentProject, selectUser
 } from '../features/projectSlice';
 
 import {
@@ -17,10 +17,12 @@ import ProjectDrop from "./dashboardcomps/ProjectDrop";
 import SignUp from "./dashboardcomps/SignUp";
 import SignIn from "./dashboardcomps/SignIn";
 
+
 export default function Header() {
     const dispatch = useDispatch();
     const everyPopup = useSelector(selectEveryPopup);
     const currentProject = useSelector(selectCurrentProject);
+    const user = useSelector(selectUser);
 
     return (
         <div>
@@ -38,18 +40,18 @@ export default function Header() {
                             <h2 className="dashboard-mock">MOCK</h2>
                         </div>
                     </Link>
-                    {false
+                    {user !== null
                     &&
                     <div className="dashboard-account-cont" onClick={() => dispatch(showPopup(['AccountDrop', 0]))}>
                         <div className="dashboard-account-icon">WW</div>
                         <img className="dashboard-account-expand" src="../dashboard/expand.svg" alt="expand account options icon" />
                     </div>
                     }
-                    {true
+                    {user === null
                     &&
-                    <div className="dashboard-account-cont">
-                        <button className="draftrename-submit" onClick={() => dispatch(showPopup(['SignIn', 0]))} style={{backgroundColor: 'transparent', boxShadow: 'none', fontWeight: '600'}}>Log In</button>
-                        <button className="draftrename-submit" onClick={() => dispatch(showPopup(['SignUp', 0]))} style={{ marginRight: '10px'}}>Sign Up</button>
+                    <div className="popupform-buttoncont" style={{margin: 0}}>
+                        <button className="popupform-button popupform-button-right" onClick={() => dispatch(showPopup(['SignIn', 0]))} style={{backgroundColor: 'transparent', boxShadow: 'none', color: 'white'}}>Log In</button>
+                        <button className="popupform-button popupform-button-blue" onClick={() => dispatch(showPopup(['SignUp', 0]))} style={{ marginRight: '20px'}}>Sign Up</button>
                     </div>
                     }
                 </div>
