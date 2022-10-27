@@ -137,8 +137,7 @@ const initialState = {
         },
     ],
     selectedObject: [
-        
-        
+
     ],
     savedVersions: [
         [
@@ -262,9 +261,6 @@ const initialState = {
         ]
     ],
     statistics: {
-        minZIndex: 10000000,
-        maxZIndex: 10000000,
-        objectNum: 0,
         selected: 'none',
         zoom: 1,
         move: false,

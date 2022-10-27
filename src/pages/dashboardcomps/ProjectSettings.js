@@ -10,6 +10,10 @@ import {
     selectCurrentProject,
     selectEveryProject,
 } from '../../features/projectSlice';
+import { selectProjectCodes, selectUser, changeUserProjects } from "../../features/userSlice";
+
+import { db } from "../../Firebase";
+import { updateDoc, doc, deleteDoc } from "firebase/firestore";
 
 import { useOutsideClick } from "../../Functions";
 
@@ -19,21 +23,23 @@ export default function ProjectSettings(props) {
     const dispatch = useDispatch();
 
     const currentProject = useSelector(selectCurrentProject);
-    const everyProject = useSelector(selectEveryProject)
+    const everyProject = useSelector(selectEveryProject);
+    const projectCodes = useSelector(selectProjectCodes);
+    const user = useSelector(selectUser);
 
     const [nameValue, setNameValue] = React.useState(currentProject[0].name);
 
     function handleRenameChange(event) {
-        setNameValue((state) => (event.target.value));
-    }
-
-    function handleRenameSubmit(event) {
-        event.preventDefault();
-        dispatch(renameProject(nameValue));
-
+        setNameValue(event.target.value);
     }
 
     function handleDeletion() {
+        const projectID = currentProject[0].id.replace(' ', '');
+        var updatedProjectCodes = [...projectCodes];
+        updatedProjectCodes.splice(updatedProjectCodes.indexOf(projectID), 1);
+        deleteDoc(doc(db, 'projects', projectID));
+        updateDoc(doc(db, 'user', user.id), {projects: updatedProjectCodes});
+        dispatch(changeUserProjects(updatedProjectCodes));
         dispatch(deleteProject());
         dispatch(switchProject(0));
         dispatch(resetPopups());
@@ -43,7 +49,7 @@ export default function ProjectSettings(props) {
         <div className="popupform-positioner">
             <div className="popupform" ref={wrapperRef} >
                 <h4 className="popupform-title">Project Settings</h4>
-                <form className="popupform-form" onSubmit={handleRenameSubmit}>
+                <form className="popupform-form">
                     <div className="popupform-input">
                         <label>Rename</label>
                         <input type="text" value={nameValue} onChange={handleRenameChange} />
@@ -56,6 +62,8 @@ export default function ProjectSettings(props) {
                     <button className="popupform-button popupform-button-blue" onClick={() => {
                         dispatch(renameProject(nameValue));
                         dispatch(resetPopups());
+                        const projectID = currentProject[0].id.replace(' ', '');
+                        updateDoc((doc(db, 'projects', projectID)), {name: nameValue});
                     }}>Finish</button>
                     {everyProject.length > 0 &&
                     <button className="popupform-button popupform-button-red popupform-right" onClick={handleDeletion}>Delete Project</button>

@@ -1,7 +1,12 @@
+import React from 'react';
+
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider,
-        signInWithRedirect } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider,} from "firebase/auth";
+import { getFirestore, setDoc, doc } from "firebase/firestore";
+
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentProject, selectEveryProject } from './features/projectSlice';
+import { selectUser } from './features/userSlice';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCwo7PJogsP2O0CRqbds2PyPvw_LXodKuM",
@@ -19,23 +24,29 @@ export const provider = new GoogleAuthProvider();
 
 export const db = getFirestore(app);
 
-export function handleSignUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password).then((cred) => {
-        console.log(cred);
-    })
-}
+// export function useUpdateUserDatabase() {
+//     const currentProject = useSelector(selectCurrentProject);
+//     const everyProject = useSelector(selectEveryProject);
+//     const user = useSelector(selectUser);
 
-export function handleSignIn(email, password) {
-    signInWithEmailAndPassword(auth, email, password).then((cred) => {
-        console.log(cred);
-    })
-}
+//     var projectIDs = everyProject.map((item) => (item.id))
+//     projectIDs.unshift(currentProject[0].id);
 
-export function handleSignInGoogle() {
-    signInWithRedirect(auth, provider);
-}
+//     React.useEffect(() => {
+//         setDoc(doc(db, 'user', user.id), {projects: projectIDs});
+//     }, [])
+//     console.log(projectIDs)
+// }
 
-export function handleSignOut() {
-    auth.signOut().then(() => {
-    })
-}
+// export function useUpdateProjectDatabase() {
+//     const currentProject = useSelector(selectCurrentProject);
+//     const everyProject = useSelector(selectEveryProject);
+//     React.useEffect(() => {
+//         setDoc(doc(db, 'projects', currentProject[0].id), currentProject[0]);
+//         console.log(currentProject[0])
+//         for (let i = 0; i < everyProject.length; i++) {
+//             setDoc(doc(db, 'projects', everyProject[i].id), everyProject[i]);
+//             console.log(everyProject[i]);
+//         }
+//     }, [])
+// }

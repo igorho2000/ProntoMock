@@ -1,15 +1,22 @@
 import React from "react";
 import './Home.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {resetPopups, transition} from '../features/popupSlice';
 
+import {selectUser} from '../features/userSlice'
+import {showPopup, selectEveryPopup} from '../features/popupSlice'
+import SignIn from "./dashboardcomps/SignIn";
+import SignUp from "./dashboardcomps/SignUp";
+
 function Home() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const everyPopup = useSelector(selectEveryPopup);
 
     return (
         <div className="Home-container">
+            
             <img className="Home-scene scene1img Home-disappear" src='./Home/scene1.svg' alt="home scene 1"/>
             <img className="Home-scene scene2img Home-disappear" src='./Home/scene2.svg' alt="home scene 2"/>
             <img className="Home-scene scene3img Home-disappear" src='./Home/scene3.svg' alt="home scene 3"/>
@@ -53,16 +60,14 @@ function Home() {
                     <div className="Home-title">
                         <h2 className="Home-adj">Pronto</h2>
                         <h3 className="Home-v">MOCK</h3>
-                        <Link to="/dashboard" className="Home-button" onClick={() => {
-                            dispatch(transition())
-                            setTimeout(() => {
-                                dispatch(resetPopups())
-                            }, 3000)
-                        }} >Start Now</Link>
+                    </div>
+                    <div className="popupform-buttoncont home-buttoncont">
+                        <button className="popupform-button popupform-button-right home-button-left" onClick={() => dispatch(showPopup(['SignIn', 0]))} style={{backgroundColor: 'transparent', boxShadow: 'none', color: 'white'}}>Log In</button>
+                        <button className="popupform-button popupform-button-blue home-button-right" onClick={() => dispatch(showPopup(['SignUp', 0]))} style={{ marginRight: '20px'}}>Sign Up</button>
                     </div>
                 </div>
-                
-               
+                {everyPopup['SignUp'][0] && <SignUp />}
+                {everyPopup['SignIn'][0] && <SignIn />}
             </div>
         </div>
         

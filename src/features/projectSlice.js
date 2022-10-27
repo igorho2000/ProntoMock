@@ -1,54 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { db } from '../Firebase';
+import { doc, getDoc } from "firebase/firestore";
 
 const initialState = {
-    user: '',
-    everyProject: [
-        {
-            name: 'ProntoMock',
-            drafts: [],
-            starredDrafts: [],
-            team: []
-        },
-       
-    ],
-    currentProject: [
-        {
-            name: 'One Premium',
-            drafts: [
-                {
-                    name: '1',
-                    type: 'A3 Horizontal',
-                    date: '8/6/2022',
-                },
-                {
-                    name: '2',
-                    type: 'B4 Portrait',
-                    date: '9/8/2022',
-                },
-                {
-                    name: '3',
-                    type: 'A3 Horizontal',
-                    date: '8/6/2022',
-                },
-                {
-                    name: '4',
-                    type: 'B4 Portrait',
-                    date: '9/8/2022',
-                }
-            ],
-            starredDrafts: [],
-            team: []
-        },
-    ]
+    everyProject: [],
+    currentProject: [],
 }
 
 export const projectSlice = createSlice({
     name: 'project',
     initialState,
     reducers: {
-        changeUserState: (state, action) => {
-            state.user = action.payload;
+        initializeCurrentProject: (state, action) => {
+            if (state.currentProject.length === 0) {
+                state.currentProject.push(action.payload);
+            }
+            console.log(action.payload);
+        },
+        initializeEveryProject: (state, action) => {
+            const idArray = state.everyProject.map((item) => (item.id))
+            if (idArray.includes(action.payload.id) === false) {
+                state.everyProject.push(action.payload);
+            }
+            console.log(action.payload);
+        },
+        wipeProject: (state) => {
+            state.currentProject.splice(0, state.currentProject.length);
+            state.everyProject.splice(0, state.everyProject.length);
         },
         switchProject: (state, action) => {
             // Payload is the index number
@@ -65,12 +43,13 @@ export const projectSlice = createSlice({
             state.currentProject.splice(0, 1);
         },
         newProject: (state, action) => {
-            // Payload is the new project name
+            // Payload is the new project name and id
             state.everyProject.unshift({
-                name: action.payload,
+                name: action.payload[0],
                 drafts: [],
                 starredDrafts: [],
-                team: []
+                team: [],
+                id: action.payload[1]
             })
         },
         starProjectDraft: (state, action) => {
@@ -89,8 +68,7 @@ export const projectSlice = createSlice({
             const toDuplicate = target.splice(action.payload[0], 1)
             const toAdd = {
                 name: toDuplicate[0].name,
-                type: toDuplicate[0].type,
-                date: toDuplicate[0].date
+                img: toDuplicate[0].img
             }
             toAdd.name += ' (Duplicate)';
             target.splice(action.payload[0], 0, toDuplicate[0], toAdd);
@@ -107,7 +85,6 @@ export const projectSlice = createSlice({
             } else {
                 state.currentProject[0].drafts[action.payload[0]].name = action.payload[2];
             }
-            
         },
         moveProjectDraft: (state, action) => {
             // Payload is an Array where 0=index 1=starred? 2=indexOfNewProject
@@ -128,12 +105,11 @@ export const projectSlice = createSlice({
     },
 });
 
-export const {changeUserState, switchProject, renameProject, deleteProject, newProject,
+export const {initializeCurrentProject, initializeEveryProject, wipeProject, changeUserState, switchProject, renameProject, deleteProject, newProject,
               starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft, 
               renameProjectDraft, moveProjectDraft, newProjectDraft} = projectSlice.actions;
 
 export const selectEveryProject = (state) => state.project.everyProject;
 export const selectCurrentProject = (state) => state.project.currentProject;
-export const selectUser = (state) => state.project.user;
 
 export default projectSlice.reducer;

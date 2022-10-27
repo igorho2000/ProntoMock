@@ -18,7 +18,7 @@ export default function DraftDrop(props) {
     const dispatch = useDispatch();
 
     return (
-        <div className="projectdrop draftdrop" ref={wrapperRef}>
+        <div className="projectdrop draftdrop" style={{margin: 0}} ref={wrapperRef}>
             {/* Star Draft */}
             {props.star === true ?
             <div className="projectdrop-list" onClick={() => {

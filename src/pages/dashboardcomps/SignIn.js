@@ -3,12 +3,13 @@ import './Drop.css';
 
 import { useDispatch } from 'react-redux';
 import {
-    resetPopups,
+    resetPopups, transition
 } from '../../features/popupSlice';
 
 import { useOutsideClick } from "../../Functions";
 
-import { handleSignIn, handleSignInGoogle } from "../../Firebase";
+import { auth, provider } from "../../Firebase";
+import { signInWithRedirect, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function SignIn() {
     const wrapperRef = React.useRef(null);
@@ -23,6 +24,7 @@ export default function SignIn() {
         passwordCorrect: false,
         confirmPasswordCorrect: true,
         canSubmit: false,
+        errorMessage: ""
     });
 
     function handleEmailChange(event) {
@@ -103,8 +105,42 @@ export default function SignIn() {
     }
     function handleSubmit(event) {
         event.preventDefault();
-        handleSignIn(inputValue.email, inputValue.password)
-        dispatch(resetPopups());
+        signInWithEmailAndPassword(auth, inputValue.email, inputValue.password).then((cred) => {
+            dispatch(resetPopups());
+            dispatch(transition())
+            setTimeout(() => {
+                dispatch(resetPopups())
+            }, 3000)
+        }).catch((error) => {
+            const errorCode = error.code;
+            setInputValue((state) => ({
+                ...state,
+                email: '',
+                password: '',
+                emailCorrect: false,
+                confirmEmailCorrect: true,
+                passwordCorrect: false,
+                confirmPasswordCorrect: true,
+                canSubmit: false,
+            }))
+            if (errorCode === 'auth/invalid-email' || errorCode=== 'auth/user-not-found') {
+                setInputValue((state) => ({
+                    ...state,
+                    errorMessage: "User doesn't exist. Please sign up."
+                }))
+            } else if (errorCode === 'auth/wrong-password') {
+                setInputValue((state) => ({
+                    ...state,
+                    errorMessage: "Password incorrect. Try again."
+                }))
+            } else {
+                setInputValue((state) => ({
+                    ...state,
+                    errorMessage: "An Unexpected Error Occurred. Please try later."
+                }))
+            }
+        })
+        
     }
 
     return (
@@ -135,9 +171,16 @@ export default function SignIn() {
                         }
                     </div>
                     <div className="popupform-buttoncont" style={{marginTop: '16px'}}>
-                        <button className="popupform-button popupform-button-right popupform-button-gray" onClick={() => {
-                            handleSignInGoogle();
-                            dispatch(resetPopups());
+                        <button to='/dashboard' className="popupform-button popupform-button-right popupform-button-gray" onClick={(event) => {
+                            event.preventDefault();
+                            signInWithRedirect(auth, provider).then(() => {
+                                dispatch(resetPopups());
+                            }).catch(() => {
+                                setInputValue((state) => ({
+                                    ...state,
+                                    errorMessage: "An Unexpected Error Occurred. Please try later."
+                                }))
+                            });
                         }}><img src='../../dashboard/google-logo.svg' />Sign In with Google</button>
                     </div>
                     <div className="popupform-buttoncont">
@@ -148,6 +191,9 @@ export default function SignIn() {
                             <input className="popupform-button popupform-button-blue popupform-button-right" style={{marginLeft: '5px'}} type='submit' value='Log In'/>
                         }
                     </div>
+                    {inputValue.errorMessage !== '' &&
+                    <h5 style={{marginTop: '16px', color: 'orange'}}>{inputValue.errorMessage}</h5>
+                    }
                 </form>
             </div>
         </div>

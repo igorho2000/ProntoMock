@@ -138,23 +138,19 @@
     align-items: center;
     height: 8rem;
 }
-.Home-button {
-    padding: 0.5rem 1.5rem;
-    border-radius: 2rem;
-    font-size: 1.8rem;
+.home-buttoncont {
+    margin-left: 24px;
+}
+.home-button-left {
+    font-size: 1.4rem;
     font-weight: 600;
-    color: white;
-    align-self: center;
-    margin-left: 10vw;
-    transition: box-shadow 0.3s;
-    text-decoration: none;
-    background-color: #004e68;
-    box-shadow: 2px 3.5px transparent;
 }
-.Home-button:hover {
-    box-shadow: 2px 5px gray;
+.home-button-right {
+    font-size: 1.4rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    padding-bottom: 0.4rem;
 }
-
 .Home-disappear {
     opacity: 0;
 }
@@ -239,5 +235,9 @@
         font-size: 1.5rem;
         align-self: center;
         margin-top: 36px;
+    }
+    .home-buttoncont {
+        margin-left: 0;
+        margin-top: 24px
     }
 }

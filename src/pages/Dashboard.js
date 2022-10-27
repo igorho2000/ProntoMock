@@ -18,16 +18,18 @@ import ProjectSettings from "./dashboardcomps/ProjectSettings";
 import NewProject from "./dashboardcomps/NewProject";
 import ProjectDrop from "./dashboardcomps/ProjectDrop";
 
+import {db} from '../Firebase'
+
 export default function Dashboard() {
     const dispatch = useDispatch();
     const everyPopup = useSelector(selectEveryPopup);
     const currentProject = useSelector(selectCurrentProject);
 
     const outputProjectDraft = currentProject[0].drafts.map((item, index) => (
-        <DraftInfo name={item.name} type={item.type} date={item.date} key={`draft${index}`} index={index} star={false} />
+        <DraftInfo name={item.name} img={'../dashboard/ex1.jpg'} key={`draft${index}`} index={index} star={false} />
     ))
     const outputStarredProjectDraft = currentProject[0].starredDrafts.map((item, index) => (
-        <DraftInfo name={item.name} type={item.type} date={item.date} key={`stardraft${index}`} index={index} star={true} />
+        <DraftInfo name={item.name} img={'../dashboard/ex1.jpg'} key={`stardraft${index}`} index={index} star={true} />
     ))
 
     return (

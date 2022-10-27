@@ -8,7 +8,12 @@ body {
 h1 {
     font-family: 'Josefin Sans', sans-serif;
 }
-
+a {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
 @font-face {
     font-family: 'Noto Serif TC';
     src: url(http://fonts.gstatic.com/s/notoseriftc/v23/XLY9IZb5bJNDGYxLBibeHZ0BvtssbX9GTsoOAX4.otf);

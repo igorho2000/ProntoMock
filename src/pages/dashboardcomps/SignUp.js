@@ -3,12 +3,13 @@ import './Drop.css';
 
 import { useDispatch } from 'react-redux';
 import {
-    resetPopups,
+    resetPopups, transition
 } from '../../features/popupSlice';
 
 import { useOutsideClick } from "../../Functions";
 
-import { handleSignIn, handleSignInGoogle } from "../../Firebase";
+import { auth, provider } from "../../Firebase";
+import { signInWithRedirect, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function SignUp() {
     const wrapperRef = React.useRef(null);
@@ -23,6 +24,7 @@ export default function SignUp() {
         passwordCorrect: false,
         confirmPasswordCorrect: true,
         canSubmit: false,
+        errorMessage: ''
     });
 
     function handleEmailChange(event) {
@@ -103,8 +105,41 @@ export default function SignUp() {
     }
     function handleSubmit(event) {
         event.preventDefault();
-        handleSignIn(inputValue.email, inputValue.password)
-        dispatch(resetPopups());
+        createUserWithEmailAndPassword(auth, inputValue.email, inputValue.password).then((cred) => {
+            dispatch(resetPopups());
+            dispatch(transition())
+            setTimeout(() => {
+                dispatch(resetPopups())
+            }, 3000)
+        }).catch((error) => {
+            const errorCode = error.code;
+            setInputValue((state) => ({
+                ...state,
+                email: '',
+                password: '',
+                emailCorrect: false,
+                confirmEmailCorrect: true,
+                passwordCorrect: false,
+                confirmPasswordCorrect: true,
+                canSubmit: false,
+            }))
+            if (errorCode === 'auth/email-already-in-use' || errorCode=== 'auth/account-exists-with-different-credential') {
+                setInputValue((state) => ({
+                    ...state,
+                    errorMessage: 'Email has been registered.'
+                }))
+            } else if (errorCode === 'auth/invalid-email') {
+                setInputValue((state) => ({
+                    ...state,
+                    errorMessage: "Email doesn't exist, try another."
+                }))
+            } else {
+                setInputValue((state) => ({
+                    ...state,
+                    errorMessage: "An Unexpected Error Occurred. Please try later."
+                }))
+            }
+        })
     }
 
     return (
@@ -135,9 +170,16 @@ export default function SignUp() {
                         }
                     </div>
                     <div className="popupform-buttoncont" style={{marginTop: '16px'}}>
-                        <button className="popupform-button popupform-button-right popupform-button-gray" onClick={() => {
-                            handleSignInGoogle();
-                            dispatch(resetPopups());
+                        <button className="popupform-button popupform-button-right popupform-button-gray" onClick={(event) => {
+                            event.preventDefault();
+                            signInWithRedirect(auth, provider).then(() => {
+                                dispatch(resetPopups());
+                            }).catch(() => {
+                                setInputValue((state) => ({
+                                    ...state,
+                                    errorMessage: "An Unexpected Error Occurred. Please try later."
+                                }))
+                            });
                         }}><img src='../../dashboard/google-logo.svg' />Sign Up with Google</button>
                     </div>
                     <div className="popupform-buttoncont">
@@ -145,10 +187,13 @@ export default function SignUp() {
                         {
                             inputValue.canSubmit 
                             &&
-                            <input className="popupform-button popupform-button-blue popupform-button-right" style={{marginLeft: '5px'}} type='submit' value='Log In'/>
+                            <input className="popupform-button popupform-button-blue popupform-button-right" style={{marginLeft: '5px'}} type='submit' value='Sign Up'/>
                         }
                     </div>
                 </form>
+                {inputValue.errorMessage !== '' &&
+                    <h5 style={{marginTop: '16px', color: 'orange'}}>{inputValue.errorMessage}</h5>
+                }
             </div>
         </div>
         

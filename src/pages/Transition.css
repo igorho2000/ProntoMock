@@ -60,7 +60,7 @@
 .transition-progress {
     background-color: rgb(84, 84, 84);
     border: 7px rgb(84, 84, 84) solid;
-    animation: progress 3s ease-in-out;
+    animation: progress 6s ease-in-out;
 }
 
 @keyframes progress {
