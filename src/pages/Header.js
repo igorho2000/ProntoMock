@@ -37,9 +37,10 @@ export default function Header(props) {
                             }, 3000)
                         }}>
                         <img src="../dashboard/logo.svg" className="dashboard-logo" alt="prontomock logo"/>
-                        <div className="dashboard-prontomock">
+                        <div className="dashboard-prontomock" style={{position: 'relative'}}>
                             <h2 className="dashboard-pronto">Pronto</h2>
                             <h2 className="dashboard-mock">MOCK</h2>
+                            <h6 style={{fontSize: '0.8rem', color: 'white', backgroundColor: 'rgb(50, 50, 50)', padding: '1px 5px', borderRadius: '5px', position: 'absolute', right: -45, top: -4}}>BETA</h6>
                         </div>
                     </Link>
                     {user !== null
