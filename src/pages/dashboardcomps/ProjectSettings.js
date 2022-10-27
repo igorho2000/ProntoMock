@@ -37,6 +37,12 @@ export default function ProjectSettings(props) {
         const projectID = currentProject[0].id.replace(' ', '');
         var updatedProjectCodes = [...projectCodes];
         updatedProjectCodes.splice(updatedProjectCodes.indexOf(projectID), 1);
+        var draftIDs = currentProject[0].drafts.map((item) => (item.id));
+        draftIDs.concat(currentProject[0].starredDrafts.map((item) => (item.id)));
+        for (let i = 0; i < draftIDs.length; i++) {
+            const draftID = draftIDs[i].replace(' ', '');
+            deleteDoc(doc(db, 'drafts', draftID));
+        }
         deleteDoc(doc(db, 'projects', projectID));
         updateDoc(doc(db, 'user', user.id), {projects: updatedProjectCodes});
         dispatch(changeUserProjects(updatedProjectCodes));

@@ -34,7 +34,7 @@
     background-color: white;
     padding: 0.7rem 0.3rem;
     border-radius: 2rem;
-    top: 170px;
+    top: 140px;
     border: rgb(192, 192, 192) solid 0.5px;
 }
 .elements-function {
@@ -77,7 +77,7 @@
 }
 
 .elements-control {
-    top: 490px;
+    top: 460px;
     left: 30px
 }
 .elements-control-icon {

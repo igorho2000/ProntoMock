@@ -54,7 +54,7 @@ export default function ImageUploader() {
     }
     
     return (
-        <div className="elements" ref={wrapperRef} style={{position: 'fixed', left: '85px', top: '375px', borderRadius: '15px', padding: '7px 5px'}}>
+        <div className="elements" ref={wrapperRef} style={{position: 'fixed', left: '85px', top: '345px', borderRadius: '15px', padding: '7px 5px'}}>
             <form onSubmit={(event) => event.preventDefault()}>
                 <div className="imageuploader-cont" style={{backgroundImage: inputValue.imagefile === null ? 'none' : `url(${inputValue.imageURL})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}>
                     <label htmlFor="imageuploader" className="imageuploader" style={{opacity: inputValue.imagefile === null ? '1' : '0'}} onDragOver={(event) => event.preventDefault} onDragEnter={(event) => event.preventDefault} 

@@ -86,6 +86,10 @@ export default function Elements() {
                 </div>
             </div>
             <div className='elements elements-control'>
+                <div className='elements-function'>
+                    <img className='elements-icon elements-control-icon' src="../properties/save.svg" />
+                    <div className='elements-description'>Save</div>
+                </div>
                 <div className='elements-function' onClick={() => dispatch(UndoAction())}>
                     <img className='elements-icon elements-control-icon' src="../properties/undo.svg" />
                     <div className='elements-description'>Undo</div>

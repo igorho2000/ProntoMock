@@ -183,6 +183,11 @@ export default function SignUp() {
                         }}><img src='../../dashboard/google-logo.svg' />Sign Up with Google</button>
                     </div>
                     <div className="popupform-buttoncont">
+                        <button to='/dashboard' className="popupform-button popupform-button-right popupform-button-gray" onClick={(event) => {
+                            event.preventDefault();
+                        }}><img src='../../dashboard/facebook-logo.svg' />Sign Up with Facebook</button>
+                    </div>
+                    <div className="popupform-buttoncont">
                         <button className="popupform-button popupform-button-right" onClick={() => dispatch(resetPopups())}>Cancel</button>
                         {
                             inputValue.canSubmit 

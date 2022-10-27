@@ -8,7 +8,6 @@ import { act } from 'react-dom/test-utils';
 const initialState = {
     canvasSettings: {
         name: 'First Draft',
-        date: '9/22/2022',
         size: 'Custom',
         unit: 'mm',
         width: 100,

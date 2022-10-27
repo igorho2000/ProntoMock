@@ -78,7 +78,7 @@ export default function IconAdder() {
     }
     
     return (
-        <div className="elements" ref={wrapperRef} style={{position: 'fixed', left: '85px', top: '425px', borderRadius: '15px', padding: '7px 5px'}}>
+        <div className="elements" ref={wrapperRef} style={{position: 'fixed', left: '85px', top: '395px', borderRadius: '15px', padding: '7px 5px'}}>
             <form onSubmit={(event) => event.preventDefault()}>
                 <div className="iconadder-cont" >
                     <input className='iconadder-search' type='text' value={inputValue.search} onChange={handleChange} placeholder='Search for Icon...' />

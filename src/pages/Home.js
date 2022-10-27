@@ -57,9 +57,10 @@ function Home() {
                 
                 <div className="Home-infocont">
                     <img className="Home-logo" src='./Home/logo.svg' alt="prontomock logo" />
-                    <div className="Home-title">
+                    <div className="Home-title" style={{position: 'relative'}}>
                         <h2 className="Home-adj">Pronto</h2>
                         <h3 className="Home-v">MOCK</h3>
+                        <h6 style={{fontSize: '1.3rem', color: 'white', backgroundColor: 'rgb(50, 50, 50)', padding: '2px 8px', borderRadius: '8px', position: 'absolute', right: 0, top: -4}}>BETA</h6>
                     </div>
                     <div className="popupform-buttoncont home-buttoncont">
                         <button className="popupform-button popupform-button-right home-button-left" onClick={() => dispatch(showPopup(['SignIn', 0]))} style={{backgroundColor: 'transparent', boxShadow: 'none', color: 'white'}}>Log In</button>
