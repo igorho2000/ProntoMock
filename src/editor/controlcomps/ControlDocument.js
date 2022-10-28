@@ -185,7 +185,7 @@ export default function ControlDocument() {
         <div className='control-group'>
             <form className='control-form-long' onSubmit={handleSubmit} onBlur={handleBlur} onKeyUp={handleKeyUp}>
                 <label>Name</label>
-                <input style={{width: '12rem'}} value={inputValue.name} id="name" onChange={handleChange} />
+                <input style={{width: '12rem'}} value={inputValue.name} id="name" onChange={handleChange} disabled/>
             </form>
             <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                 <label>Size</label>

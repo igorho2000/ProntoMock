@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    selectCurrentProject
+    selectCurrentProject, wipeProject
 } from '../features/projectSlice';
 
 import { selectUser } from "../features/userSlice";
@@ -15,9 +15,7 @@ import {
 } from '../features/popupSlice';
 
 import AccountDrop from './dashboardcomps/AccountDrop';
-import ProjectDrop from "./dashboardcomps/ProjectDrop";
-import SignUp from "./dashboardcomps/SignUp";
-import SignIn from "./dashboardcomps/SignIn";
+import { WipeDraft } from "../features/draftSlice";
 
 
 export default function Header(props) {
@@ -31,7 +29,8 @@ export default function Header(props) {
             <div>
                 <div className="dashboard-header-top">
                     <Link to="/dashboard" className="dashboard-logo-cont" onClick={() => {
-                            dispatch(transition())
+                            dispatch(WipeDraft());
+                            dispatch(transition());
                             setTimeout(() => {
                                 dispatch(resetPopups())
                             }, 3000)

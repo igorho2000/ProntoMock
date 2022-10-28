@@ -2,15 +2,19 @@ import React from 'react';
 import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft, AddObject } from '../features/draftSlice';
+import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft, AddObject, DeselectObject, SaveToDatabase } from '../features/draftSlice';
 import ImageUploader from './canvascomps/ImageUploader';
 
 import { selectEveryPopup, showPopup } from '../features/popupSlice';
 import IconAdder from './canvascomps/IconAdder';
 
+import { db } from '../Firebase';
+import { doc, setDoc } from 'firebase/firestore';
+
 export default function Elements() {
     const dispatch = useDispatch();
     const draftInfo = useSelector(selectDraft);
+    const statistics = draftInfo.statistics;
     const popup = useSelector(selectEveryPopup);
 
     const [zoom, setZoom] = React.useState(Math.round(draftInfo.statistics.zoom * 100));
@@ -86,9 +90,18 @@ export default function Elements() {
                 </div>
             </div>
             <div className='elements elements-control'>
-                <div className='elements-function'>
+                <div className='elements-function' onClick={() => {
+                    dispatch(DeselectObject());
+                    dispatch(SaveToDatabase());
+                    setDoc(doc(db, 'draft', draftInfo.id), {
+                        id: draftInfo.id,
+                        canvasSettings: draftInfo.canvasSettings,
+                        everyObject: draftInfo.everyObject
+                    })
+                }}>
                     <img className='elements-icon elements-control-icon' src="../properties/save.svg" />
                     <div className='elements-description'>Save</div>
+                    {statistics.savedToDatabase === false && <div style={{width: 10, height: 10, borderRadius: '50%', backgroundColor: 'crimson', position: 'absolute', transform: 'translate3d(8px, -8px, 0)'}}></div>}
                 </div>
                 <div className='elements-function' onClick={() => dispatch(UndoAction())}>
                     <img className='elements-icon elements-control-icon' src="../properties/undo.svg" />

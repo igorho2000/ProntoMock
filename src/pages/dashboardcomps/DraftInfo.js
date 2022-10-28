@@ -5,12 +5,13 @@ import DraftDrop from './DraftDrop';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    showPopup,
-    selectEveryPopup,
+    showPopup, transition,
+    selectEveryPopup, resetPopups
 } from '../../features/popupSlice';
-
+import { WipeDraft } from '../../features/draftSlice';
 import DraftRename from "./DraftRename";
 import DraftMove from './DraftMove';
+import { Link } from 'react-router-dom';
 
 export default function DraftInfo(props) {
     
@@ -21,8 +22,8 @@ export default function DraftInfo(props) {
         <div className="dashboard-draft">
             <div className='dashboard-draft-cont'>
                 <img className="dashboard-draft-img" src={props.img} alt={props.name} />
-                <div className='dashboard-draft-info'>
-                    <a className='dashboard-draft-settings'>
+                <div className='dashboard-draft-info' >
+                    <div className='dashboard-draft-settings'>
                         {props.star ?
                         <img className="dashboard-draft-more" src="../dashboard/more.svg" alt="more options icon"
                         onClick={() => 
@@ -36,8 +37,14 @@ export default function DraftInfo(props) {
                         {props.star ?
                         everyPopup.StarDraftDrop[props.index] && <DraftDrop index={props.index} star={props.star} /> :
                         everyPopup.DraftDrop[props.index] && <DraftDrop index={props.index} star={props.star} />}
-                    </a>
-                    <h3>{props.name}</h3>
+                    </div>
+                    <Link to={`/draft/${props.id}`} onClick={() => {
+                        dispatch(WipeDraft());
+                        dispatch(transition());
+                        setTimeout(() => {
+                            dispatch(resetPopups())
+                        }, 3000)
+                    }} ><h3 style={{color:'black'}}>{props.name}</h3></Link>
                 </div>
                 {props.star &&
                 <img className='dashboard-draft-star' src='../dashboard/star-gold.svg' />
@@ -45,15 +52,15 @@ export default function DraftInfo(props) {
             </div>
             {
                 props.star ?
-                everyPopup.StarredDraftRename[props.index] && <DraftRename index={props.index} star={props.star} name={props.name} />
+                everyPopup.StarredDraftRename[props.index] && <DraftRename index={props.index} id={props.id} star={props.star} name={props.name} />
                 :
-                everyPopup.DraftRename[props.index] && <DraftRename index={props.index} star={props.star} name={props.name} /> 
+                everyPopup.DraftRename[props.index] && <DraftRename index={props.index} id={props.id} star={props.star} name={props.name} /> 
             }
             {
                 props.star ?
-                everyPopup.StarredDraftMove[props.index] && <DraftMove index={props.index} star={props.star} name={props.name} />
+                everyPopup.StarredDraftMove[props.index] && <DraftMove index={props.index} id={props.id} star={props.star} name={props.name} />
                 :
-                everyPopup.DraftMove[props.index] && <DraftMove index={props.index} star={props.star} name={props.name} />
+                everyPopup.DraftMove[props.index] && <DraftMove index={props.index} id={props.id} star={props.star} name={props.name} />
             }
         </div>
     )

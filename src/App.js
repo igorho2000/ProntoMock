@@ -10,16 +10,19 @@ import Header from './pages/Header';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {selectEveryPopup} from './features/popupSlice';
-import { selectCurrentProject,  initializeCurrentProject, initializeEveryProject, wipeProject } from './features/projectSlice';
+import { selectEveryProject, selectCurrentProject,  initializeCurrentProject, initializeEveryProject, wipeProject } from './features/projectSlice';
 
 import {auth, db} from './Firebase';
 import { doc, getDoc, addDoc, setDoc, collection } from "firebase/firestore";
 
 import {changeUserState, selectUser, changeUserProjects} from './features/userSlice'
+import {selectDraft} from './features/draftSlice'
 
 function App() {
     const everyPopup = useSelector(selectEveryPopup);
     const currentProject = useSelector(selectCurrentProject);
+    const everyProject = useSelector(selectEveryProject);
+    const draft = useSelector(selectDraft);
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
@@ -79,6 +82,13 @@ function App() {
         }) 
     }, [])
 
+    // var allDraftIDs = currentProject[0].drafts.map((item) => (item.id));
+    // allDraftIDs.concat(currentProject[0].starredDrafts.map((item) => (item.id)));
+    // for (let i = 0; i < everyProject.length; i++) {
+    //     allDraftIDs.concat(everyProject[i].drafts.map((item) => (item.id)));
+    //     allDraftIDs.concat(everyProject[i].starredDrafts.map((item) => (item.id)));
+    // }
+
     return (
         <div onContextMenu={(event) => {
           event.preventDefault();
@@ -91,16 +101,25 @@ function App() {
           event.preventDefault();
         }}
         >
-      
             <Routes>
+                {/* Initial Routing */}
                   {user === 'start' && <Route path="/" element={<Transition />} /> }
                   {user === 'start' && <Route path="/dashboard" element={<Transition />} /> }
-                  {user === 'start' && <Route path="/draft" element={<Transition />} /> }
+                  {user === 'start' && <Route path="/draft/:wait" element={<Transition />} /> }
+                {/* Check and not logged in */}
+                  {(user === null) ? <Route path="/" element={<Home />} /> : <Route path="/" element={<Navigate replace to="/dashboard" />} />}
+                  {(user === null) && <Route path="/dashboard" element={<Navigate replace to="/" />} />}
+                  {(user === null) && <Route path="/draft/:wait" element={<Navigate replace to="/" />} />}
+                {/* Logged in but project not loaded */}
                   {(user !== null && currentProject.length === 0) && <Route path="/dashboard" element={<Header loading={true} />} />}
-                  {(user === null && user !== 'start') ? <Route path="/" element={<Home />} /> : <Route path="/" element={<Navigate replace to="/dashboard" />} />}
-                  {(user !== null && user !== 'start' && currentProject.length !== 0) ? <Route path="/dashboard" element={<Dashboard />} /> : <Route path="/dashboard" element={<Navigate replace to="/" />} />}
-                  {(user !== null && user !== 'start' && currentProject.length !== 0) ? <Route path="/dashboard/" element={<Dashboard />} /> : <Route path="/dashboard" element={<Navigate replace to="/" />} />}
-                  {(user !== null && user !== 'start') ? <Route path="/draft" element={<Editor />} /> : <Route path="/draft" element={<Navigate replace to="/" />} />}
+                  {(user !== null && currentProject.length === 0) && <Route path="/dashboard/" element={<Header loading={true} />} />}
+                  {(user !== null && currentProject.length === 0) && <Route path="/draft/:wait" element={<Header loading={true} />} />}
+                {/* Logged in and project loaded */}
+                  {(user !== null && currentProject.length !== 0) && <Route path="/dashboard" element={<Dashboard />} />}
+                  {(user !== null && currentProject.length !== 0) && <Route path="/dashboard/" element={<Dashboard />} />}
+                  {(user !== null && currentProject.length !== 0) && <Route path="/draft/:id" element={<Editor />} />}
+                {/* Logged in but draft not loaded */}
+                  {/* {draftLinks} */}
             </Routes>
             {everyPopup.Transition && <Transition />}
         </div>

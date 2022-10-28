@@ -1,26 +1,29 @@
 import React from "react";
 import './Drop.css';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     resetPopups,
 } from '../../features/popupSlice';
 import {
-    newProjectDraft,
+    newProjectDraft, selectCurrentProject
 } from '../../features/projectSlice';
 
 import { useOutsideClick } from "../../Functions";
 import { paperSizes } from "../../features/paperSizes";
 
+import { db } from "../../Firebase";
+import { updateDoc, addDoc, setDoc, doc, collection } from "firebase/firestore";
+
 export default function NewDraft() {
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
+    const currentProject = useSelector(selectCurrentProject);
 
     const [inputValue, setInputValue] = React.useState({
         name: 'My New Draft',
-        size: 'A4',
-        orientation: 'Portrait'
+        size: 'A4 Portrait',
     });
 
     function handleNameChange(event) {
@@ -35,12 +38,6 @@ export default function NewDraft() {
             size: event.target.value,
         }))
     }
-    function handleOrientationChange(event) {
-        setInputValue((state) => ({
-            ...state,
-            orientation: event.target.value,
-        }))
-    }
 
     const outputPaperSizes = Object.keys(paperSizes).map((item) => {
         if (item === 'Custom') {
@@ -52,8 +49,30 @@ export default function NewDraft() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        dispatch(newProjectDraft(inputValue));
         dispatch(resetPopups());
+        addDoc(collection(db, 'draft'), {
+            canvasSettings: {
+                name: inputValue.name,
+                size: inputValue.size,
+                unit: 'mm',
+                width: paperSizes[inputValue.size][0],
+                height: paperSizes[inputValue.size][1],
+                margin: [10,10,10,10],
+                differentMargin: false,
+                fillColor: [255,255,255,1]
+            },
+            everyObject: []
+        }).then((result) => {
+            const projectID = currentProject[0].id.replace(' ', '');
+            var updatedDrafts = [...currentProject[0].drafts];
+            updatedDrafts.unshift({
+                name: inputValue.name,
+                id: result.id
+            })
+            updateDoc(doc(db, 'projects', projectID), {drafts: updatedDrafts});
+            setDoc(doc(db, 'draft', result.id), {id: result.id}, {merge: true});
+            dispatch(newProjectDraft([inputValue.name, result.id]));
+        })
     }
 
     return (

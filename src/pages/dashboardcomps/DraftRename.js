@@ -1,18 +1,21 @@
 import React from "react";
 import './Drop.css';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     resetPopups,
 } from '../../features/popupSlice';
 import {
-    renameProjectDraft,
+    renameProjectDraft, selectCurrentProject
 } from '../../features/projectSlice';
 
 import { useOutsideClick } from "../../Functions";
+import { db } from "../../Firebase";
+import { updateDoc, doc } from "firebase/firestore";
 
 export default function DraftRename(props) {
     const wrapperRef = React.useRef(null);
+    const currentProject = useSelector(selectCurrentProject);
     useOutsideClick(wrapperRef);
 
     const dispatch = useDispatch();
@@ -27,6 +30,23 @@ export default function DraftRename(props) {
         event.preventDefault();
         dispatch(renameProjectDraft([props.index, props.star, inputValue]));
         dispatch(resetPopups());
+        const projectID = currentProject[0].id.replace(' ', '');
+        updateDoc(doc(db, 'draft', props.id), {'canvasSettings.name': inputValue});
+        if (props.star) {
+            var updatedDrafts = [...currentProject[0].starredDrafts];
+            updatedDrafts[props.index] = {
+                name: inputValue,
+                id: props.id
+            };
+            updateDoc(doc(db, 'projects', projectID), {starredDrafts: updatedDrafts});
+        } else {
+            var updatedDrafts = [...currentProject[0].drafts];
+            updatedDrafts[props.index] = {
+                name: inputValue,
+                id: props.id
+            };
+            updateDoc(doc(db, 'projects', projectID), {drafts: updatedDrafts});
+        }
     }
 
     return (

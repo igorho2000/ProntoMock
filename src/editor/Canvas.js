@@ -149,6 +149,23 @@ export default function Canvas() {
         }
     }, [selected, saved])
 
+    function handleBeforeUnload(e) {
+        if (draftInfo.statistics.savedToDatabase === false) {
+            e.preventDefault();
+            e.returnValue = '';
+            console.log('prevented')
+        }
+        console.log('not prevented')
+    }
+
+    React.useEffect(() => {
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        }
+    }, [draftInfo.statistics.savedToDatabase])
+    
+
     // function handleScroll(ev) {
     //     ev.preventDefault();
     //     ev.stopPropagation();

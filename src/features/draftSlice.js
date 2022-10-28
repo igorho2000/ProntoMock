@@ -6,259 +6,11 @@ import { DegreeCalc } from '../Functions';
 import { act } from 'react-dom/test-utils';
 
 const initialState = {
-    canvasSettings: {
-        name: 'First Draft',
-        size: 'Custom',
-        unit: 'mm',
-        width: 100,
-        height: 200,
-        margin: [10,10,10,10],
-        differentMargin: false,
-        fillColor: [255,255,255,1]
-    },
-    everyObject: [
-        {
-            type: 'Square',
-            width: 25,
-            height: 25,
-            x: 0,
-            y: 0,
-            rotate: 0,
-            radius: [0,0,0,0],
-            differentRadius: false,
-            zIndex: 1002,
-            fillColor: [150,150,150,1],
-            borderStyle: 'none',
-            borderWidth: 0,
-            borderColor: [0,0,0,1],
-        },
-        {
-            type: 'Text',
-            value: `Hi, it's Igor`,
-            width: 20,
-            height: 20,
-            x: 0,
-            y: 30,
-            rotate: 0,
-            radius: [0,0,0,0],
-            differentRadius: false,
-            zIndex: 1001,
-            bold: false,
-            underline: false,
-            italic: false,
-            size: 14,
-            textAlign: 'left',
-            font: 'Lobster',
-            textColor: [0,0,0,1],
-            fillColor: [255,255,255,1],
-            borderStyle: 'none',
-            borderWidth: 0,
-            borderColor: [0,0,0,1],
-        },
-        {
-            type: 'Text',
-            value: `Hi, it's Dorothy`,
-            width: 20,
-            height: 20,
-            x: 10,
-            y: 70,
-            rotate: 0,
-            radius: [5,5,5,5],
-            differentRadius: false,
-            zIndex: 1003,
-            bold: true,
-            underline: true,
-            italic: true,
-            size: 12,
-            textAlign: 'left',
-            font: 'Arial',
-            textColor: [0,0,0,1],
-            fillColor: [255,255,255,1],
-            borderStyle: 'none',
-            borderWidth: 0,
-            borderColor: [0,0,0,1],
-        },
-        {
-            type: 'Line',
-            height: 0,
-            width: 50,
-            x: 1,
-            y: 60,
-            rotate: 0,
-            zIndex: 1004,
-            borderStyle: 'solid',
-            borderWidth: 1,
-            borderColor: [0,0,0,1],
-        },
-        {
-            type: 'Ellipse',
-            width: 25,
-            height: 25,
-            x: 30,
-            y: 0,
-            rotate: 0,
-            zIndex: 1005,
-            fillColor: [230,255,255,1],
-            borderStyle: 'none',
-            borderWidth: 0,
-            borderColor: [0,0,0,1],
-        },
-        {
-            type: 'Image',
-            src: '../../logo192.png',
-            width: 25,
-            height: 25,
-            x: 40,
-            y: 80,
-            rotate: 0,
-            radius: [0,0,0,0],
-            differentRadius: false,
-            zIndex: 1006,
-            borderStyle: 'none',
-            borderWidth: 0,
-            borderColor: [0,0,0,1],
-        },
-        {
-            type: 'Icon',
-            code: 'battery_0_bar',
-            class: 'material-icons',
-            width: 25,
-            x: 0,
-            y: 0,
-            rotate: 0,
-            radius: [0,0,0,0],
-            differentRadius: false,
-            zIndex: 1007,
-            borderStyle: 'none',
-            borderWidth: 0,
-            borderColor: [0,0,0,1],
-            fillColor: [0,0,0,1],
-        },
-    ],
-    selectedObject: [
-
-    ],
-    savedVersions: [
-        [
-            {
-                type: 'Square',
-                width: 25,
-                height: 25,
-                x: 0,
-                y: 0,
-                rotate: 0,
-                radius: [0,0,0,0],
-                differentRadius: false,
-                zIndex: 1002,
-                fillColor: [150,150,150,1],
-                borderStyle: 'none',
-                borderWidth: 0,
-                borderColor: [0,0,0,1],
-            },
-            {
-                type: 'Text',
-                value: `Hi, it's Igor`,
-                width: 20,
-                height: 20,
-                x: 0,
-                y: 30,
-                rotate: 0,
-                radius: [0,0,0,0],
-                differentRadius: false,
-                zIndex: 1001,
-                bold: false,
-                underline: false,
-                italic: false,
-                size: 14,
-                textAlign: 'left',
-                font: 'Lobster',
-                textColor: [0,0,0,1],
-                fillColor: [255,255,255,1],
-                borderStyle: 'none',
-                borderWidth: 0,
-                borderColor: [0,0,0,1],
-            },
-            {
-                type: 'Text',
-                value: `Hi, it's Dorothy`,
-                width: 20,
-                height: 20,
-                x: 10,
-                y: 70,
-                rotate: 0,
-                radius: [5,5,5,5],
-                differentRadius: false,
-                zIndex: 1003,
-                bold: true,
-                underline: true,
-                italic: true,
-                size: 12,
-                textAlign: 'left',
-                font: 'Arial',
-                textColor: [0,0,0,1],
-                fillColor: [255,255,255,1],
-                borderStyle: 'none',
-                borderWidth: 0,
-                borderColor: [0,0,0,1],
-            },
-            {
-                type: 'Line',
-                height: 0,
-                width: 50,
-                x: 1,
-                y: 60,
-                rotate: 0,
-                zIndex: 1004,
-                borderStyle: 'solid',
-                borderWidth: 1,
-                borderColor: [0,0,0,1],
-            },
-            {
-                type: 'Ellipse',
-                width: 25,
-                height: 25,
-                x: 30,
-                y: 0,
-                rotate: 0,
-                zIndex: 1005,
-                fillColor: [230,255,255,1],
-                borderStyle: 'none',
-                borderWidth: 0,
-                borderColor: [0,0,0,1],
-            },
-            {
-                type: 'Image',
-                src: '../../logo192.png',
-                width: 25,
-                height: 25,
-                x: 40,
-                y: 80,
-                rotate: 0,
-                radius: [0,0,0,0],
-                differentRadius: false,
-                zIndex: 1006,
-                borderStyle: 'none',
-                borderWidth: 0,
-                borderColor: [0,0,0,1],
-            },
-            {
-                type: 'Icon',
-                code: 'battery_0_bar',
-                class: 'material-icons',
-                width: 25,
-                x: 0,
-                y: 0,
-                rotate: 0,
-                radius: [0,0,0,0],
-                differentRadius: false,
-                zIndex: 1007,
-                borderStyle: 'none',
-                borderWidth: 0,
-                borderColor: [0,0,0,1],
-                fillColor: [0,0,0,1],
-            },
-        ]
-    ],
+    id: '',
+    canvasSettings: {},
+    everyObject: [],
+    selectedObject: [],
+    savedVersions: [],
     statistics: {
         selected: 'none',
         zoom: 1,
@@ -266,6 +18,7 @@ const initialState = {
         sizeX: false,
         sizeY: false,
         sizeXY: false,
+        savedToDatabase: true
     },
     exporting: false,
 }
@@ -274,22 +27,40 @@ export const draftSlice = createSlice({
     name: 'draft',
     initialState,
     reducers: {
+        InitializeDraft: (state, action) => {
+            // payload is an array 0=id 1=rest of stuff
+            state.id = action.payload[0];
+            state.canvasSettings = action.payload[1].canvasSettings;
+            state.everyObject = state.everyObject.concat(action.payload[1].everyObject);
+            state.savedVersions.push(action.payload[1].everyObject);
+        },
+        WipeDraft: (state) => {
+            state.canvasSettings = {}
+            state.everyObject.splice(0, state.everyObject.length);
+            state.selectedObject.splice(0, state.selectedObject.length);
+            state.savedVersions.splice(0, state.savedVersions.length);
+        },
+        SaveToDatabase: (state) => {
+            state.statistics.savedToDatabase = true;
+        },
         ChangeCanvasProperties: (state, action) => {
             // payload is an array where 0=property name and 1=new value
             state.canvasSettings[action.payload[0]] = action.payload[1];
-            
+            state.statistics.savedToDatabase = false;
         },
         ChangeSelectedProperties: (state, action) => {
             // payload is an array where 0=property name and 1=new value
             state.selectedObject.map((item) => {
                 item[action.payload[0]] = action.payload[1];
             })
+            state.statistics.savedToDatabase = false;
         },
         ChangeEachSelectedProperties: (state, action) => {
             // payload is an array where 0=property name and 1=an array containing new values
             state.selectedObject.map((item, index) => {
                 item[action.payload[0]] = action.payload[1][index];
             })
+            state.statistics.savedToDatabase = false;
         },
         ChangeSelectedBorderWidth: (state, action) => {
             // payload is the new borderwidth
@@ -307,10 +78,12 @@ export const draftSlice = createSlice({
                 item.x = +item.x - offsetX;
                 item.y = +item.y - offsetY;
             })
+            state.statistics.savedToDatabase = false;
         },
         ChangeSelectedText: (state, action) => {
             // payload is an array where 0=index number and 1=new value
             state.selectedObject[action.payload[0]].value = action.payload[1];
+            state.statistics.savedToDatabase = false;
         },
         SetDraftSize: (state, action) => {
             // payload is a string of the paper size
@@ -320,6 +93,7 @@ export const draftSlice = createSlice({
             state.canvasSettings.size = action.payload;
             state.canvasSettings.width = paperSizes[action.payload][0];
             state.canvasSettings.height = paperSizes[action.payload][1];
+            state.statistics.savedToDatabase = false;
         },
         ZoomInOutDraft: (state, action) => {
             // payload is the new zoom 
@@ -393,6 +167,7 @@ export const draftSlice = createSlice({
                 item.x = (+item.x + +action.payload[0]).toFixed(2);
                 item.y = (+item.y + +action.payload[1]).toFixed(2);
             })
+            state.statistics.savedToDatabase = false;
         },
         SizeXSelected: (state, action) => {
             // Payload is an array containing the difference between the new location and old location
@@ -401,6 +176,7 @@ export const draftSlice = createSlice({
             state.selectedObject.map((item) => {
                 item.width = (+item.width + +action.payload[0]).toFixed(2);
             })
+            state.statistics.savedToDatabase = false;
         },
         SizeYSelected: (state, action) => {
             // Payload is an array containing the difference between the new location and old location
@@ -416,6 +192,7 @@ export const draftSlice = createSlice({
             state.selectedObject.map((item) => {
                 item.height = (+item.height + +action.payload[1]).toFixed(2);
             })
+            state.statistics.savedToDatabase = false;
         },
         SizeXYSelected: (state, action) => {
             // Payload is an array containing the difference between the new location and old location
@@ -451,10 +228,12 @@ export const draftSlice = createSlice({
                 state.selectedObject[i].width = +state.selectedObject[i].width + action.payload[0] * (widthPercentage - 2 * widthDifPercentage);
                 state.selectedObject[i].height = +state.selectedObject[i].height + action.payload[1] * (heightPercentage - 2 * heightDifPercentage);
             }
+            state.statistics.savedToDatabase = false;
         },
         DeleteSelected: (state) => {
             state.selectedObject.splice(0, state.selectedObject.length);
             state.statistics.selected = 'none';
+            state.statistics.savedToDatabase = false;
         }, 
         SaveDraft: (state) => {
             var toConcat = state.selectedObject.splice(0, state.selectedObject.length);
@@ -475,6 +254,7 @@ export const draftSlice = createSlice({
             state.everyObject = [...state.savedVersions[state.savedVersions.length - 2]]
             state.savedVersions.pop();
             state.statistics.selected = 'none';
+            state.statistics.savedToDatabase = false;
         },
         PasteSelected: (state, action) => {
             // payload is an array containing paste items
@@ -500,9 +280,11 @@ export const draftSlice = createSlice({
                     state.statistics.selected = selected + 's';
                 }
             }
+            state.statistics.savedToDatabase = false;
         },
         DuplicateSelected: (state) => {
             state.everyObject = state.everyObject.concat(state.selectedObject);
+            state.statistics.savedToDatabase = false;
         },
         ToggleExport: (state, action) => {
             // payload is true or false
@@ -513,6 +295,7 @@ export const draftSlice = createSlice({
             const toEverything = {...defaultObject[action.payload]}
             toEverything.zIndex = state.everyObject.length + state.selectedObject.length + 1000
             state.everyObject.push(toEverything);
+            state.statistics.savedToDatabase = false;
         },
         AddImage: (state, action) => {
             // payload is an array 0=link, 1=width, 2=height
@@ -522,6 +305,7 @@ export const draftSlice = createSlice({
             toEverything.width = action.payload[1];
             toEverything.height = action.payload[2];
             state.everyObject.push(toEverything);
+            state.statistics.savedToDatabase = false;
         },
         AddIcon: (state, action) => {
             // payload is an array 0=code, 1=class
@@ -530,29 +314,34 @@ export const draftSlice = createSlice({
             toEverything.code = action.payload[0];
             toEverything.class = action.payload[1];
             state.everyObject.push(toEverything);
+            state.statistics.savedToDatabase = false;
         },
         SortEveryObjectByZ: (state) => {
             state.everyObject = state.everyObject.sort((a, b) => (+a.zIndex > +b.zIndex) ? 1 : -1)
             for (let i = 0; i < state.everyObject.length; i++) {
                 state.everyObject[i].zIndex = i + 1001;
             }
+            state.statistics.savedToDatabase = false;
         },
         MoveSelectedToFront: (state) => {
             state.selectedObject = state.selectedObject.sort((a, b) => (+a.zIndex > +b.zIndex) ? 1 : -1)
             for (let i = 0; i < state.everyObject.length; i++) {
                 state.everyObject[i].zIndex = i;
             }
+            state.statistics.savedToDatabase = false;
         },
         MoveSelectedToBack: (state) => {
             state.selectedObject = state.selectedObject.sort((a, b) => (+a.zIndex > +b.zIndex) ? 1 : -1)
             for (let i = 0; i < state.everyObject.length; i++) {
                 state.everyObject[i].zIndex = i + 100000;
             }
+            state.statistics.savedToDatabase = false;
         }
     },
 });
 
-export const {ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
+export const {InitializeDraft, WipeDraft, SaveToDatabase,
+            ChangeCanvasProperties, ChangeSelectedProperties, ChangeEachSelectedProperties, ChangeSelectedText, ChangeSelectedBorderWidth, 
             SetDraftSize, ZoomInOutDraft, SortEveryObjectByZ, MoveSelectedToBack, MoveSelectedToFront,
             SelectObject, DeselectObject, DeselectParticularObject, ToggleMove, MoveSelected, SizeXSelected, SizeXYSelected, SizeYSelected,
             DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, ToggleExport, AddObject, AddImage, AddIcon} = draftSlice.actions;

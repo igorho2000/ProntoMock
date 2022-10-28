@@ -93,13 +93,10 @@ export const projectSlice = createSlice({
             state.everyProject[action.payload[2]][star].unshift(toMove[0]);
         },
         newProjectDraft: (state, action) => {
-            // Payload is an Object containing name, size, orientation
-            let today = new Date().toLocaleDateString()
-            
+            // Payload is an Array
             state.currentProject[0].drafts.unshift({
-                name: action.payload.name,
-                type: action.payload.size + ' ' + action.payload.orientation,
-                date: today,
+                name: action.payload[0],
+                id: action.payload[1]
             })
         }
     },
