@@ -253,6 +253,23 @@ export default function Canvas() {
             <img src='../properties/duplicate-duplicate.svg' alt='pre-load icon' style={{display: 'none'}} />
             <img src='../properties/delete.svg' alt='pre-load icon' style={{display: 'none'}} />
             <img src='../properties/delete-lid.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/bold.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/underlined.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/italic.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/align_horizontal_center.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/align_horizontal_left.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/align_horizontal_right.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/align_vertical_center.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/align_vertical_top.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/align_vertical_bottom.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/format_align_center.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/format_align_left.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/format_align_justify.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/format_align_right.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/move_up.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/move_down.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/horizontal_distribute.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/vertical_distribute.svg' alt='pre-load icon' style={{display: 'none'}} />
         </div>
     )
 }

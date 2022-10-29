@@ -68,7 +68,7 @@ export default function DraftDrop(props) {
             }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/moveto.svg" alt="move to other project icon upper portion" />
                 <img className="draftdrop-iconmove draftdrop-moveto" src="../../dashboard/moveto-arrow.svg" alt="move to other project icon bottom portion" />
-                <h3>Move To...</h3>
+                <h3>Move To</h3>
             </div>
             :
             <div className="projectdrop-list" onClick={() => {
@@ -77,19 +77,19 @@ export default function DraftDrop(props) {
             }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/moveto.svg" alt="move to other project icon upper portion" />
                 <img className="draftdrop-iconmove draftdrop-moveto" src="../../dashboard/moveto-arrow.svg" alt="move to other project icon bottom portion" />
-                <h3>Move To...</h3>
+                <h3>Move To</h3>
             </div>
             }
 
             {/* Duplicate Draft */}
-            <div className="projectdrop-list" onClick={() => {
+            {/* <div className="projectdrop-list" onClick={() => {
             dispatch(resetPopups());
             dispatch(duplicateProjectDraft([props.index, props.star]))
             }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/duplicate.svg" alt="duplicate draft icon bottom portion" />
                 <img className="draftdrop-iconmove draftdrop-duplicate" src="../../dashboard/duplicate-duplicate.svg" alt="duplicate draft icon upper portion" />
                 <h3>Duplicate</h3>
-            </div>
+            </div> */}
 
             {/* Delete Draft */}
             <div className="projectdrop-list" onClick={() => {

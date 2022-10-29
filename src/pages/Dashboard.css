@@ -154,6 +154,7 @@
     text-align: center;
     font-weight: 700;
     font-size: 1.4rem;
+    max-width: 95%;
 }
 .dashboard-draft-settings {
     display: flex;

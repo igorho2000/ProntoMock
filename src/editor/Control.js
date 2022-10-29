@@ -80,7 +80,6 @@ export default function Control() {
             }
             <br />
             <br />
-            
         </div>
     )
 }

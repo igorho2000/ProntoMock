@@ -96,8 +96,9 @@ export default function Elements() {
                     setDoc(doc(db, 'draft', draftInfo.id), {
                         id: draftInfo.id,
                         canvasSettings: draftInfo.canvasSettings,
-                        everyObject: draftInfo.everyObject
+                        everyObject: draftInfo.everyObject.concat(draftInfo.selectedObject)
                     })
+                    
                 }}>
                     <img className='elements-icon elements-control-icon' src="../properties/save.svg" />
                     <div className='elements-description'>Save</div>
