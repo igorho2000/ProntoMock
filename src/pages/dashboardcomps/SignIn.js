@@ -8,7 +8,7 @@ import {
 
 import { useOutsideClick } from "../../Functions";
 
-import { auth, provider } from "../../Firebase";
+import { auth, provider, fbProvider } from "../../Firebase";
 import { signInWithRedirect, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function SignIn() {
@@ -183,11 +183,19 @@ export default function SignIn() {
                             });
                         }}><img src='../../dashboard/google-logo.svg' />Sign In with Google</button>
                     </div>
-                    <div className="popupform-buttoncont">
+                    {/* <div className="popupform-buttoncont">
                         <button to='/dashboard' className="popupform-button popupform-button-right popupform-button-gray" onClick={(event) => {
                             event.preventDefault();
+                            signInWithRedirect(auth, fbProvider).then(() => {
+                                dispatch(resetPopups());
+                            }).catch(() => {
+                                setInputValue((state) => ({
+                                    ...state,
+                                    errorMessage: "An Unexpected Error Occurred. Please try later."
+                                }))
+                            });
                         }}><img src='../../dashboard/facebook-logo.svg' />Sign In with Facebook</button>
-                    </div>
+                    </div> */}
                     <div className="popupform-buttoncont">
                         <button className="popupform-button popupform-button-right" onClick={() => dispatch(resetPopups())}>Cancel</button>
                         {

@@ -82,6 +82,7 @@ export default function Editor() {
             
         }} >
             <Header />
+            
             {loading.inProgress === false && <Elements />}
             {loading.inProgress === false && <Canvas />}
             {loading.inProgress === false && <Control />}

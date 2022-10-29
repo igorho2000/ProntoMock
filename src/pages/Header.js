@@ -39,7 +39,7 @@ export default function Header(props) {
                         <div className="dashboard-prontomock" style={{position: 'relative'}}>
                             <h2 className="dashboard-pronto">Pronto</h2>
                             <h2 className="dashboard-mock">MOCK</h2>
-                            <h6 style={{fontSize: '0.8rem', color: 'white', backgroundColor: 'rgb(50, 50, 50)', padding: '1px 5px', borderRadius: '5px', position: 'absolute', right: -45, top: -4}}>BETA</h6>
+                            <h6 style={{fontSize: '0.8rem', color: 'white', backgroundColor: 'rgb(50, 50, 50)', padding: '1px 5px', borderRadius: '5px', position: 'absolute', right: -2, top: -6}}>BETA</h6>
                         </div>
                     </Link>
                     {user !== null

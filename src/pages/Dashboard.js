@@ -69,7 +69,23 @@ export default function Dashboard() {
             {everyPopup['NewDraft'][0] && <NewDraft />}
             {everyPopup['ProjectSettings'][0] && <ProjectSettings />}
             {everyPopup['NewProject'][0] && <NewProject />}
-
+            <img src='../dashboard/star.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/unstar.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/duplicate-duplicate.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/duplicate.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/rename.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/rename-pencil.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/moveto.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/moveto-arrow.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/delete.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/delete-lid.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/settings.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/accountsettings.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/accountsettings-gear.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/logout.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/logout-arrow.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/newproject.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../dashboard/newproject-plus.svg' alt='pre-load icon' style={{display: 'none'}} />
         </div>
     )
 }

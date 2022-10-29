@@ -242,6 +242,17 @@ export default function Canvas() {
                 
             </div>
             {popup.CanvasRightClick[0] && selected.length === 0 ? <CanvasRightClick /> : <div></div>}
+            <img src='../properties/paste.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/paste-top.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/undo-white.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/copy.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/copy-copy.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/cut.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/cut-top.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/duplicate.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/duplicate-duplicate.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/delete.svg' alt='pre-load icon' style={{display: 'none'}} />
+            <img src='../properties/delete-lid.svg' alt='pre-load icon' style={{display: 'none'}} />
         </div>
     )
 }

@@ -1,12 +1,8 @@
 import React from 'react';
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider,} from "firebase/auth";
-import { getFirestore, setDoc, doc } from "firebase/firestore";
-
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentProject, selectEveryProject } from './features/projectSlice';
-import { selectUser } from './features/userSlice';
+import { getAuth, GoogleAuthProvider, FacebookAuthProvider} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCwo7PJogsP2O0CRqbds2PyPvw_LXodKuM",
@@ -21,6 +17,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
+export const fbProvider = new FacebookAuthProvider();
 
 export const db = getFirestore(app);
 
