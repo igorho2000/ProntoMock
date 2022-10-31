@@ -9,7 +9,7 @@ import {
 import { useOutsideClick } from "../../Functions";
 
 import { auth, provider, fbProvider } from "../../Firebase";
-import { signInWithRedirect, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithRedirect, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default function SignUp() {
     const wrapperRef = React.useRef(null);
@@ -17,6 +17,7 @@ export default function SignUp() {
     const dispatch = useDispatch();
 
     const [inputValue, setInputValue] = React.useState({
+        name: '',
         email: '',
         password: '',
         emailCorrect: false,
@@ -26,7 +27,12 @@ export default function SignUp() {
         canSubmit: false,
         errorMessage: ''
     });
-
+    function handleNameChange(event) {
+        setInputValue((state) => ({
+            ...state,
+            name: event.target.value
+        }))
+    }
     function handleEmailChange(event) {
         setInputValue((state) => ({
             ...state,
@@ -106,6 +112,9 @@ export default function SignUp() {
     function handleSubmit(event) {
         event.preventDefault();
         createUserWithEmailAndPassword(auth, inputValue.email, inputValue.password).then((cred) => {
+            updateProfile(cred.user, {
+                displayName: inputValue.name
+            }).then(() => {console.log('success')})
             dispatch(resetPopups());
             dispatch(transition())
             setTimeout(() => {
@@ -147,6 +156,10 @@ export default function SignUp() {
             <div className="popupform" ref={wrapperRef} >
                 <h4>Sign Up</h4>
                 <form className="popupform-form" onSubmit={handleSubmit}>
+                    <div className="popupform-input" >
+                        <label>Full Name</label>
+                        <input className="popupform-input-border" type="text" value={inputValue.name} onChange={handleNameChange} />
+                    </div>
                     <div className="popupform-input" >
                         <label>Email</label>
                         <input className="popupform-input-border" type="email" value={inputValue.email} onChange={handleEmailChange} onBlur={handleEmailBlur} />
@@ -198,7 +211,7 @@ export default function SignUp() {
                     <div className="popupform-buttoncont">
                         <button className="popupform-button popupform-button-right" onClick={() => dispatch(resetPopups())}>Cancel</button>
                         {
-                            inputValue.canSubmit 
+                            (inputValue.canSubmit && inputValue.name !== '')
                             &&
                             <input className="popupform-button popupform-button-blue popupform-button-right" style={{marginLeft: '5px'}} type='submit' value='Sign Up'/>
                         }

@@ -7,15 +7,18 @@ import {
 } from '../../features/popupSlice';
 import {
     switchProject, moveProjectDraft,
-    selectEveryProject,
+    selectEveryProject, selectCurrentProject
 } from '../../features/projectSlice';
 
 import { useOutsideClick } from "../../Functions";
+import { db } from "../../Firebase";
+import { updateDoc, doc } from "firebase/firestore";
 
 export default function DraftMove(props) {
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
+    const currentProject = useSelector(selectCurrentProject);
 
     const everyProject = useSelector(selectEveryProject);
     const datalist = everyProject.map((item, index) => (
@@ -38,6 +41,31 @@ export default function DraftMove(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
+        const originalProjectID = currentProject[0].id.replace(' ', '');
+        const targetProjectID = everyProject[inputValue.index].id.replace(' ', '');
+        if (props.star === false) {
+            var originalDrafts = [...currentProject[0].drafts];
+            var targetDrafts = [...everyProject[inputValue.index].drafts];
+            const toMove = originalDrafts.splice(props.index, 1);
+            targetDrafts = targetDrafts.concat(toMove);
+            updateDoc(doc(db, 'projects', originalProjectID), {
+                drafts: originalDrafts
+            })
+            updateDoc(doc(db, 'projects', targetProjectID), {
+                drafts: targetDrafts
+            })
+        } else {
+            var originalStarredDrafts = [...currentProject[0].starredDrafts];
+            var targetStarredDrafts = [...everyProject[inputValue.index].starredDrafts];
+            const toMove = originalStarredDrafts.splice(props.index, 1);
+            targetStarredDrafts = targetStarredDrafts.concat(toMove);
+            updateDoc(doc(db, 'projects', originalProjectID), {
+                starredDrafts: originalStarredDrafts
+            })
+            updateDoc(doc(db, 'projects', targetProjectID), {
+                starredDrafts: targetStarredDrafts
+            })
+        }
         dispatch(moveProjectDraft([props.index, props.star, inputValue.index]));
         dispatch(resetPopups());
         dispatch(switchProject(inputValue.index));

@@ -46,7 +46,7 @@ export default function Header(props) {
                     &&
                     <div className="dashboard-account-cont" onClick={() => dispatch(showPopup(['AccountDrop', 0]))}>
                         {user.photo === null ?
-                        <div className="dashboard-account-icon">{user.email[0]}</div>
+                        user.name === null ? <div className="dashboard-account-icon">{user.email[0]}</div> : <div className="dashboard-account-icon">{user.name[0]}</div>
                         :
                         <img className="dashboard-account-icon" src={user.photo} />
                         }

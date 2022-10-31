@@ -35,8 +35,8 @@ export default function DraftInfo(props) {
                         }/>
                         }
                         {props.star ?
-                        everyPopup.StarDraftDrop[props.index] && <DraftDrop index={props.index} star={props.star} /> :
-                        everyPopup.DraftDrop[props.index] && <DraftDrop index={props.index} star={props.star} />}
+                        everyPopup.StarDraftDrop[props.index] && <DraftDrop index={props.index} id={props.id} star={props.star} /> :
+                        everyPopup.DraftDrop[props.index] && <DraftDrop index={props.index} id={props.id} star={props.star} />}
                     </div>
                     <Link to={`/draft/${props.id}`} onClick={() => {
                         dispatch(WipeDraft());

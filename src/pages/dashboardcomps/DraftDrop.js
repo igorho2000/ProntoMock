@@ -1,37 +1,58 @@
 import React from "react";
 import './Drop.css';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     resetPopups, showPopup,
 } from '../../features/popupSlice';
 import {
-    starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft,
+    starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft, selectCurrentProject
 } from '../../features/projectSlice';
 
 
 import { useOutsideClick } from "../../Functions";
+import { db } from "../../Firebase";
+import { updateDoc, doc, deleteDoc } from "firebase/firestore";
 
 export default function DraftDrop(props) {
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
+    const currentProject = useSelector(selectCurrentProject);
 
     return (
         <div className="projectdrop draftdrop" style={{margin: 0}} ref={wrapperRef}>
             {/* Star Draft */}
             {props.star === true ?
             <div className="projectdrop-list" onClick={() => {
-            dispatch(resetPopups());
-            dispatch(unstarProjectDraft(props.index));
+                const ProjectID = currentProject[0].id.replace(' ', '');
+                var drafts = [...currentProject[0].drafts];
+                var starredDrafts = [...currentProject[0].starredDrafts];
+                const toMove = starredDrafts.splice(props.index, 1);
+                drafts = drafts.concat(toMove);
+                updateDoc(doc(db, 'projects', ProjectID), {
+                    drafts: drafts,
+                    starredDrafts: starredDrafts
+                })
+                dispatch(resetPopups());
+                dispatch(unstarProjectDraft(props.index));
             }}>
                 <img className="draftdrop-iconbase draftdrop-star" src="../../dashboard/unstar.svg" alt="unstar draft icon" />
                 <h3>Unstar</h3>
             </div> 
             :
             <div className="projectdrop-list" onClick={() => {
-            dispatch(resetPopups());
-            dispatch(starProjectDraft(props.index));
+                const ProjectID = currentProject[0].id.replace(' ', '');
+                var drafts = [...currentProject[0].drafts];
+                var starredDrafts = [...currentProject[0].starredDrafts];
+                const toMove = drafts.splice(props.index, 1);
+                starredDrafts = starredDrafts.concat(toMove);
+                updateDoc(doc(db, 'projects', ProjectID), {
+                    drafts: drafts,
+                    starredDrafts: starredDrafts
+                })
+                dispatch(resetPopups());
+                dispatch(starProjectDraft(props.index));
             }}>
                 <img className="draftdrop-iconbase draftdrop-star" src="../../dashboard/star.svg" alt="star draft icon"/>
                 <h3>Star</h3>
@@ -93,8 +114,23 @@ export default function DraftDrop(props) {
 
             {/* Delete Draft */}
             <div className="projectdrop-list" onClick={() => {
-            dispatch(resetPopups());
-            dispatch(deleteProjectDraft([props.index, props.star]))
+                const ProjectID = currentProject[0].id.replace(' ', '');
+                if (props.star) {
+                    var starredDrafts = [...currentProject[0].starredDrafts];
+                    starredDrafts.splice(props.index, 1)
+                    updateDoc(doc(db, 'projects', ProjectID), {
+                        starredDrafts: starredDrafts
+                    })
+                } else {
+                    var drafts = [...currentProject[0].drafts];
+                    drafts.splice(props.index, 1)
+                    updateDoc(doc(db, 'projects', ProjectID), {
+                        drafts: drafts
+                    })
+                }
+                deleteDoc(doc(db, 'draft', props.id));
+                dispatch(resetPopups());
+                dispatch(deleteProjectDraft([props.index, props.star]))
             }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/delete.svg" alt="delete draft icon bottom portion" />
                 <img className="draftdrop-iconmove draftdrop-delete" src="../../dashboard/delete-lid.svg" alt="delete draft icon upper portion" />

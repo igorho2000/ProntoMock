@@ -39,6 +39,17 @@ export const draftSlice = createSlice({
             state.everyObject.splice(0, state.everyObject.length);
             state.selectedObject.splice(0, state.selectedObject.length);
             state.savedVersions.splice(0, state.savedVersions.length);
+            state.statistics.selected = {
+                selected: 'none',
+                zoom: 1,
+                move: false,
+                sizeX: false,
+                sizeY: false,
+                sizeXY: false,
+                savedToDatabase: true
+            }
+            state.exporting = false;
+            state.id = '';
         },
         SaveToDatabase: (state) => {
             state.statistics.savedToDatabase = true;
