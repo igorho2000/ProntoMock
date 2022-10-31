@@ -3,7 +3,7 @@ import './Drop.css';
 
 import { useDispatch } from 'react-redux';
 import {
-    resetPopups, transition
+    resetPopups, transition, showPopup
 } from '../../features/popupSlice';
 
 import {useNavigate} from "react-router-dom";
@@ -22,7 +22,8 @@ export default function AccountDrop() {
     return (
         <div className="projectdrop accountdrop" ref={wrapperRef}>
             <div className="projectdrop-list" onClick={() => {
-            dispatch(resetPopups());
+                dispatch(resetPopups());
+                dispatch(showPopup(['UserSettings', 0]))
             }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/accountsettings.svg" alt="account settings icon top portion" />
                 <img className="draftdrop-iconmove accountdrop-settings" src="../../dashboard/accountsettings-gear.svg" alt="account settings icon bottom portion" />

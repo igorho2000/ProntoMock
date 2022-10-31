@@ -14,11 +14,14 @@ export const userSlice = createSlice({
         },
         changeUserProjects: (state, action) => {
             state.userProjects = action.payload;
+        },
+        changeUserProperties: (state, action) => {
+            state.userInfo[action.payload[0]] = action.payload[1]
         }
     },
 });
 
-export const {changeUserState, changeUserProjects} = userSlice.actions;
+export const {changeUserState, changeUserProjects, changeUserProperties} = userSlice.actions;
 
 export const selectUser = (state) => state.user.userInfo;
 export const selectProjectCodes = (state) => state.user.userProjects;

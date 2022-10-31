@@ -25,6 +25,7 @@ const initialState = {
         // Account
         SignIn: [],
         SignUp: [],
+        UserSettings: [],
     },
 }
 
@@ -51,6 +52,7 @@ export const popupSlice = createSlice({
             state.everyPopup.IconAdder = [false];
             state.everyPopup.SignIn = [false];
             state.everyPopup.SignUp = [false];
+            state.everyPopup.UserSettings = [false];
         },
         showPopup: (state, action) => {
             var popupType = action.payload[0];

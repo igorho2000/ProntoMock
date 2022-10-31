@@ -15,6 +15,7 @@ import {
 } from '../features/popupSlice';
 
 import AccountDrop from './dashboardcomps/AccountDrop';
+import UserSettings from "./dashboardcomps/UserSettings";
 import { WipeDraft } from "../features/draftSlice";
 
 
@@ -55,6 +56,7 @@ export default function Header(props) {
                     }
                 </div>
                 {everyPopup['AccountDrop'][0] && <AccountDrop />}
+                {everyPopup['UserSettings'][0] && <UserSettings />}
                 {props.loading && <p style={{position: 'fixed', top: '80px', left: '15px', fontSize: '1.3rem'}}>Loading...</p>}
             </div>
             

@@ -9,7 +9,7 @@ import {
 import { useOutsideClick } from "../../Functions";
 
 import { auth, provider, fbProvider } from "../../Firebase";
-import { signInWithRedirect, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithRedirect, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 export default function SignIn() {
     const wrapperRef = React.useRef(null);
@@ -204,6 +204,24 @@ export default function SignIn() {
                             <input className="popupform-button popupform-button-blue popupform-button-right" style={{marginLeft: '5px'}} type='submit' value='Log In'/>
                         }
                     </div>
+                    {inputValue.emailCorrect &&
+                    <button style={{color: 'gray', fontSize: '0.9rem', fontWeight: '600', background: 'none', border: 'none', cursor: 'pointer', margin: '5px 0px'}} onClick={
+                        (event) => {
+                            event.preventDefault();
+                            sendPasswordResetEmail(auth, inputValue.email).then(
+                                setInputValue((state) => ({
+                                    ...state,
+                                    errorMessage: "Password Reset Email Sent"
+                                }))
+                            ).catch(() => {
+                                setInputValue((state) => ({
+                                    ...state,
+                                    errorMessage: "User not found or an unexpected error."
+                                }))
+                            })                        
+                        }
+                    }>Forgot Password</button>
+                    }
                     {inputValue.errorMessage !== '' &&
                     <h5 style={{marginTop: '16px', color: 'orange'}}>{inputValue.errorMessage}</h5>
                     }
