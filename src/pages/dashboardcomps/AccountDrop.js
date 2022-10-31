@@ -29,6 +29,18 @@ export default function AccountDrop() {
                 <img className="draftdrop-iconmove accountdrop-settings" src="../../dashboard/accountsettings-gear.svg" alt="account settings icon bottom portion" />
                 <h3>Settings</h3>
             </div>
+            <a className="projectdrop-list" onClick={() => {
+                dispatch(resetPopups());
+            }} href='https://www.privacypolicygenerator.info/live.php?token=s8LjBGGAWcoKtRVOSFpFqKrIuXBc2oz8' target='_blank'>
+                <img className="draftdrop-iconbase" src="../../dashboard/policy.svg" alt="privacy icon" />
+                <h3 style={{color: 'white'}}>Privacy</h3>
+            </a>
+            <a className="projectdrop-list" onClick={() => {
+                dispatch(resetPopups());
+            }} href='https://projectonepremium.com' target='_blank'>
+                <img className="draftdrop-iconbase" src="../../dashboard/logo-o-3d.svg" alt="privacy icon" />
+                <h3 style={{color: 'white'}}>ONE Premium</h3>
+            </a>
             <div className="projectdrop-list" onClick={() => {
                 dispatch(resetPopups());
                 dispatch(transition());

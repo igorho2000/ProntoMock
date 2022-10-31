@@ -99,6 +99,8 @@ export const draftSlice = createSlice({
         SetDraftSize: (state, action) => {
             // payload is a string of the paper size
             if (action.payload === 'Custom') {
+                state.canvasSettings.size = action.payload;
+                state.statistics.savedToDatabase = false;
                 return
             } 
             state.canvasSettings.size = action.payload;

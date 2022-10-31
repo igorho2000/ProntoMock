@@ -58,6 +58,7 @@ export default function ControlDocument() {
                 size: event.target.value,
                 }
             ))
+            dispatch(SetDraftSize(event.target.value))
             return
         }
         setInputValue((state) => (
