@@ -62,7 +62,26 @@
     border: 7px rgb(84, 84, 84) solid;
     animation: progress 6s ease-in-out;
 }
-
+.loading-line {
+    background-color: rgb(158, 158, 158);
+    border: 5px rgb(158, 158, 158) solid;
+    border-radius: 10px;
+    width: 150px;
+    margin-top: 8px;
+}
+.loading-progress {
+    background-color: rgb(84, 84, 84);
+    border: 5px rgb(84, 84, 84) solid;
+    animation: loading 8s linear;
+    border-radius: 10px;
+    width: 150px;
+    position: relative;
+    bottom: 10px;
+}
+@keyframes loading {
+    0% {width: 0%;}
+    100% {width: calc(100% - 10px);}
+}
 @keyframes progress {
     0% {width: 0px; transform: translate3d(-60px, 100px, 0)}
     100% {width: 120px; transform: translate3d(0px, 100px, 0)}

@@ -160,8 +160,9 @@ textarea:focus {
     font-size: 0.9rem;
     font-weight: 400;
     border-radius: 1rem;
+    width: fit-content;
     border: none;
-    padding: 4px 10px;
+    padding: 4px 15px;
     cursor: pointer;
     box-shadow: 2px 3.5px transparent;
     transition: box-shadow 0.2s;
@@ -328,6 +329,22 @@ textarea:focus {
     border: rgb(218, 218, 218) solid 2px;
     cursor: pointer;
   }
+@keyframes loadingspin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.control-loading-circle {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-top: #99250b 5px solid;
+    border-left: #004e68 5px solid;
+    border-bottom: #007298 5px solid;
+    border-right: #f57b66 5px solid;;
+    margin-top: 8px;
+    margin-left: 8px;
+    border-radius: 50%;
+    animation: loadingspin 1s linear none infinite;
+}
 
 @media (max-width: 960px) {
     .elements,

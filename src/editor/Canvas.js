@@ -218,9 +218,7 @@ export default function Canvas() {
                 dispatch(showPopup(['CanvasRightClick', 0]))
                 dispatch(getCoordinates([+event.clientX, +event.clientY]))
             }
-        }} onWheel={(event) => {
-            event.preventDefault();
-        }} >
+        }}>
             <div className='draft-cont'>
                 <div className='canvas-buffer'></div>
                 

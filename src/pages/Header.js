@@ -57,9 +57,12 @@ export default function Header(props) {
                 </div>
                 {everyPopup['AccountDrop'][0] && <AccountDrop />}
                 {everyPopup['UserSettings'][0] && <UserSettings />}
-                {props.loading && <p style={{position: 'fixed', top: '80px', left: '15px', fontSize: '1.3rem'}}>Loading...</p>}
+                {props.loading && 
+                <div style={{position: 'fixed', top: '80px', left: '15px', fontSize: '1.3rem', display: 'flex', alignItems: 'center'}}>
+                    <p>Loading...</p>
+                    <div className='control-loading-circle' style={{marginTop: 0}}></div>
+                </div>}
             </div>
-            
         </div>
     )
 }

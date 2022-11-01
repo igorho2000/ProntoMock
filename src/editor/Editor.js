@@ -86,7 +86,10 @@ export default function Editor() {
             {loading.inProgress === false && <Elements />}
             {loading.inProgress === false && <Canvas />}
             {loading.inProgress === false && <Control />}
-            <p style={{position: 'fixed', top: '80px', left: '15px', fontSize: '1.3rem'}}>{loading.message}</p>
+            {loading.inProgress && <div style={{position: 'fixed', top: '80px', left: '15px', fontSize: '1.3rem', display: 'flex', alignItems: 'center'}}>
+                <p>{loading.message}</p>
+                <div className='control-loading-circle' style={{marginTop: 0}}></div>
+            </div>}
         </div>
     )
 }

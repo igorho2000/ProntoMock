@@ -3,6 +3,7 @@ import React from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCwo7PJogsP2O0CRqbds2PyPvw_LXodKuM",
@@ -20,6 +21,7 @@ export const provider = new GoogleAuthProvider();
 export const fbProvider = new FacebookAuthProvider();
 
 export const db = getFirestore(app);
+export const storage = getStorage();
 
 // export function useUpdateUserDatabase() {
 //     const currentProject = useSelector(selectCurrentProject);
