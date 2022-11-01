@@ -228,12 +228,22 @@
     display: flex;
     align-items: center;
 }
+.popupform-button-ininput {
+    position: absolute;
+    right: 10px;
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+    padding: 3px 8px
+}
 .popupform-button img {
     height: 1.1rem;
     margin-right: 8px;
 }
 .popupform-button:hover {
     box-shadow: 2px 3.5px gray;
+}
+.popupform-button-ininput:hover {
+    box-shadow: 2px 3.5px transparent;
 }
 .popupform-button-right {
     margin-right: 0;
@@ -250,7 +260,17 @@
     background-color: rgb(172, 172, 172);
     color: white
 }
-
+.popupform-teamcont {
+    margin-left: 89px;
+    display: flex;
+    align-self: baseline;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.popupform-teamcont p {
+    font-weight: 600;
+    margin-right: 10px;
+}
 
 /* Right Click */
 .selectright {

@@ -26,10 +26,10 @@ export default function Dashboard() {
     const currentProject = useSelector(selectCurrentProject);
 
     const outputProjectDraft = currentProject[0].drafts.map((item, index) => (
-        <DraftInfo name={item.name} id={item.id} img={'../dashboard/ex1.jpg'} key={`draft${index}`} index={index} star={false} />
+        <DraftInfo name={item.name} id={item.id} img={item.image} key={`draft${index}`} index={index} star={false} />
     ))
     const outputStarredProjectDraft = currentProject[0].starredDrafts.map((item, index) => (
-        <DraftInfo name={item.name} id={item.id} img={'../dashboard/ex1.jpg'} key={`stardraft${index}`} index={index} star={true} />
+        <DraftInfo name={item.name} id={item.id} img={item.image} key={`stardraft${index}`} index={index} star={true} />
     ))
 
     return (

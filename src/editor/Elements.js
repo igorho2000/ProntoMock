@@ -8,16 +8,23 @@ import ImageUploader from './canvascomps/ImageUploader';
 import { selectEveryPopup, showPopup } from '../features/popupSlice';
 import IconAdder from './canvascomps/IconAdder';
 
+import { selectCurrentProject, selectEveryProject } from '../features/projectSlice';
+
 import { db } from '../Firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import html2canvas from 'html2canvas';
+import { updateDraftThumbnail } from '../features/projectSlice';
 
 export default function Elements() {
     const dispatch = useDispatch();
     const draftInfo = useSelector(selectDraft);
     const statistics = draftInfo.statistics;
     const popup = useSelector(selectEveryPopup);
+    const currentProject = useSelector(selectCurrentProject);
+    const everyProject = useSelector(selectEveryProject);
 
     const [zoom, setZoom] = React.useState(Math.round(draftInfo.statistics.zoom * 100));
+    const [saving, setSaving] = React.useState(false);
 
     React.useEffect(() => {
         setZoom(Math.round(draftInfo.statistics.zoom * 100))
@@ -93,16 +100,38 @@ export default function Elements() {
                 <div className='elements-function' onClick={() => {
                     dispatch(DeselectObject());
                     dispatch(SaveToDatabase());
+                    setSaving(true)
                     setDoc(doc(db, 'draft', draftInfo.id), {
                         id: draftInfo.id,
                         canvasSettings: draftInfo.canvasSettings,
                         everyObject: draftInfo.everyObject.concat(draftInfo.selectedObject)
+                    }).then(() => {
+                        html2canvas(document.querySelector('#draft'), {useCORS: true}).then(
+                            (canvas) => {
+                                const imageURI = canvas.toDataURL("image/png");
+                                const projectID = draftInfo.project[0] === 'currentProject' ? currentProject[0].id.replace(' ', '') : everyProject[draftInfo.project[1]].id.replace(' ', '');
+                                dispatch(updateDraftThumbnail([draftInfo.project, imageURI]))
+                                var draftsToUpdate = draftInfo.project[0] === 'currentProject' ? [...currentProject[0][draftInfo.project[2]]] : [...everyProject[draftInfo.project[1]][draftInfo.project[2]]];
+                                draftsToUpdate[draftInfo.project[3]] = {
+                                    ...draftsToUpdate[draftInfo.project[3]],
+                                    image: imageURI
+                                };
+                                updateDoc(doc(db, 'projects', projectID), {
+                                    [draftInfo.project[2]]: draftsToUpdate
+                                })
+                                setSaving(false)
+                            }).catch(() => {
+                                setSaving(false)
+                            })
+                    }).catch(() => {
+                        setSaving(false)
                     })
                     
                 }}>
                     <img className='elements-icon elements-control-icon' src="../properties/save.svg" />
                     <div className='elements-description'>Save</div>
                     {statistics.savedToDatabase === false && <div style={{width: 10, height: 10, borderRadius: '50%', backgroundColor: 'crimson', position: 'absolute', transform: 'translate3d(8px, -8px, 0)'}}></div>}
+                    {saving && <div className='control-loading-circle' style={{position: 'absolute', width: 0, height: 0, transform: 'translate3d(8px, -8px, 0)', margin: 0, borderWidth: 15}}></div>}
                 </div>
                 <div className='elements-function' onClick={() => dispatch(UndoAction())}>
                     <img className='elements-icon elements-control-icon' src="../properties/undo.svg" />

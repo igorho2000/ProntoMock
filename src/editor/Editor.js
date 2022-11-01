@@ -41,13 +41,15 @@ export default function Editor() {
             }))
             return
         }
-        var allDraftIDs = currentProject[0].drafts.map((item) => (item.id));
-        allDraftIDs.concat(currentProject[0].starredDrafts.map((item) => (item.id)));
+        var allDraftIDs = {}
+        currentProject[0].drafts.forEach((element, index) => {allDraftIDs[element.id] = ['currentProject', 0, 'drafts', index]});
+        currentProject[0].starredDrafts.forEach((element, index) => { allDraftIDs[element.id]= ['currentProject', 0, 'starredDrafts', index]});
         for (let i = 0; i < everyProject.length; i++) {
-            allDraftIDs.concat(everyProject[i].drafts.map((item) => (item.id)));
-            allDraftIDs.concat(everyProject[i].starredDrafts.map((item) => (item.id)));
+            everyProject[i].drafts.forEach((element, index) => {allDraftIDs[element.id]= ['everyProject', i, 'drafts', index]});
+            everyProject[i].starredDrafts.forEach((element, index) => {allDraftIDs[element.id]= ['everyProject', i, 'starredDrafts', index]});
         }
-        if (allDraftIDs.includes(id) === false) {
+        console.log(allDraftIDs)
+        if (allDraftIDs[id] === undefined) {
             setLoading((state) => ({
                 ...state,
                 message: 'URL incorrect or not authorized to view content.'
@@ -59,7 +61,7 @@ export default function Editor() {
             message: 'Retrieving Your Document'
         }))
         getDoc(doc(db, 'draft', id)).then((result) => {
-            dispatch(InitializeDraft([id, result.data()]));
+            dispatch(InitializeDraft([id, result.data(), allDraftIDs[id]]));
             setLoading({
                 inProgress: false,
                 message: '',
@@ -83,10 +85,10 @@ export default function Editor() {
         }} >
             <Header />
             
-            {loading.inProgress === false && <Elements />}
-            {loading.inProgress === false && <Canvas />}
-            {loading.inProgress === false && <Control />}
-            {loading.inProgress && <div style={{position: 'fixed', top: '80px', left: '15px', fontSize: '1.3rem', display: 'flex', alignItems: 'center'}}>
+            {draftInfo.id === id && <Elements />}
+            {draftInfo.id === id && <Canvas />}
+            {draftInfo.id === id && <Control />}
+            {draftInfo.id !== id && <div style={{position: 'fixed', top: '80px', left: '15px', fontSize: '1.3rem', display: 'flex', alignItems: 'center'}}>
                 <p>{loading.message}</p>
                 <div className='control-loading-circle' style={{marginTop: 0}}></div>
             </div>}

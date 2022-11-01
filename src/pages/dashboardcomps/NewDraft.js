@@ -67,11 +67,12 @@ export default function NewDraft() {
             var updatedDrafts = [...currentProject[0].drafts];
             updatedDrafts.unshift({
                 name: inputValue.name,
-                id: result.id
+                id: result.id,
+                image: paperSizes[inputValue.size][2]
             })
             updateDoc(doc(db, 'projects', projectID), {drafts: updatedDrafts});
             setDoc(doc(db, 'draft', result.id), {id: result.id}, {merge: true});
-            dispatch(newProjectDraft([inputValue.name, result.id]));
+            dispatch(newProjectDraft([inputValue.name, result.id, paperSizes[inputValue.size][2]]));
         })
     }
 

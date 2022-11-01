@@ -96,13 +96,17 @@ export const projectSlice = createSlice({
             // Payload is an Array
             state.currentProject[0].drafts.unshift({
                 name: action.payload[0],
-                id: action.payload[1]
+                id: action.payload[1],
+                image: action.payload[2],
             })
+        },
+        updateDraftThumbnail: (state, action) => {
+            state[action.payload[0][0]][action.payload[0][1]][action.payload[0][2]][action.payload[0][3]].image = action.payload[1]
         }
     },
 });
 
-export const {initializeCurrentProject, initializeEveryProject, wipeProject, changeUserState, switchProject, renameProject, deleteProject, newProject,
+export const {updateDraftThumbnail, initializeCurrentProject, initializeEveryProject, wipeProject, changeUserState, switchProject, renameProject, deleteProject, newProject,
               starProjectDraft, unstarProjectDraft, duplicateProjectDraft, deleteProjectDraft, 
               renameProjectDraft, moveProjectDraft, newProjectDraft} = projectSlice.actions;
 

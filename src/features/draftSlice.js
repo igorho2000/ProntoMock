@@ -7,6 +7,7 @@ import { act } from 'react-dom/test-utils';
 
 const initialState = {
     id: '',
+    project: [],
     canvasSettings: {},
     everyObject: [],
     selectedObject: [],
@@ -30,6 +31,7 @@ export const draftSlice = createSlice({
         InitializeDraft: (state, action) => {
             // payload is an array 0=id 1=rest of stuff
             state.id = action.payload[0];
+            state.project = state.project.concat(action.payload[2]);
             state.canvasSettings = action.payload[1].canvasSettings;
             state.everyObject = state.everyObject.concat(action.payload[1].everyObject);
             state.savedVersions.push(action.payload[1].everyObject);
@@ -39,7 +41,7 @@ export const draftSlice = createSlice({
             state.everyObject.splice(0, state.everyObject.length);
             state.selectedObject.splice(0, state.selectedObject.length);
             state.savedVersions.splice(0, state.savedVersions.length);
-            state.statistics.selected = {
+            state.statistics = {
                 selected: 'none',
                 zoom: 1,
                 move: false,
@@ -50,6 +52,7 @@ export const draftSlice = createSlice({
             }
             state.exporting = false;
             state.id = '';
+            state.project.splice(0, state.project.length);
         },
         SaveToDatabase: (state) => {
             state.statistics.savedToDatabase = true;
