@@ -3,9 +3,6 @@ import './Dashboard.css';
 import {Link} from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux';
-import {
-    selectCurrentProject, wipeProject
-} from '../features/projectSlice';
 
 import { selectUser } from "../features/userSlice";
 
@@ -22,7 +19,6 @@ import { WipeDraft } from "../features/draftSlice";
 export default function Header(props) {
     const dispatch = useDispatch();
     const everyPopup = useSelector(selectEveryPopup);
-    const currentProject = useSelector(selectCurrentProject);
     const user = useSelector(selectUser);
 
     return (
@@ -49,7 +45,7 @@ export default function Header(props) {
                         {user.photo === null ?
                         user.name === null ? <div className="dashboard-account-icon">{user.email[0]}</div> : <div className="dashboard-account-icon">{user.name[0]}</div>
                         :
-                        <img className="dashboard-account-icon" src={user.photo} />
+                        <img className="dashboard-account-icon" src={user.photo} alt='user profile' />
                         }
                         <img className="dashboard-account-expand" src="../dashboard/expand.svg" alt="expand account options icon" />
                     </div>

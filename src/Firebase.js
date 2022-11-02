@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";

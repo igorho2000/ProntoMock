@@ -1,11 +1,7 @@
 import React from "react";
 import './Home.css';
-import {Link, useNavigate} from "react-router-dom";
 
 import {useDispatch, useSelector} from 'react-redux';
-import {resetPopups, transition} from '../features/popupSlice';
-
-import {selectUser} from '../features/userSlice'
 import {showPopup, selectEveryPopup} from '../features/popupSlice'
 import SignIn from "./dashboardcomps/SignIn";
 import SignUp from "./dashboardcomps/SignUp";

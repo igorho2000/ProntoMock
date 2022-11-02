@@ -10,19 +10,16 @@ import Header from './pages/Header';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {selectEveryPopup} from './features/popupSlice';
-import { selectEveryProject, selectCurrentProject,  initializeCurrentProject, initializeEveryProject, wipeProject } from './features/projectSlice';
+import { selectCurrentProject,  initializeCurrentProject, initializeEveryProject, wipeProject } from './features/projectSlice';
 
 import {auth, db} from './Firebase';
 import { doc, getDoc, addDoc, setDoc, collection } from "firebase/firestore";
 
 import {changeUserState, selectUser, changeUserProjects} from './features/userSlice'
-import {selectDraft} from './features/draftSlice'
 
 function App() {
     const everyPopup = useSelector(selectEveryPopup);
     const currentProject = useSelector(selectCurrentProject);
-    const everyProject = useSelector(selectEveryProject);
-    const draft = useSelector(selectDraft);
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 

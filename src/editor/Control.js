@@ -1,6 +1,6 @@
 import React from 'react';
 import './editor.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { selectDraft } from '../features/draftSlice';
 

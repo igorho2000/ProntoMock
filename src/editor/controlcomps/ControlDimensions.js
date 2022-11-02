@@ -174,16 +174,16 @@ export default function ControlDimensions(props) {
                         <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                             <label>Radius</label>
                             <div className='control-form-input'>
-                                <input id="radius" aria-label={0} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderRight: "none", borderBottom: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[0]} />
-                                <input id="radius" aria-label={1} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderLeft: "none", borderBottom: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[1]} />
-                                <input id="radius" aria-label={2} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderLeft: "none", borderTop: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[2]} />
-                                <input id="radius" aria-label={3} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderRight: "none", borderTop: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[3]} />
+                                <input id="radius" aria-label={'0'} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderRight: "none", borderBottom: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[0]} />
+                                <input id="radius" aria-label={'1'} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderLeft: "none", borderBottom: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[1]} />
+                                <input id="radius" aria-label={'2'} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderLeft: "none", borderTop: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[2]} />
+                                <input id="radius" aria-label={'3'} onChange={handleCheckInputChange} onBlur={handleCanZeroBlur} style={{borderRight: "none", borderTop: "none", borderWidth: '2px'}} type='number' value={inputValue.radius[3]} />
                             </div>
                         </form>
                         :
                         <form className='control-form' onSubmit={handleSubmit} onBlur={handleCanZeroBlur} onKeyUp={handleKeyUp}>
                             <label>Radius</label>
-                            <input type="number" id="radius" aria-label={4} onChange={handleCheckInputChange} value={inputValue.radius[0]} />
+                            <input type="number" id="radius" aria-label={'4'} onChange={handleCheckInputChange} value={inputValue.radius[0]} />
                         </form>)
                     }
                     { props.radius && 

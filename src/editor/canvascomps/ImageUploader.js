@@ -3,7 +3,7 @@ import '../../pages/dashboardcomps/Drop.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    resetPopups, selectEveryPopup
+    resetPopups,
 } from '../../features/popupSlice';
 
 import { selectDraft, SaveDraft, AddImage} from "../../features/draftSlice";
@@ -14,12 +14,7 @@ import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 
 export default function ImageUploader() {
-
-    const popup = useSelector(selectEveryPopup);
     const draftInfo = useSelector(selectDraft);
-    const selected = draftInfo.selectedObject;
-    const canvasSettings = draftInfo.canvasSettings;
-    const zoom = draftInfo.statistics.zoom;
 
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
@@ -133,7 +128,7 @@ export default function ImageUploader() {
                         <button onClick={() => dispatch(resetPopups())}>Cancel</button>
                     </div>
                 </div>
-                <img id='uploadedimage' src={inputValue.imageURL} style={{display: 'none'}}></img>
+                <img id='uploadedimage' src={inputValue.imageURL} style={{display: 'none'}} alt='preview of uploaded document'></img>
                 <input id='imageuploader' type='file' style={{display:'none'}} accept="image/png, image/jpeg, .svg, image/svg+xml" onChange={handleChange}></input>
             </form>
         </div>

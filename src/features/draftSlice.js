@@ -3,7 +3,6 @@ import { paperSizes } from './paperSizes';
 import { defaultObject } from './defaultObjects';
 
 import { DegreeCalc } from '../Functions';
-import { act } from 'react-dom/test-utils';
 
 const initialState = {
     id: '',
@@ -64,33 +63,33 @@ export const draftSlice = createSlice({
         },
         ChangeSelectedProperties: (state, action) => {
             // payload is an array where 0=property name and 1=new value
-            state.selectedObject.map((item) => {
-                item[action.payload[0]] = action.payload[1];
+            state.selectedObject.forEach((element) => {
+                element[action.payload[0]] = action.payload[1];
             })
             state.statistics.savedToDatabase = false;
         },
         ChangeEachSelectedProperties: (state, action) => {
             // payload is an array where 0=property name and 1=an array containing new values
-            state.selectedObject.map((item, index) => {
-                item[action.payload[0]] = action.payload[1][index];
+            state.selectedObject.forEach((element, index) => {
+                element[action.payload[0]] = action.payload[1][index];
             })
             state.statistics.savedToDatabase = false;
         },
         ChangeSelectedBorderWidth: (state, action) => {
             // payload is the new borderwidth
-            state.selectedObject.map((item) => {
-                const rotate = DegreeCalc(+item.rotate);
+            state.selectedObject.forEach((element) => {
+                const rotate = DegreeCalc(+element.rotate);
 
-                const offsetX = ((+action.payload - +item.borderWidth) * Math.cos(rotate) + (+action.payload - +item.borderWidth) * Math.sin(rotate));
-                const offsetY = ((+action.payload - +item.borderWidth) * Math.sin(rotate) + (+action.payload - +item.borderWidth) * Math.cos(rotate));
+                const offsetX = ((+action.payload - +element.borderWidth) * Math.cos(rotate) + (+action.payload - +element.borderWidth) * Math.sin(rotate));
+                const offsetY = ((+action.payload - +element.borderWidth) * Math.sin(rotate) + (+action.payload - +element.borderWidth) * Math.cos(rotate));
 
-                item.borderWidth = action.payload;
-                if (item.type === 'Line') {
-                    item.y = +item.y - offsetY / 2;
+                element.borderWidth = action.payload;
+                if (element.type === 'Line') {
+                    element.y = +element.y - offsetY / 2;
                     return
                 }
-                item.x = +item.x - offsetX;
-                item.y = +item.y - offsetY;
+                element.x = +element.x - offsetX;
+                element.y = +element.y - offsetY;
             })
             state.statistics.savedToDatabase = false;
         },
@@ -179,9 +178,9 @@ export const draftSlice = createSlice({
 
             action.payload[0] = (+action.payload[0] * 0.26458) / (+state.statistics.zoom);
             action.payload[1] = (+action.payload[1] * 0.26458) / (+state.statistics.zoom);
-            state.selectedObject.map((item) => {
-                item.x = (+item.x + +action.payload[0]).toFixed(2);
-                item.y = (+item.y + +action.payload[1]).toFixed(2);
+            state.selectedObject.forEach((element) => {
+                element.x = (+element.x + +action.payload[0]).toFixed(2);
+                element.y = (+element.y + +action.payload[1]).toFixed(2);
             })
             state.statistics.savedToDatabase = false;
         },
@@ -189,8 +188,8 @@ export const draftSlice = createSlice({
             // Payload is an array containing the difference between the new location and old location
             // [x, y] unit in pixels (0.26458mm)
             action.payload[0] = (+action.payload[0] * 0.26458) / (+state.statistics.zoom);
-            state.selectedObject.map((item) => {
-                item.width = (+item.width + +action.payload[0]).toFixed(2);
+            state.selectedObject.forEach((element) => {
+                element.width = (+element.width + +action.payload[0]).toFixed(2);
             })
             state.statistics.savedToDatabase = false;
         },
@@ -199,14 +198,14 @@ export const draftSlice = createSlice({
             // [x, y] unit in pixels (0.26458mm)
             action.payload[1] = (+action.payload[1] * 0.26458) / (+state.statistics.zoom);
             if (state.statistics.selected === 'Line') {
-                state.selectedObject.map((item) => {
-                    item.width = (+item.width + +action.payload[1]).toFixed(2);
-                    item.y = (+item.y + +action.payload[1]).toFixed(2);
+                state.selectedObject.forEach((element) => {
+                    element.width = (+element.width + +action.payload[1]).toFixed(2);
+                    element.y = (+element.y + +action.payload[1]).toFixed(2);
                 })
                 return
             }
-            state.selectedObject.map((item) => {
-                item.height = (+item.height + +action.payload[1]).toFixed(2);
+            state.selectedObject.forEach((element) => {
+                element.height = (+element.height + +action.payload[1]).toFixed(2);
             })
             state.statistics.savedToDatabase = false;
         },

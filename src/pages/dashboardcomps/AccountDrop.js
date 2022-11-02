@@ -31,13 +31,13 @@ export default function AccountDrop() {
             </div>
             <a className="projectdrop-list" onClick={() => {
                 dispatch(resetPopups());
-            }} href='https://www.privacypolicygenerator.info/live.php?token=s8LjBGGAWcoKtRVOSFpFqKrIuXBc2oz8' target='_blank'>
+            }} href='https://www.privacypolicygenerator.info/live.php?token=s8LjBGGAWcoKtRVOSFpFqKrIuXBc2oz8' rel="noreferrer" target='_blank'>
                 <img className="draftdrop-iconbase" src="../../dashboard/policy.svg" alt="privacy icon" />
                 <h3 style={{color: 'white'}}>Privacy</h3>
             </a>
             <a className="projectdrop-list" onClick={() => {
                 dispatch(resetPopups());
-            }} href='https://projectonepremium.com' target='_blank'>
+            }} href='https://projectonepremium.com' rel="noreferrer" target='_blank'>
                 <img className="draftdrop-iconbase" src="../../dashboard/logo-o-3d.svg" alt="privacy icon" />
                 <h3 style={{color: 'white'}}>ONE Premium</h3>
             </a>

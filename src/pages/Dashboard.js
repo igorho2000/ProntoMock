@@ -18,8 +18,6 @@ import ProjectSettings from "./dashboardcomps/ProjectSettings";
 import NewProject from "./dashboardcomps/NewProject";
 import ProjectDrop from "./dashboardcomps/ProjectDrop";
 
-import {db} from '../Firebase'
-
 export default function Dashboard() {
     const dispatch = useDispatch();
     const everyPopup = useSelector(selectEveryPopup);

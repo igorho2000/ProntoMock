@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
     ChangeSelectedProperties,
-    SaveDraft, DeselectObject,
+    DeselectObject,
     selectDraft, ToggleExport
 } from '../../features/draftSlice';
 
@@ -54,8 +54,6 @@ export default function ControlExport() {
         ))
         dispatch(ChangeSelectedProperties([event.target.id, event.target.value]))
     }
-
-    const [download, setDownload] = React.useState('');
 
     function savepng() {
         setInputValue((state) => ({
@@ -137,7 +135,7 @@ export default function ControlExport() {
         }))
         htmlToImage.toPng(document.querySelector('#draft'), {width: +canvasSettings.width * 3.7795276 * zoom, height: +canvasSettings.height * 3.7795276 * zoom, canvasWidth: +canvasSettings.width * 20, canvasHeight: +canvasSettings.height * 20}).then(
             function (dataUrl) {
-                var pdf = new jsPDF('p', 'mm', [+canvasSettings.width, +canvasSettings.height]);
+                var pdf = new jsPDF(+canvasSettings.width > +canvasSettings.height ? 'h' : 'p', 'mm', [+canvasSettings.width, +canvasSettings.height]);
                 pdf.addImage(dataUrl, 'PNG', 0, 0, +canvasSettings.width, +canvasSettings.height, '', 'FAST');
                 pdf.save(inputValue.fileName);
                 setInputValue((state) => ({

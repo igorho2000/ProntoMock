@@ -150,9 +150,9 @@ export default function ControlText() {
                 </form>
                 <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                     <label>Style</label>
-                    <img id="bold" onClick={toggleStyle} style={{marginLeft:"5px", height: "1.2rem", marginTop: 0, border: inputValue.bold ? 'gray 1px solid' : 'none', padding: inputValue.bold ? '1px' : '2px'}} src="../properties/bold.svg" />
-                    <img id="underline" onClick={toggleStyle} style={{height: "1.2rem", marginTop: 0, border: inputValue.underline ? 'gray 1px solid' : 'none', padding: inputValue.underline ? '1px' : '2px'}} src="../properties/underlined.svg" />
-                    <img id="italic" onClick={toggleStyle} style={{height: "1.2rem", marginTop: 0, border: inputValue.italic ? 'gray 1px solid' : 'none', padding: inputValue.italic ? '1px' : '2px'}} src="../properties/italic.svg" />
+                    <img id="bold" onClick={toggleStyle} style={{marginLeft:"5px", height: "1.2rem", marginTop: 0, border: inputValue.bold ? 'gray 1px solid' : 'none', padding: inputValue.bold ? '1px' : '2px'}} src="../properties/bold.svg" alt='bold'/>
+                    <img id="underline" onClick={toggleStyle} style={{height: "1.2rem", marginTop: 0, border: inputValue.underline ? 'gray 1px solid' : 'none', padding: inputValue.underline ? '1px' : '2px'}} src="../properties/underlined.svg" alt='underline' />
+                    <img id="italic" onClick={toggleStyle} style={{height: "1.2rem", marginTop: 0, border: inputValue.italic ? 'gray 1px solid' : 'none', padding: inputValue.italic ? '1px' : '2px'}} src="../properties/italic.svg" alt='italic' />
                 </form>
                 <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                     <label>Align</label>

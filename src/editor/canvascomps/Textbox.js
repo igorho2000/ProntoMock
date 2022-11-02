@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { selectDraft, SelectObject, ChangeSelectedText, SaveDraft, SortEveryObjectByZ } from '../../features/draftSlice';
+import { selectDraft, SelectObject, ChangeSelectedText, SaveDraft } from '../../features/draftSlice';
 
 import { useSelector, useDispatch } from 'react-redux';
 

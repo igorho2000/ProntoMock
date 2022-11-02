@@ -3,7 +3,7 @@ import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectDraft, MoveSelected,
-    DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, SortEveryObjectByZ, ZoomInOutDraft, SizeXSelected, SizeYSelected, SizeXYSelected } from '../features/draftSlice';
+    DeleteSelected, SaveDraft, UndoAction, PasteSelected, DuplicateSelected, SortEveryObjectByZ, SizeXSelected, SizeYSelected, SizeXYSelected } from '../features/draftSlice';
 
 import { selectEveryPopup, showPopup, getCoordinates } from '../features/popupSlice';
 
@@ -51,6 +51,9 @@ export default function Canvas() {
             case 'Icon':
                 output = <Icon element={item} selected={false} index={index} key={`everyObject${index}`} />
                 break
+            default:
+                output = undefined;
+                break
         }
 
         return output
@@ -78,6 +81,9 @@ export default function Canvas() {
             case 'Icon':
                 output = <Icon element={item} selected={true} index={index} key={`selectedObject${index}`} />
                 break
+            default:
+                output = undefined;
+                break
         }
 
         return output
@@ -90,11 +96,11 @@ export default function Canvas() {
               ? true : false);
           var selectedString = ''
           // ctrl V
-          if (key == 86 && ctrl) {
+          if (key === 86 && ctrl) {
             if (localStorage.getItem('clipboard') === null) {
                 return
             }
-            const paste = localStorage.getItem('clipboard').split('/\}{|');
+            const paste = localStorage.getItem('clipboard').split('/}{|');
             paste.splice(-1,1);
             const pasteArray = paste.map((item) => (
               JSON.parse(item)
@@ -104,16 +110,16 @@ export default function Canvas() {
             dispatch(SaveDraft());
           }
           // ctrl C
-          else if (key == 67 && ctrl) { 
-            selected.map((item) => {
-              selectedString += JSON.stringify(item) + '/\}{|';
+          else if (key === 67 && ctrl) { 
+            selected.forEach((element) => {
+              selectedString += JSON.stringify(element) + '/}{|';
             })
             localStorage.setItem('clipboard', selectedString);
           }
         //    ctrl X
-          else if (key == 88 && ctrl) {
-            selected.map((item) => {
-                selectedString += JSON.stringify(item) + '/\}{|';
+          else if (key === 88 && ctrl) {
+            selected.forEach((element) => {
+                selectedString += JSON.stringify(element) + '/}{|';
               })
             localStorage.setItem('clipboard', selectedString);
             dispatch(DeleteSelected());
@@ -121,7 +127,7 @@ export default function Canvas() {
             dispatch(SaveDraft());
           }
           // ctrl D
-          else if (key == 68 && ctrl) {
+          else if (key === 68 && ctrl) {
             ev.preventDefault();
             dispatch(DuplicateSelected());
             dispatch(MoveSelected([10, 10]));
@@ -136,7 +142,7 @@ export default function Canvas() {
             dispatch(SaveDraft());
           }
         //   undo
-          else if (key == 90 && ctrl) {
+          else if (key === 90 && ctrl) {
             ev.preventDefault();
             dispatch(UndoAction());          
         }
@@ -191,12 +197,6 @@ export default function Canvas() {
 
     const selectedItemStats = getSelectedItemStats(selected)
     const selectedStats = getSelectedStats(selectedItemStats);
-    
-    const left = selectedStats.leftBound;
-    const top = selectedStats.topBound;
-    const width = selectedStats.selectedWidth;
-    const height = selectedStats.selectedHeight;
-
 
     return (
         <div className='canvas' onMouseMove={(event) => {

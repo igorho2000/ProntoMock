@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { db } from '../Firebase';
-import { doc, getDoc } from "firebase/firestore";
 
 const initialState = {
     everyProject: [],
@@ -63,15 +61,14 @@ export const projectSlice = createSlice({
             state.currentProject[0].drafts = toDraft.concat(state.currentProject[0].drafts);
         },
         duplicateProjectDraft: (state, action) => {
-            // Payload is an Array where 0=index 1=starred?
+            // Payload is an Array where 0=index 1=starred? 2=new id
             const target = action.payload[1] ? state.currentProject[0].starredDrafts : state.currentProject[0].drafts;
-            const toDuplicate = target.splice(action.payload[0], 1)
-            const toAdd = {
-                name: toDuplicate[0].name,
-                img: toDuplicate[0].img
+            const toDuplicate = {
+                ...target[action.payload[0]],
+                name: target[action.payload[0]].name + ' (Duplicate)',
+                id: action.payload[2]
             }
-            toAdd.name += ' (Duplicate)';
-            target.splice(action.payload[0], 0, toDuplicate[0], toAdd);
+            state.currentProject[0].drafts.push(toDuplicate);
         },
         deleteProjectDraft: (state, action) => {
             // Payload is an Array where 0=index 1=starred?

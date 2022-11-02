@@ -57,42 +57,42 @@ export default function Elements() {
                     dispatch(AddObject(0));
                     dispatch(SaveDraft());
                 }}>
-                    <img className='elements-icon' src="../properties/text.svg" />
-                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
+                    <img className='elements-icon' src="../properties/text.svg" alt='add text' />
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" alt='plus sign decoration icon'/>
                     <div className='elements-description'>Text</div>
                 </div>
                 <div className='elements-function' onClick={() => {
                     dispatch(AddObject(1));
                     dispatch(SaveDraft());
                 }}>
-                    <img className='elements-icon' src="../properties/rectangle.svg" />
-                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
+                    <img className='elements-icon' src="../properties/rectangle.svg" alt='add rectangle'/>
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" alt='plus sign decoration icon'/>
                     <div className='elements-description'>Rectangle</div>
                 </div>
                 <div className='elements-function' onClick={() => {
                     dispatch(AddObject(2));
                     dispatch(SaveDraft());
                 }}>
-                    <img className='elements-icon' src="../properties/ellipse.svg" />
-                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
+                    <img className='elements-icon' src="../properties/ellipse.svg" alt='add ellipse'/>
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" alt='plus sign decoration icon'/>
                     <div className='elements-description'>Ellipse</div>
                 </div>
                 <div className='elements-function' onClick={() => {
                     dispatch(AddObject(3));
                     dispatch(SaveDraft());
                 }}>
-                    <img className='elements-icon' src="../properties/line.svg" />
-                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
+                    <img className='elements-icon' src="../properties/line.svg" alt='add line'/>
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" alt='plus sign decoration icon'/>
                     <div className='elements-description'>Line</div>
                 </div>
                 <div className='elements-function' onClick={() => dispatch(showPopup(['ImageUploader', 0]))}>
-                    <img className='elements-icon' src="../properties/image.svg" />
-                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
+                    <img className='elements-icon' src="../properties/image.svg" alt='add file'/>
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" alt='plus sign decoration icon'/>
                     <div className='elements-description'>Image</div>
                 </div>
                 <div className='elements-function' onClick={() => dispatch(showPopup(['IconAdder', 0]))}>
-                    <img className='elements-icon' src="../properties/icon.svg" />
-                    <img className='elements-add-circle' src="../properties/add-circle.svg" />
+                    <img className='elements-icon' src="../properties/icon.svg" alt='add icon'/>
+                    <img className='elements-add-circle' src="../properties/add-circle.svg" alt='plus sign decoration icon'/>
                     <div className='elements-description'>Icon</div>
                 </div>
             </div>
@@ -108,7 +108,8 @@ export default function Elements() {
                     }).then(() => {
                         html2canvas(document.querySelector('#draft'), {useCORS: true}).then(
                             (canvas) => {
-                                const imageURI = canvas.toDataURL("image/png");
+                                const resolution = (+draftInfo.statistics.zoom * 30) / +draftInfo.canvasSettings.height;
+                                const imageURI = canvas.toDataURL("image/jpeg", resolution);
                                 const projectID = draftInfo.project[0] === 'currentProject' ? currentProject[0].id.replace(' ', '') : everyProject[draftInfo.project[1]].id.replace(' ', '');
                                 dispatch(updateDraftThumbnail([draftInfo.project, imageURI]))
                                 var draftsToUpdate = draftInfo.project[0] === 'currentProject' ? [...currentProject[0][draftInfo.project[2]]] : [...everyProject[draftInfo.project[1]][draftInfo.project[2]]];
@@ -128,17 +129,17 @@ export default function Elements() {
                     })
                     
                 }}>
-                    <img className='elements-icon elements-control-icon' src="../properties/save.svg" />
+                    <img className='elements-icon elements-control-icon' src="../properties/save.svg" alt='save draft' />
                     <div className='elements-description'>Save</div>
                     {statistics.savedToDatabase === false && <div style={{width: 10, height: 10, borderRadius: '50%', backgroundColor: 'crimson', position: 'absolute', transform: 'translate3d(8px, -8px, 0)'}}></div>}
                     {saving && <div className='control-loading-circle' style={{position: 'absolute', width: 0, height: 0, transform: 'translate3d(8px, -8px, 0)', margin: 0, borderWidth: 15}}></div>}
                 </div>
                 <div className='elements-function' onClick={() => dispatch(UndoAction())}>
-                    <img className='elements-icon elements-control-icon' src="../properties/undo.svg" />
+                    <img className='elements-icon elements-control-icon' src="../properties/undo.svg" alt='undo action' />
                     <div className='elements-description'>Undo</div>
                 </div>
                 <div className='elements-function' onClick={() => dispatch(ZoomInOutDraft(+zoom / 100 + 0.05))}>
-                    <img className='elements-icon elements-control-icon' src="../properties/zoom_in.svg" />
+                    <img className='elements-icon elements-control-icon' src="../properties/zoom_in.svg" alt='zoom in' />
                     <div className='elements-description'>Zoom In</div>
                 </div>
                 <form onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
@@ -146,7 +147,7 @@ export default function Elements() {
                     <label style={{fontSize: '0.9rem'}}>%</label>
                 </form>
                 <div className='elements-function' onClick={() => dispatch(ZoomInOutDraft(+zoom / 100 - 0.05))}>
-                    <img className='elements-icon elements-control-icon' src="../properties/zoom_out.svg" />
+                    <img className='elements-icon elements-control-icon' src="../properties/zoom_out.svg" alt='zoom out' />
                     <div className='elements-description'>Zoom Out</div>
                 </div>
             </div>

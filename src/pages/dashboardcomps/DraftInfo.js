@@ -8,7 +8,6 @@ import {
     showPopup, transition,
     selectEveryPopup, resetPopups
 } from '../../features/popupSlice';
-import { WipeDraft } from '../../features/draftSlice';
 import DraftRename from "./DraftRename";
 import DraftMove from './DraftMove';
 import { Link } from 'react-router-dom';
@@ -46,7 +45,7 @@ export default function DraftInfo(props) {
                     }} ><h3 style={{color:'black'}}>{props.name}</h3></Link>
                 </div>
                 {props.star &&
-                <img className='dashboard-draft-star' src='../dashboard/star-gold.svg' />
+                <img className='dashboard-draft-star' src='../dashboard/star-gold.svg' alt='starred draft icon' />
                 }
             </div>
             {

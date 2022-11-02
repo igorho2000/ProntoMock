@@ -41,7 +41,7 @@ export default function NewDraft() {
 
     const outputPaperSizes = Object.keys(paperSizes).map((item) => {
         if (item === 'Custom') {
-            return
+            return undefined
         }
         return (
         <option key={`papersize-${item}`}>{item}</option>

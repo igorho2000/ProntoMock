@@ -10,7 +10,6 @@ import { selectDraft, DeleteSelected, SortEveryObjectByZ, SaveDraft,
 MoveSelected, DuplicateSelected } from "../../features/draftSlice";
 
 import { useOutsideClick } from "../../Functions";
-import * as htmlToImage from 'html-to-image';
 
 
 export default function SelectedRightClick() {
@@ -18,8 +17,6 @@ export default function SelectedRightClick() {
     const popup = useSelector(selectEveryPopup);
     const draftInfo = useSelector(selectDraft);
     const selected = draftInfo.selectedObject;
-    const canvasSettings = draftInfo.canvasSettings;
-    const zoom = draftInfo.statistics.zoom;
 
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
@@ -43,8 +40,8 @@ export default function SelectedRightClick() {
         <div className="projectdrop selectright" style={{left: popup.Coordinates[0] < window.innerWidth - 510 ? popup.Coordinates[0] - 13 : popup.Coordinates[0] - 210, top: popup.Coordinates[1] < window.innerHeight - 140 ? popup.Coordinates[1] + 3 : popup.Coordinates[1] - 140, minHeight: 'fit-content', minWidth: 'fit-content', zIndex: '10000003'}} ref={wrapperRef}>
             <div className="projectdrop-list" onClick={() => {
                 var selectedString = ''
-                selected.map((item) => {
-                    selectedString += JSON.stringify(item) + '/\}{|';
+                selected.forEach((element) => {
+                    selectedString += JSON.stringify(element) + '/}{|';
                   })
                 localStorage.setItem('clipboard', selectedString);
                 dispatch(resetPopups());
@@ -56,8 +53,8 @@ export default function SelectedRightClick() {
             </div>
             <div className="projectdrop-list" onClick={() => {
                 var selectedString = ''
-                selected.map((item) => {
-                    selectedString += JSON.stringify(item) + '/\}{|';
+                selected.forEach((element) => {
+                    selectedString += JSON.stringify(element) + '/}{|';
                   })
                 localStorage.setItem('clipboard', selectedString);
                 dispatch(DeleteSelected());

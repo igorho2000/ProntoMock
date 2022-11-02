@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { selectDraft, SelectObject, SortEveryObjectByZ } from '../../features/draftSlice';
+import { selectDraft, SelectObject } from '../../features/draftSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Image(props) {
@@ -20,6 +20,6 @@ export default function Image(props) {
         }} onClick={() => {
             dispatch(SelectObject(props.index));
             // dispatch(SortEveryObjectByZ());
-        }}></img>
+        }} alt=''></img>
     )
 }

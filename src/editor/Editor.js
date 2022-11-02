@@ -2,9 +2,7 @@ import React from 'react';
 import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-    selectEveryPopup, resetPopups, showPopup
-} from '../features/popupSlice';
+
 import {
     selectDraft, ToggleMove, SaveDraft, InitializeDraft
 } from '../features/draftSlice'
@@ -18,7 +16,7 @@ import Elements from './Elements';
 import Control from './Control';
 
 import {db} from '../Firebase';
-import { doc, getDoc, addDoc, setDoc, collection } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function Editor() {
     const dispatch = useDispatch();
@@ -67,7 +65,7 @@ export default function Editor() {
                 message: '',
             })
         })
-    }, [id])
+    }, [id, currentProject, dispatch, everyProject])
 
     return (
         <div onMouseUp={() => {

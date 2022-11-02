@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     ChangeCanvasProperties, SetDraftSize,
     selectDraft,
-    SaveDraft,
 } from '../../features/draftSlice';
 
 import ControlColorpicker from './ControlColorpicker';
@@ -215,16 +214,16 @@ export default function ControlDocument() {
                 inputValue.differentMargin ?
                 <form className='control-form-long' onSubmit={handleSubmit} onKeyUp={handleKeyUp}>
                     <label>Margin</label>
-                    <input type="number" id="margin" aria-label={0} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[0]} style={{borderRight: "none", borderBottom: "none", borderLeft: "none", borderWidth: '2px'}} />
-                    <input type="number" id="margin" aria-label={1} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[1]} style={{borderLeft: "none", borderBottom: "none", borderTop: "none", borderWidth: '2px'}} />
-                    <input type="number" id="margin" aria-label={2} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[2]} style={{borderLeft: "none", borderTop: "none", borderRight: "none", borderWidth: '2px'}} />
-                    <input type="number" id="margin" aria-label={3} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[3]} style={{borderRight: "none", borderTop: "none", borderBottom: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={'0'} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[0]} style={{borderRight: "none", borderBottom: "none", borderLeft: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={'1'} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[1]} style={{borderLeft: "none", borderBottom: "none", borderTop: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={'2'} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[2]} style={{borderLeft: "none", borderTop: "none", borderRight: "none", borderWidth: '2px'}} />
+                    <input type="number" id="margin" aria-label={'3'} onChange={handleCheckInputChange} onBlur={handleMarginBlur} value={inputValue.margin[3]} style={{borderRight: "none", borderTop: "none", borderBottom: "none", borderWidth: '2px'}} />
             
                 </form>
                 :
                 <form className='control-form' onSubmit={handleSubmit} onBlur={handleMarginBlur} onKeyUp={handleKeyUp}>
                     <label>Margin</label>
-                    <input type="number" id="margin" aria-label={4} onChange={handleCheckInputChange} value={inputValue.margin[0]} />
+                    <input type="number" id="margin" aria-label={'4'} onChange={handleCheckInputChange} value={inputValue.margin[0]} />
                 </form>
             }
             

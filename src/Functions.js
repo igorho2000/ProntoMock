@@ -1,8 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
-    resetPopups, showPopup,
-    selectEveryPopup,
+    resetPopups
 } from './features/popupSlice';
 import { DeselectObject, SortEveryObjectByZ } from './features/draftSlice';
 
@@ -82,9 +81,9 @@ export function useOutsideClick(ref) {
 // Function that converts RGB to HEX
 
 export function RGBtoHEX(array) {
-  var red = array[0].toString(16).length == 1 ? '0' + array[0].toString(16) : array[0].toString(16);
-  var green = array[1].toString(16).length == 1 ? '0' + array[1].toString(16) : array[1].toString(16);
-  var blue = array[2].toString(16).length == 1 ? '0' + array[2].toString(16) : array[2].toString(16);
+  var red = array[0].toString(16).length === 1 ? '0' + array[0].toString(16) : array[0].toString(16);
+  var green = array[1].toString(16).length === 1 ? '0' + array[1].toString(16) : array[1].toString(16);
+  var blue = array[2].toString(16).length === 1 ? '0' + array[2].toString(16) : array[2].toString(16);
   var hex = '#' + red + green + blue;
   return hex
 }

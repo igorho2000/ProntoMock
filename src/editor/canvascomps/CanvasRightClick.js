@@ -6,20 +6,14 @@ import {
     resetPopups, selectEveryPopup
 } from '../../features/popupSlice';
 
-import { selectDraft, SortEveryObjectByZ, SaveDraft, PasteSelected, UndoAction} from "../../features/draftSlice";
+import { SortEveryObjectByZ, SaveDraft, PasteSelected, UndoAction} from "../../features/draftSlice";
 
 import { useOutsideClick } from "../../Functions";
-import * as htmlToImage from 'html-to-image';
 
 
 export default function CanvasRightClick() {
 
     const popup = useSelector(selectEveryPopup);
-    const draftInfo = useSelector(selectDraft);
-    const selected = draftInfo.selectedObject;
-    const canvasSettings = draftInfo.canvasSettings;
-    const zoom = draftInfo.statistics.zoom;
-
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();
@@ -30,7 +24,7 @@ export default function CanvasRightClick() {
                 if (localStorage.getItem('clipboard') === null) {
                     return
                 }
-                const paste = localStorage.getItem('clipboard').split('/\}{|');
+                const paste = localStorage.getItem('clipboard').split('/}{|');
                 paste.splice(-1,1);
                 const pasteArray = paste.map((item) => (
                   JSON.parse(item)

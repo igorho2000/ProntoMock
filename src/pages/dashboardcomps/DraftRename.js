@@ -33,12 +33,12 @@ export default function DraftRename(props) {
         const projectID = currentProject[0].id.replace(' ', '');
         updateDoc(doc(db, 'draft', props.id), {'canvasSettings.name': inputValue});
         if (props.star) {
-            var updatedDrafts = [...currentProject[0].starredDrafts];
-            updatedDrafts[props.index] = {
+            var updatedStarredDrafts = [...currentProject[0].starredDrafts];
+            updatedStarredDrafts[props.index] = {
                 name: inputValue,
                 id: props.id
             };
-            updateDoc(doc(db, 'projects', projectID), {starredDrafts: updatedDrafts});
+            updateDoc(doc(db, 'projects', projectID), {starredDrafts: updatedStarredDrafts});
         } else {
             var updatedDrafts = [...currentProject[0].drafts];
             updatedDrafts[props.index] = {

@@ -1,12 +1,12 @@
 import React from "react";
 import '../../pages/dashboardcomps/Drop.css';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
-    resetPopups, selectEveryPopup
+    resetPopups
 } from '../../features/popupSlice';
 
-import { selectDraft, SaveDraft, AddIcon} from "../../features/draftSlice";
+import { SaveDraft, AddIcon} from "../../features/draftSlice";
 
 import { useOutsideClick } from "../../Functions";
 
@@ -14,13 +14,6 @@ import { allIcons } from "../../features/AllIcons";
 
 
 export default function IconAdder() {
-
-    const popup = useSelector(selectEveryPopup);
-    const draftInfo = useSelector(selectDraft);
-    const selected = draftInfo.selectedObject;
-    const canvasSettings = draftInfo.canvasSettings;
-    const zoom = draftInfo.statistics.zoom;
-
     const wrapperRef = React.useRef(null);
     useOutsideClick(wrapperRef);
     const dispatch = useDispatch();

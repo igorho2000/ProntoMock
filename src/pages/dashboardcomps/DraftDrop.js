@@ -12,7 +12,7 @@ import {
 
 import { useOutsideClick } from "../../Functions";
 import { db } from "../../Firebase";
-import { updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { getDoc, setDoc, updateDoc, doc, deleteDoc, collection, addDoc } from "firebase/firestore";
 
 export default function DraftDrop(props) {
     const wrapperRef = React.useRef(null);
@@ -103,14 +103,40 @@ export default function DraftDrop(props) {
             }
 
             {/* Duplicate Draft */}
-            {/* <div className="projectdrop-list" onClick={() => {
-            dispatch(resetPopups());
-            dispatch(duplicateProjectDraft([props.index, props.star]))
+            <div className="projectdrop-list" onClick={() => {
+                dispatch(resetPopups());
+                const projectID = currentProject[0].id.replace(' ', '');
+                const toDuplicate = props.star ? currentProject[0].starredDrafts[props.index] : currentProject[0].drafts[props.index];
+                var drafts = [...currentProject[0].drafts];
+                getDoc(doc(db, 'draft', props.id)).then((result) => {
+                    console.log('get')
+                    const data = result.data()
+                    console.log(data)
+                    var updateCanvasSettings = {
+                        ...data.canvasSettings,
+                        name: data.canvasSettings.name + ' (Duplicate)'
+                    }
+                    addDoc(collection(db, 'draft'), {
+                        canvasSettings: updateCanvasSettings,
+                        everyObject: data.everyObject
+                    }).then((result) => {
+                        console.log('set')
+                        dispatch(duplicateProjectDraft([props.index, props.star, result.id]))
+                        drafts.push({
+                            ...toDuplicate,
+                            id: result.id,
+                            name: toDuplicate.name + ' (Duplicate)'
+                        })
+                        updateDoc(doc(db, 'projects', projectID), {drafts: drafts}).then(() => {console.log('update')})
+                        setDoc(doc(db, 'draft', result.id), {id: result.id}, {merge: true}).then(() => {console.log('done')})
+                    })
+                })
+                
             }}>
                 <img className="draftdrop-iconbase" src="../../dashboard/duplicate.svg" alt="duplicate draft icon bottom portion" />
                 <img className="draftdrop-iconmove draftdrop-duplicate" src="../../dashboard/duplicate-duplicate.svg" alt="duplicate draft icon upper portion" />
                 <h3>Duplicate</h3>
-            </div> */}
+            </div>
 
             {/* Delete Draft */}
             <div className="projectdrop-list" onClick={() => {

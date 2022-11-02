@@ -8,7 +8,7 @@ import {
 
 import { useOutsideClick } from "../../Functions";
 
-import { auth, provider, fbProvider } from "../../Firebase";
+import { auth, provider } from "../../Firebase";
 import { signInWithRedirect, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 export default function SignIn() {
@@ -181,7 +181,7 @@ export default function SignIn() {
                                     errorMessage: "An Unexpected Error Occurred. Please try later."
                                 }))
                             });
-                        }}><img src='../../dashboard/google-logo.svg' />Sign In with Google</button>
+                        }}><img src='../../dashboard/google-logo.svg' alt='Google Logo' />Sign In with Google</button>
                     </div>
                     {/* <div className="popupform-buttoncont">
                         <button to='/dashboard' className="popupform-button popupform-button-right popupform-button-gray" onClick={(event) => {

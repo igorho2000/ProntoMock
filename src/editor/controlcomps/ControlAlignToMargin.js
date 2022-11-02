@@ -60,26 +60,26 @@ export default function ControlAlignToMargin() {
             </div>
             <div className='control-group'>
                 <form className='control-form-long'>
-                    <img src="../properties/align_horizontal_left.svg" onClick={AlignLeft} />
-                    <img src="../properties/align_horizontal_center.svg" onClick={AlignHorizontalCenter}/>
-                    <img src="../properties/align_horizontal_right.svg" onClick={AlignRight} />
-                    <img src="../properties/align_vertical_top.svg" onClick={AlignTop} />
-                    <img src="../properties/align_vertical_center.svg" onClick={AlignVerticalCenter} />
-                    <img src="../properties/align_vertical_bottom.svg" onClick={AlignBottom} />
+                    <img src="../properties/align_horizontal_left.svg" onClick={AlignLeft} alt='align left' />
+                    <img src="../properties/align_horizontal_center.svg" onClick={AlignHorizontalCenter} alt='align horizontal center'/>
+                    <img src="../properties/align_horizontal_right.svg" onClick={AlignRight} alt='align right' />
+                    <img src="../properties/align_vertical_top.svg" onClick={AlignTop} alt='align top' />
+                    <img src="../properties/align_vertical_center.svg" onClick={AlignVerticalCenter} alt='align vertical center' />
+                    <img src="../properties/align_vertical_bottom.svg" onClick={AlignBottom} alt='align bottom' />
                 </form>
                 <form className='control-form'>
                     <label style={{width: "5.5rem"}}>Move to Front</label>
                     <img src="../properties/move_up.svg" onClick={() => {
                         dispatch(MoveSelectedToFront());
                         dispatch(SaveDraft());
-                    }} />
+                    }} alt='move to front' />
                 </form>
                 <form className='control-form'>
                     <label style={{width: "5.5rem"}}>Move to Back</label>
                     <img src="../properties/move_down.svg" onClick={() => {
                         dispatch(MoveSelectedToBack());
                         dispatch(SaveDraft());
-                    }} />
+                    }} alt='move to back' />
                 </form>
             </div>
         </div>

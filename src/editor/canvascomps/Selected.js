@@ -2,8 +2,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDraft, DeselectObject, DeselectParticularObject,
-MoveSelected, ToggleMove } from '../../features/draftSlice';
+import { selectDraft, DeselectParticularObject, ToggleMove } from '../../features/draftSlice';
 
 import { selectEveryPopup, showPopup, getCoordinates } from '../../features/popupSlice';
 
