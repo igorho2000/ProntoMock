@@ -1,1 +1,1 @@
-# ProntoMock ![ProntoMock Logo](/assets/logo.png)
+# ProntoMock <img src='assets/logo.png' width='24' height='24'>
