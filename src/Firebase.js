@@ -5,7 +5,7 @@ import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCwo7PJogsP2O0CRqbds2PyPvw_LXodKuM",
-    authDomain: "prontomock-abed0.firebaseapp.com",
+    authDomain: "www.prontomock.com",
     projectId: "prontomock-abed0",
     storageBucket: "prontomock-abed0.appspot.com",
     messagingSenderId: "786548531074",
