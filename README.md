@@ -1,1 +1,1 @@
-# ProntoMock ![ProntoMock Logo](/assets/logo192.png)
+# ProntoMock ![ProntoMock Logo](/assets/logo.png)
