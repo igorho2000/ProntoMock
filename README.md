@@ -96,17 +96,29 @@ Files (drafts) in PM are stored in projects (folders). The dashboard is where us
 | -------- | ----------- |
 | New Draft | Click on the blue `New Draft` button in the bottom right corner (This button is unavailable in mobile devices). Enter a project name and choose a draft size from the drop down menu. Click on `Create Draft`. |
 | Access Draft | Hover on a draft thumbnail and click on the `draft name` to go to the draft editor. |
-| Draft Options | Hover on a draft thumbnail and click on the  `three dots icon` to access draft options.<br><ul><li>**Star/Unstar Draft**:</li><li>**Rename Draft**:</li><li>**Move Draft**:</li><li>**Duplicate Draft**:</li><li>**Delete Draft**:</li></ul>
+| Draft Options | Hover on a draft thumbnail and click on the  `three dots icon` to access draft options.<br><ul><li>**Star/Unstar Draft**: Click on the `icon` to star or unstar drafts. Starred drafts will be listed in front of other unstarred drafts.</li><li>**Rename Draft**: Click on the `icon` and enter the new name into the form. Click on `Rename` to save changes.</li><li>**Move Draft**: Click on the `icon` and select a project to move the draft to. Click on `Move` to save changes.</li><li>**Duplicate Draft**: Click on the `icon` to duplicate the draft.</li><li>**Delete Draft**: Click on the `icon` to delete the draft. This action is irreversible.</li></ul>
 
 ### Editor
 
 #### Elements
 
+| Function | Description |
+| -------- | ----------- |
+
 #### Select
+
+| Function | Description |
+| -------- | ----------- |
 
 #### Actions and Shortcuts
 
+| Function | Description |
+| -------- | ----------- |
+
 #### Exporting
+
+| Function | Description |
+| -------- | ----------- |
 
 ## Future Development
 
