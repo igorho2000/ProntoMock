@@ -158,15 +158,41 @@ The properties panel contains all the options available for modification for sel
 
 | Function | Shortcut | Description |
 | -------- | -------- | ----------- |
-| Save | `ctrl + s` | Saves the draft to the cloud. Users **MUST** save their drafts before exiting the editor or all changes will be discarded.<br>Saving can also be done by clicking the `save icon` below the elements panel. A `red dot` indicates that the draft hasn't been saved to the cloud. |
+| Save | `ctrl+s` | Saves the draft to the cloud. Users **MUST** save their drafts before exiting the editor or all changes will be discarded.<br>Saving can also be done by clicking the `save icon` below the elements panel. A `red dot` indicates that the draft hasn't been saved to the cloud. |
+| Undo | `ctrl+z` | PM automatically saves a imprint of each edit **(this is different from saving to the cloud)**. Invoking undo will return the draft to it's last modified state. <br>Undoing can also be done by clicking the `undo icon` below the elements panel. Or by `right clicking` outside of selected elements and clicking `undo`. |
+| Copy | `ctrl+c` | Copies all selected elements.<br>Copying can also be done by `right clicking` on selected elements and clicking `copy` |
+| Cut | `ctrl+x` | Cuts all selected elements.<br>Cutting can also be done by `right clicking` on selected elements and clicking `cut` |
+| Duplicate | `ctrl+d` | Duplicates all selected elements.<br>Duplicating can also be done by `right clicking` on selected elements and clicking `duplicate` |
+| Delete | `delete` | Deletes all selected elements.<br>Deleting can also be done by `right clicking` on selected elements and clicking `delete` |
+| Paste | `ctrl+v` | Pastes all selected elements.<br>Pasting can also be done by `right clicking` outside of selected elements and clicking `paste` |
 
 > **Warning**: Users **MUST** press the `save icon` or `ctrl + s` to save changes to the cloud. If users leave the draft without saving, every change made will be discarded.
 
+> **Note**: Document property changes cannot be undone. If you wish to revert changes, directly edit them in the properties panel.
+
 ## Future Development
+
+`ProntoMock v1.0 (beta)` support all basic functions expected of a mockup editor. However, there are many more functions that could be added to the software to enhance its usefulness. Additional features in future versions of ProntoMock v2.0 may include:
+
+**1. Sharing between Users**: Users will be able to collaborate on the same project with multiple other users.
+
+**2. Variable Text**: Users will be able to include different fonts, sizes, alignment, and styles in the same text component
+
+**3. Pen Tool**: Users will be able to draw free-hand lines.
+
+**4. Enhanced Selected Control Box**: Dragging, resizing, and rotating will be smoother and more intuitive.
 
 ## Demo
 
+PM is freely available at www.prontomock.com. Create an account to try out the software yourself. Or, use the following demo account to explore the application without signing up.
+
+**Demo Account**: igorlifemanagement@gmail.com
+**Password**: password
+
 ## Contact
+
+I welcome all suggestions that can improve the UX/UI of PM. Feel free to drop me a message.
+
 📫 **Email**: igorho2000@gmail.com
 
 🌐 **Website**: www.projectonepremium.com
