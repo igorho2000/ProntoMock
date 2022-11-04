@@ -182,6 +182,8 @@ The properties panel contains all the options available for modification for sel
 
 **4. Enhanced Selected Control Box**: Dragging, resizing, and rotating will be smoother and more intuitive.
 
+**5. Multiple Pages Per Document**: Create documents that consist of multiple pages. Allowing users to create reports and slideshows.
+
 ## Demo
 
 PM is freely available at www.prontomock.com. Create an account to try out the software yourself. Or, use the following demo account to explore the application without signing up.
