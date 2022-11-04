@@ -8,6 +8,8 @@
 - [Tutorial](#tutorial)
   - [User Account](#user-account)
   - [Dashboard](#dashboard)
+    - [Projects](#projects)
+    - [Drafts](#drafts)
   - [Editor](#editor)
     - [Elements](#elements)
     - [Select](#select)
@@ -77,6 +79,24 @@ Git & GitHub
 | Log Out | Click on the `round user photo` in the upper right corner of the dashboard or editor. Click on `Log Out`.|
 
 ### Dashboard
+
+Files (drafts) in PM are stored in projects (folders). The dashboard is where users are able to access all files of their account.
+
+#### Projects
+
+| Function | Description |
+| -------- | ----------- |
+| Access Projects | Click on the `Project name` in the upper left corner, then choose a project to navigate to from the drop down menu. |
+| New Project | Click on the `Project name` in the upper left corner, then click on  `New Project` in the bottom of the drop down menu. Enter a project name in the form and click on  `Create Project`. |
+| Project Settings | Click on the `Gear Icon` beside the project name.<br><ul><li>**Change Project Name**: Enter the new name into the form, then click on the blue `Finish` button to save changes.</li><li>**Delete Project**: Click on the red `Delete Project` button. This action in irreversible.</li></ul> |
+
+#### Drafts
+
+| Function | Description |
+| -------- | ----------- |
+| New Draft | Click on the blue `New Draft` button in the bottom right corner (This button is unavailable in mobile devices). Enter a project name and choose a draft size from the drop down menu. Click on `Create Draft`. |
+| Access Draft | Hover on a draft thumbnail and click on the `draft name` to go to the draft editor. |
+| Draft Options | Hover on a draft thumbnail and click on the  `three dots icon` to access draft options.<br><ul><li>**Star/Unstar Draft**:</li><li>**Rename Draft**:</li><li>**Move Draft**:</li><li>**Duplicate Draft**:</li><li>**Delete Draft**:</li></ul>
 
 ### Editor
 
