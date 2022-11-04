@@ -187,6 +187,7 @@ The properties panel contains all the options available for modification for sel
 PM is freely available at www.prontomock.com. Create an account to try out the software yourself. Or, use the following demo account to explore the application without signing up.
 
 **Demo Account**: igorlifemanagement@gmail.com
+
 **Password**: password
 
 ## Contact
