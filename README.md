@@ -11,6 +11,12 @@
 
 ## Story and Motivation
 
+In July, I was working on the Google UX Design Professional Certificate. As part of the curriculum, I learned to use popular online mockup software such as Figma and Adobe XD. I thought to myself then, “how hard would it be to code a graphics editor from scratch?” As such, in August when I finished learning React and was looking for project ideas, creating a mockup editor kept popping into my head. 
+
+With minimal fanfare, I began work on PM in mid-September. 1.5 months later, I’m pleased to announce that ProntoMock v1.0 (Beta) is complete. This version contains all basic functions expected from a mockup editor, the complete list could be found below.
+
+This is, however, not the end of the development of PM. There are dozens of more functions I aim at adding to the application to ensure PM is not only a cool project, but also a fully functional software that I myself would use on a daily basis.
+
 ## Tools and Skills Utilized
 
 ## Tutorial
