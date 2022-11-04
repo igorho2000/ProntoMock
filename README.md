@@ -66,7 +66,7 @@ Git & GitHub
 
 ## Tutorial
 
-[ProntoMock](www.prontomock.com) <img src='assets/logo.png' width='16' height='16'> v1.0 (Beta)
+**Current Version**: ProntoMock <img src='assets/logo.png' width='16' height='16'> v1.0 (Beta)
 
 ### User Account
 
