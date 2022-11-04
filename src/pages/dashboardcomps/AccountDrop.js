@@ -31,6 +31,12 @@ export default function AccountDrop() {
             </div>
             <a className="projectdrop-list" onClick={() => {
                 dispatch(resetPopups());
+            }} href='https://github.com/igorho2000/ProntoMock' rel="noreferrer" target='_blank'>
+                <img className="draftdrop-iconbase" src="../../dashboard/learn.svg" alt="tutorial icon" />
+                <h3 style={{color: 'white'}}>Tutorial</h3>
+            </a>
+            <a className="projectdrop-list" onClick={() => {
+                dispatch(resetPopups());
             }} href='https://www.privacypolicygenerator.info/live.php?token=s8LjBGGAWcoKtRVOSFpFqKrIuXBc2oz8' rel="noreferrer" target='_blank'>
                 <img className="draftdrop-iconbase" src="../../dashboard/policy.svg" alt="privacy icon" />
                 <h3 style={{color: 'white'}}>Privacy</h3>

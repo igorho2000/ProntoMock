@@ -13,14 +13,12 @@ export const projectSlice = createSlice({
             if (state.currentProject.length === 0) {
                 state.currentProject.push(action.payload);
             }
-            console.log(action.payload);
         },
         initializeEveryProject: (state, action) => {
             const idArray = state.everyProject.map((item) => (item.id))
             if (idArray.includes(action.payload.id) === false) {
                 state.everyProject.push(action.payload);
             }
-            console.log(action.payload);
         },
         wipeProject: (state) => {
             state.currentProject.splice(0, state.currentProject.length);

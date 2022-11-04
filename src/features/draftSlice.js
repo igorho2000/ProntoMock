@@ -30,8 +30,10 @@ export const draftSlice = createSlice({
         InitializeDraft: (state, action) => {
             // payload is an array 0=id 1=rest of stuff
             state.id = action.payload[0];
+            state.project.splice(0, state.project.length)
             state.project = state.project.concat(action.payload[2]);
             state.canvasSettings = action.payload[1].canvasSettings;
+            state.everyObject.splice(0, state.everyObject.length);
             state.everyObject = state.everyObject.concat(action.payload[1].everyObject);
             state.savedVersions.push(action.payload[1].everyObject);
         },

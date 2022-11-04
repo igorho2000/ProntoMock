@@ -46,7 +46,6 @@ export default function Editor() {
             everyProject[i].drafts.forEach((element, index) => {allDraftIDs[element.id]= ['everyProject', i, 'drafts', index]});
             everyProject[i].starredDrafts.forEach((element, index) => {allDraftIDs[element.id]= ['everyProject', i, 'starredDrafts', index]});
         }
-        console.log(allDraftIDs)
         if (allDraftIDs[id] === undefined) {
             setLoading((state) => ({
                 ...state,
@@ -65,7 +64,7 @@ export default function Editor() {
                 message: '',
             })
         })
-    }, [id, currentProject, dispatch, everyProject])
+    }, [id])
 
     return (
         <div onMouseUp={() => {

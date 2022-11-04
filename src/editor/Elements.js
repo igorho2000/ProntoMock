@@ -2,7 +2,7 @@ import React from 'react';
 import './editor.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft, AddObject, DeselectObject, SaveToDatabase } from '../features/draftSlice';
+import { SaveDraft, selectDraft, UndoAction, ZoomInOutDraft, AddObject, DeselectObject, SaveToDatabase, SortEveryObjectByZ } from '../features/draftSlice';
 import ImageUploader from './canvascomps/ImageUploader';
 
 import { selectEveryPopup, showPopup } from '../features/popupSlice';
@@ -53,6 +53,7 @@ export default function Elements() {
     }
     function handleSave() {
         dispatch(DeselectObject());
+        dispatch(SortEveryObjectByZ());
         dispatch(SaveToDatabase());
         setSaving(true)
         setDoc(doc(db, 'draft', draftInfo.id), {
