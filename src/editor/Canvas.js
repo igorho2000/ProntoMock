@@ -134,6 +134,14 @@ export default function Canvas() {
             dispatch(SortEveryObjectByZ())
             dispatch(SaveDraft());
           }
+        //   ctrl S
+          else if (key === 83 && ctrl) {
+            ev.preventDefault();
+            dispatch(DuplicateSelected());
+            dispatch(MoveSelected([10, 10]));
+            dispatch(SortEveryObjectByZ())
+            dispatch(SaveDraft());
+          }
           // delete 
           else if (key === 46) {
             ev.preventDefault();

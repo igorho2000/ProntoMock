@@ -18,6 +18,8 @@ import { updateDraftThumbnail } from '../features/projectSlice';
 export default function Elements() {
     const dispatch = useDispatch();
     const draftInfo = useSelector(selectDraft);
+    const selected = draftInfo.selected;
+    const saved = draftInfo.saved;
     const statistics = draftInfo.statistics;
     const popup = useSelector(selectEveryPopup);
     const currentProject = useSelector(selectCurrentProject);
@@ -49,6 +51,55 @@ export default function Elements() {
             event.target.blur();
         }
     }
+    function handleSave() {
+        dispatch(DeselectObject());
+        dispatch(SaveToDatabase());
+        setSaving(true)
+        setDoc(doc(db, 'draft', draftInfo.id), {
+            id: draftInfo.id,
+            canvasSettings: draftInfo.canvasSettings,
+            everyObject: draftInfo.everyObject.concat(draftInfo.selectedObject)
+        }).then(() => {
+            html2canvas(document.querySelector('#draft'), {useCORS: true}).then(
+                (canvas) => {
+                    const resolution = (+draftInfo.statistics.zoom * 30) / +draftInfo.canvasSettings.height;
+                    const imageURI = canvas.toDataURL("image/jpeg", resolution);
+                    const projectID = draftInfo.project[0] === 'currentProject' ? currentProject[0].id.replace(' ', '') : everyProject[draftInfo.project[1]].id.replace(' ', '');
+                    dispatch(updateDraftThumbnail([draftInfo.project, imageURI]))
+                    var draftsToUpdate = draftInfo.project[0] === 'currentProject' ? [...currentProject[0][draftInfo.project[2]]] : [...everyProject[draftInfo.project[1]][draftInfo.project[2]]];
+                    draftsToUpdate[draftInfo.project[3]] = {
+                        ...draftsToUpdate[draftInfo.project[3]],
+                        image: imageURI
+                    };
+                    updateDoc(doc(db, 'projects', projectID), {
+                        [draftInfo.project[2]]: draftsToUpdate
+                    })
+                    setSaving(false)
+                }).catch(() => {
+                    setSaving(false)
+                })
+        }).catch(() => {
+            setSaving(false)
+        })
+    }
+    function handleKeyDown(ev) {
+        ev = ev || window.event;
+          var key = ev.which || ev.keyCode;
+          var ctrl = ev.ctrlKey ? ev.ctrlKey : ((key === 17)
+              ? true : false);
+        //   ctrl S
+          if (key === 83 && ctrl) {
+            ev.preventDefault();
+            handleSave();
+          }
+      }
+    
+    React.useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown, false)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown, false)
+        }
+    }, [selected, saved])
 
     return (
         <div>
@@ -97,38 +148,7 @@ export default function Elements() {
                 </div>
             </div>
             <div className='elements elements-control'>
-                <div className='elements-function' onClick={() => {
-                    dispatch(DeselectObject());
-                    dispatch(SaveToDatabase());
-                    setSaving(true)
-                    setDoc(doc(db, 'draft', draftInfo.id), {
-                        id: draftInfo.id,
-                        canvasSettings: draftInfo.canvasSettings,
-                        everyObject: draftInfo.everyObject.concat(draftInfo.selectedObject)
-                    }).then(() => {
-                        html2canvas(document.querySelector('#draft'), {useCORS: true}).then(
-                            (canvas) => {
-                                const resolution = (+draftInfo.statistics.zoom * 30) / +draftInfo.canvasSettings.height;
-                                const imageURI = canvas.toDataURL("image/jpeg", resolution);
-                                const projectID = draftInfo.project[0] === 'currentProject' ? currentProject[0].id.replace(' ', '') : everyProject[draftInfo.project[1]].id.replace(' ', '');
-                                dispatch(updateDraftThumbnail([draftInfo.project, imageURI]))
-                                var draftsToUpdate = draftInfo.project[0] === 'currentProject' ? [...currentProject[0][draftInfo.project[2]]] : [...everyProject[draftInfo.project[1]][draftInfo.project[2]]];
-                                draftsToUpdate[draftInfo.project[3]] = {
-                                    ...draftsToUpdate[draftInfo.project[3]],
-                                    image: imageURI
-                                };
-                                updateDoc(doc(db, 'projects', projectID), {
-                                    [draftInfo.project[2]]: draftsToUpdate
-                                })
-                                setSaving(false)
-                            }).catch(() => {
-                                setSaving(false)
-                            })
-                    }).catch(() => {
-                        setSaving(false)
-                    })
-                    
-                }}>
+                <div className='elements-function' onClick={handleSave}>
                     <img className='elements-icon elements-control-icon' src="../properties/save.svg" alt='save draft' />
                     <div className='elements-description'>Save</div>
                     {statistics.savedToDatabase === false && <div style={{width: 10, height: 10, borderRadius: '50%', backgroundColor: 'crimson', position: 'absolute', transform: 'translate3d(8px, -8px, 0)'}}></div>}
