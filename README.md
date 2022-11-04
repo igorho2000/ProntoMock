@@ -13,8 +13,8 @@
   - [Editor](#editor)
     - [Elements](#elements)
     - [Select](#select)
+    - [Properties Panel](#properties-panel)
     - [Actions and Shortcuts](#actions-and-shortcuts)
-    - [Exporting](#exporting)
 - [Future Development](#future-development)
 - [Demo](#demo)
 - [Contact](#contact)
@@ -76,7 +76,7 @@ Git & GitHub
 | Sign In | Click on `Sign In` on the home page, then choose either manual sign in or sign in with Google. <br> <ul><li>**Manual Sign In**: Enter your email, and password. Then, click on the blue `sign in` button.</li><li>**Sign In with Google**: Click on the gray `sign in with Google` button. Then, choose a google account to sign in with. </li></ul> |
 | Forgot Password | Click on `Sign In` on the home page. Then, enter your account email and click on `Forgot Password`. Check your email and follow the instructions to reset your password. Finally, sign in with your new password. |
 | User Settings | Click on the `round user photo` in the upper right corner of the dashboard or editor. Click on `Settings` and enter changes into the form. Click on  `Save Changes` to save settings. |
-| Log Out | Click on the `round user photo` in the upper right corner of the dashboard or editor. Click on `Log Out`.|
+| Log Out | Click on the `round user photo` in the upper right corner of the dashboard or editor. Click on `Log Out`. |
 
 ### Dashboard
 
@@ -100,25 +100,67 @@ Files (drafts) in PM are stored in projects (folders). The dashboard is where us
 
 ### Editor
 
+Drafts in PM can be edited in the editor. In this section, core functions of the editor as well as best practices will be shared.
+
 #### Elements
+
+PM v1.0 (Beta) supports four basic elements (text, square, ellipse, line) and two graphic elements (image, icon). Each element contains certain properties that can be modified via the properties panel in the right of the editor.
 
 | Function | Description |
 | -------- | ----------- |
+| Add Basic Element | Locate the `Elements Panel` to the left of the editor, then click on the `text icon`, `square icon`, `ellipse icon`, or `line` icon to add that particular element to the canvas. The new element will appear in the upper left corner of the canvas. |
+| Add Image | Locate the `Elements Panel` to the left of the editor, then click on the `image icon`. Drag an image file to the gray area of the `image uploader` or click on the gray area to select a file via file explorer. Click on `Add Image` to add the image to the canvas. The image will appear in the upper left corner of the canvas. Restrictions:<br><li>**File Types**: jpeg, png, and svg are supported. Other file types will be rejected.</li><li>**File Size**: Files must be smaller than 2 MB. Files that exceed this limit will be rejected.</li><ul></ul>
+| Add Icon | Locate the `Elements Panel` to the left of the editor, then click on the `icon icon`. Search for an icon by entering keywords into the search bar. PM supports five types of icons: `Regular`, `Round`, `Sharp`, `Outlined`, and `Two-Toned`. Add an icon to the canvas by clicking on the desired icon, then clicking `Add Icon`. The new icon will appear in the upper left corner of the canvas.  |
+
+> 💡 **Tip**: Elements added from the elements panel will be appended to the canvas in the element's default form. In some cases, it is more convenient to add a new element by simply duplicating an already-styled element on the canvas.
+
+> **Note**: The color of Two-Toned icons could not be modified.
+
+> **Note**: Text elements currently do not support differing fonts, styles, sizes, and color within the same element. A workaround is to utilize multiple text elements to create variation in your draft. Variable styles within the same text element is under development and will be released in PM v2.0.
 
 #### Select
 
+Elements on the canvas can only be modified if they are selected. Selected an element by simply clicking on it.
+
 | Function | Description |
 | -------- | ----------- |
+| Select Element(s) | Select an element by simply clicking on it. To select multiple elements, hold down the `shift` key and select as usual. |
+| Deselect Element(s) | Deselect all selected element by clicking anywhere outside the selected area. To deselect particular selected elements, hold down the `shift` key and click on an selected element to deselect it. |
+| Move Element(s) | Click on any selected element and simply drag to a desired location. Alternatively, users can also manually change the location of elements via the properties panel |
+| Resize Element(s) | Selected items are render with a control box that supports drag resizing.<br>Press down on the `right or bottom bars` and drag to resize only the element's width or height.<br>Press down on the `bottom right bar` and drag to resize proportionally. |
+
+> 💡 **Tip**: Selected elements are by default rendered with a control box which prevents users from selecting other unselected elements if an selected element contains the unselected element. To select multiple elements, it is recommended that nested elements should be selected first before parent elements.
+
+> 💡 **Tip**: If multiple elements are selected, the control box will only support proportional resizing. For other controls, utilize the properties panel.
+
+#### Properties Panel
+
+The properties panel contains all the options available for modification for selected elements. To change a value, simply enter or select a desired new value then press `enter` or click anywhere outside the input area to save the new value.
+
+| Function | Description |
+| -------- | ----------- |
+| Color Picker | To change color settings of an element via hex, simply enter the desired color code into the input box and press `enter`.<br>To change color settings of an element via rgba, click on the `square color preview icon` to open up additional controls. |
+| Document | **Change draft** settings: Size, Unit, Margin, and Fill. |
+| Export | Export draft into `pdf`, `jpg`, or `png` then download. Downloads typically take around 5 seconds but may take longer if many images are used. |
+| Dimensions | **Change dimension settings**: X, Y, Width, Height, Rotate, Radius. |
+| Align | If only one element is selected, alignment will be based on margin guides.<br>If multiple elements are selected, alignment will be based on the first element selected.<br>**Options**: toLeft, toHorizontalCenter, toRight, toTop, toVerticalCenter, toBottom, horizontalDistribution, verticalDistribution, moveToFront, and moveToBack. |
+| Text | **Change text settings**: Size, Style (Bold, Underline, Italic), Align (Left, Center, Right, Justify), Font, and Color. |
+| Fill | **Change fill settings**: Color |
+| Border | **Change border settings**: Style (None, Solid, Dashed, Dotted), Width, and Color. |
+
+> 💡 **Tip**: Select `Custom` in document size to manually change the width and height of the document.
+
+> 💡 **Tip**: Some properties support different values for each side of an element. Check the checkbox below those properties to define different values for each side. Hover over the input areas to view the side that input area controls. For example, if an input area shows a blue right border, it indicates that that input area is responsible for controlling the right side of an element.
+
+> 💡 **Tip**: Margins are a useful tool for alignment.
 
 #### Actions and Shortcuts
 
-| Function | Description |
-| -------- | ----------- |
+| Function | Shortcut | Description |
+| -------- | -------- | ----------- |
+| Save | `ctrl + s` | Saves the draft to the cloud. Users **MUST** save their drafts before exiting the editor or all changes will be discarded.<br>Saving can also be done by clicking the `save icon` below the elements panel. A `red dot` indicates that the draft hasn't been saved to the cloud. |
 
-#### Exporting
-
-| Function | Description |
-| -------- | ----------- |
+> **Warning**: Users **MUST** press the `save icon` or `ctrl + s` to save changes to the cloud. If users leave the draft without saving, every change made will be discarded.
 
 ## Future Development
 
